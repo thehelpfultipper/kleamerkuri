@@ -10,7 +10,9 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "predeploy": "gatsby clean"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -33,5 +35,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
