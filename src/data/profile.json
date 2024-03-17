@@ -1,0 +1,26 @@
+{
+    "profile": {
+        "name": "Klea Merkuri",
+        "employer": "Experian",
+        "title": "Web Developer",
+        "blog": {
+            "name": "The Helpful Tipper",
+            "url": "https://www.thehelpfultipper.com"
+        },
+        "pronouns": "she/her",
+        "story": "I’m an LA-based web developer and digital content creator who developed a genuine passion for coding when trying to automate Excel billing spreadsheets. I’m eager to bring my unique blend of analytical skills and coding enthusiasm to innovative projects to create intuitive and accessible software.",
+        "facts": [
+            "Self-taught developer",
+            "Background in finance and accounting",
+            "Blogger and content creator",
+            "Codes when traveling", 
+            "Pet-parent of Eve the Beagle", 
+            "Enthusiast of Asian cuisine",
+            "Named after an Egyptian queen"
+        ],
+        "contact": {
+            "email": "kleamdev@gmail.com",
+            "phone": "(818) 355-3683"
+        }
+    }
+}

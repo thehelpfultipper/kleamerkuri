@@ -1,0 +1,36 @@
+.wrapper {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 1.5em;
+}
+
+.title,
+.subTitle {
+    text-align: center;
+    line-height: normal;
+}
+
+.title {
+    font-size: 5em;
+    font-weight: 100;
+    font-family: var(--font-extra);
+    margin-bottom: 0;
+    color: var(--mulberry-pink);
+}
+
+.subTitle {
+    font-weight: 300;
+}
+
+.optionsList li {
+    margin-bottom: 0.6em;
+}
+
+.optionsList li a {
+    color: var(--mulberry-pink);
+}
+
+.optionsList li a:hover {
+    text-decoration: underline;
+}

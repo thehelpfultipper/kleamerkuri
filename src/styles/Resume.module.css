@@ -1,0 +1,106 @@
+/* Header section */
+.resumeTitle {
+    width: 50%;
+    margin-bottom: 0;
+    flex: 2;
+}
+
+.resumeAction {
+    height: 100%;
+    align-self: flex-end;
+    flex: 1;
+    display: flex;
+    gap: 5px;
+}
+
+.actionBtn {
+    padding: 0.4rem 0.6rem !Important;
+    box-shadow: none !Important;
+}
+
+.download {
+    background: var(--mulberry-pink) !Important;
+}
+
+.linkedin {
+    border-color: var(--dark-gray) !Important;
+    color: var(--dark-gray) !Important;
+}
+
+.linkedin:hover {
+    border-color: var(--dark-gray) !Important;
+    background: #5050501a !Important;
+}
+
+/* Timeline */
+.summary {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.activeSection,
+.activeSection .centerLine {
+    transition: color .3s ease, background .3s ease;
+}
+
+.activeSection {
+    color: var(--mulberry-pink);
+}
+
+.activeSection .centerLine {
+    background: var(--mulberry-pink);
+}
+
+/* Skills section */
+.skillsTimelineItem {
+    margin-bottom: -10px;
+}
+
+.expandIcon {
+    width: .6em;
+    height: .6em;
+    color: var(--mulberry-pink);
+}
+
+/* Experience */
+.resExp__info {
+    flex-direction: column;
+}
+
+.resExp__info p:first-child {
+    margin-bottom: 0;
+    margin-top: 5px
+}
+
+.resExp__info p:last-child {
+    margin-top: 5px;
+}
+
+.infoDetails {
+    color: var(--grey-txt);
+    font-family: var(--font-extra);
+}
+
+/* General */
+.nullMargin {
+    margin: 0;
+}
+
+.centerLine {
+    margin-left: -15px !Important;
+}
+
+.baselineAlign {
+    align-self: baseline;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+    .resumeTitle {
+        width: 100%;
+    }
+}
