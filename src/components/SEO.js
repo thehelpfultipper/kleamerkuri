@@ -1,8 +1,12 @@
 import React from 'react';
+import { pathPrefix } from '../../gatsby-config';
 
 import useSiteMetadata from '../hooks/use-sitemetadata';
 
+
 export default function SEO({ title, description, children }) {
+  let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
+
   const { 
     description: siteDesc, 
     title: siteTitle, 
@@ -27,7 +31,7 @@ export default function SEO({ title, description, children }) {
       <meta name="og:image" content={ siteImage } />
       <meta name="og:description" content={ seo.description } />
       <meta name="og:type" content="website" />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href={`${pathName}/favicon.ico`} />
       <title>{ seo.title }</title>
       { children }
     </>
