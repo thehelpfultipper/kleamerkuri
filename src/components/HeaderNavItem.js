@@ -4,12 +4,15 @@ import { useLocation } from '@reach/router';
 import Avatar from '@mui/material/Avatar';
 import classNames from 'classnames';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { pathPrefix } from '../../gatsby-config';
 
 import '../styles/global.css';
 
 
 export default function HeaderNavItem({name, path, ...props}) {
-    let pathName = path === 'home' ? '/' : `/${path}/`;
+    const prefix = process.env.NODE_ENV === 'development' ? '' : pathPrefix;
+   
+    let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
 
     const location = useLocation();
 
