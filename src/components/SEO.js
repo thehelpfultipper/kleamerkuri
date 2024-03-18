@@ -6,7 +6,6 @@ import useSiteMetadata from '../hooks/use-sitemetadata';
 
 export default function SEO({ title, description, children }) {
   const prefix = process.env.NODE_ENV === 'development' ? '' : pathPrefix;
-  let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
 
   const { 
     description: siteDesc, 
@@ -32,7 +31,7 @@ export default function SEO({ title, description, children }) {
       <meta name="og:image" content={ siteImage } />
       <meta name="og:description" content={ seo.description } />
       <meta name="og:type" content="website" />
-      <link rel="icon" href={`${pathName}/favicon.ico`} />
+      <link rel="icon" href={`${prefix}/favicon.ico`} />
       <title>{ seo.title }</title>
       { children }
     </>
