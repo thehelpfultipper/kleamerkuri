@@ -5,6 +5,7 @@ import useSiteMetadata from '../hooks/use-sitemetadata';
 
 
 export default function SEO({ title, description, children }) {
+  const prefix = process.env.NODE_ENV === 'development' ? '' : pathPrefix;
   let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
 
   const { 
