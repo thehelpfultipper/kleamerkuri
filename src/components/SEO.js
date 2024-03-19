@@ -19,6 +19,7 @@ export default function SEO({ title, description, children }) {
   const seo = {
     title: `${title} - ${siteTitle}` || siteTitle,
     description: description || siteDesc,
+    img: prefix + siteImage
   }
 
   return (
@@ -28,7 +29,7 @@ export default function SEO({ title, description, children }) {
       <meta name="keywords" content={ keywords } />
       <meta name="og:title" content={ seo.title } />
       <meta name="og:url" content={ siteUrl } />
-      <meta name="og:image" content={ siteImage } />
+      <meta name="og:image" content={ seo.img } />
       <meta name="og:description" content={ seo.description } />
       <meta name="og:type" content="website" />
       <link rel="icon" href={`${prefix}/favicon.ico`} />

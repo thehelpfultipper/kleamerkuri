@@ -9,7 +9,9 @@ export default function useSiteMetadata() {
                     author
                     description
                     title,
-                    keywords
+                    keywords,
+                    siteImage,
+                    siteUrl
                 }
             }
         }
