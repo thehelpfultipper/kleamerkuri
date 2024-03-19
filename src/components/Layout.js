@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import Header from './Header';
 import Footer from './Footer';
+import ScrollTop from './UI/ScrollTop';
 
 import '../styles/global.css';
 
@@ -27,6 +28,7 @@ export default function Layout({ children }) {
             <Header mainLogo={logo} />
             <main>{ React.cloneElement(children, {mainLogo: logo})}</main>
             <Footer />
+            <ScrollTop />
         </React.Fragment>
     )
 }
