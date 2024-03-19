@@ -44,6 +44,7 @@
         width: 100%;
         border-radius: 0px;
         padding: 0.6rem 0.9rem;
+        font-size: 1.15rem;
     }
 
     .show {
@@ -61,7 +62,7 @@
         align-items: flex-start;
         justify-content: center;
         top: 40px;
-        max-width: 145px;
+        max-width: 80%;
         width: 100%;
         height: max-content;
         z-index: 99999;
