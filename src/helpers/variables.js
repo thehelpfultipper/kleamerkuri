@@ -1,3 +1,7 @@
+// imports
+import { pathPrefix } from '../../gatsby-config';
+
+// exports
 export const categories = [
     "All",
     "HTML",
@@ -14,7 +18,7 @@ export const links = {
         text: "LinkedIn"
     },
     resume: {
-        url: "/Klea_Resume_24.pdf",
+        url: process.env.NODE_ENV === 'development' ? '' : pathPrefix + "/Klea_Resume_24.pdf",
         text: "Download"
     },
     github: {

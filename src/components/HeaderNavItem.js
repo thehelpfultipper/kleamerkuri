@@ -12,7 +12,8 @@ import '../styles/global.css';
 export default function HeaderNavItem({name, path, ...props}) {
     const prefix = process.env.NODE_ENV === 'development' ? '' : pathPrefix;
    
-    let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
+    // let pathName = path === 'home' ? prefix + '/' : `${prefix}/${path}/`;
+    let pathName = path === 'home' ? '/' : `/${path}/`;
 
     const location = useLocation();
 
@@ -20,7 +21,7 @@ export default function HeaderNavItem({name, path, ...props}) {
         return classNames({
             'navLink': true,
             'mob': props.show,
-            'active': location.pathname === p,
+            'active': location.pathname === prefix + p,
             'navProfile': p === '/about/' && props.profile
         });
     };
