@@ -22,6 +22,7 @@
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.1s ease-in;
+    color: var(--dark-gray);
 }
 
 .filterBtn:hover,
