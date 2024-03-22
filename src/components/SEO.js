@@ -26,11 +26,11 @@ export default function SEO({ title, description, children }) {
       <meta name="description" content={ seo.description } />
       <meta name="author" content={ author } />
       <meta name="keywords" content={ keywords } />
-      <meta name="og:title" content={ seo.title } />
-      <meta name="og:url" content={ siteUrl } />
-      <meta name="og:image" content={ siteImage } />
-      <meta name="og:description" content={ seo.description } />
-      <meta name="og:type" content="website" />
+      <meta name="title" property="og:title" content={ seo.title } />
+      <meta name="url" property="og:url" content={ siteUrl } />
+      <meta name="image" property="og:image" content={ siteImage } />
+      <meta name="description" property="og:description" content={ seo.description } />
+      <meta property="og:type" content="website" />
       <link rel="icon" href={`${prefix}/favicon.ico`} />
       <title>{ seo.title }</title>
       { children }
