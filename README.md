@@ -1,14 +1,9 @@
-<p align="center" style="display: block; width: 60px; margin: 0 auto; border-radius: 20%; overflow: hidden; height: 60px; margin-bottom: 20px;">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="KM Portfolio" src="./static/site-image.png" style="width: 100%; height: 100%" />
-  </a>
+<p align="center">
+  <img width="200" height="200" src="./static/site-image.png/">
 </p>
-<hgroup align="center">
-<h1 style="margin-bottom: 0px;">
-  Klea Merkuri 
-</h1>
-<p><a href="https://thehelpfultipper.github.io/kleamerkuri/" target="_blank">Web Developer Portfolio</a></p>
-</hgroup>
+
+<h1 align="center">Klea Merkuri</h1>
+<p align="center"><a href="https://thehelpfultipper.github.io/kleamerkuri/">Web Developer Portfolio</a></p>
 
 Welcome! This portfolio showcases my projects, skills, and experience in web development. It is built using Gatsby, a modern React-based framework for building fast and efficient websites, and Material UI, a popular React UI framework for creating beautiful and responsive user interfaces.
 
