@@ -1,6 +1,34 @@
 {
     "projects": [
         {
+            "title": "Tic Tac Toe Game",
+            "description": "This React-based Tic Tac Toe game project highlights the implementation of core programming logic within a user interface. By pitting a player against the computer, it demonstrates the application of fundamental game mechanics. With its clean design and intuitive interface, this project serves as a practical showcase of React's capabilities in building interactive web applications.",
+            "image": "https://thehelpfultipper.com/wp-content/uploads/2024/04/tic-tac-toe-game-with-react.png",
+            "links": {
+                "demo": "https://thehelpfultipper.github.io/tictactoe_react/",
+                "blog": "https://thehelpfultipper.com/how-to-make-tic-tac-toe-game-with-react/"
+            },
+            "meta": {
+                "stack": ["React", "JavaScript"],
+                "date": "2024-04-04",
+                "category": ["React"]
+            }
+        },
+        {
+            "title": "Pokémon Search App",
+            "description": "Embark on an immersive journey through the Pokémon universe with this Pokémon Search App, inspired by the FreeCodeCamp Challenge. Featuring a user-friendly options list and auto-suggestions during search, navigating through vast Pokémon data has never been easier. With dynamic data displays, users can delve deeper into their favorite Pokémon's details.",
+            "image": "https://thehelpfultipper.com/wp-content/uploads/2024/02/pokemon-search-app-freecodecamp.png",
+            "links": {
+                "demo": "https://codepen.io/thehelpfultipper/full/WNmOdLP",
+                "blog": "https://thehelpfultipper.com/build-futuristic-pokemon-search-app-freecodecamp/"
+            },
+            "meta": {
+                "stack": ["HTML", "CSS", "JavaScript"],
+                "date": "2024-02-16",
+                "category": ["JavaScript"]
+            }
+        },
+        {
             "title": "PDF File Reader App",
             "description": "Powered by React and Flask, PinkPanda PDF offers an array of captivating features including a custom drag-and-drop file input, seamless uploading animations, and robust PDF parsing and reading capabilities. With built-in pan and zoom actions on search results, navigating through PDF documents has never been more intuitive and engaging.",
             "image": "https://thehelpfultipper.com/wp-content/uploads/2024/01/react-flask-custom-app.png",
