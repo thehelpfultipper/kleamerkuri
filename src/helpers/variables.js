@@ -18,7 +18,7 @@ export const links = {
         text: "LinkedIn"
     },
     resume: {
-        url: process.env.NODE_ENV === 'development' ? '' : pathPrefix + "/Klea_Resume_24.pdf",
+        url: process.env.NODE_ENV === "development" ? "/Klea_Resume_24.pdf" : pathPrefix + "/Klea_Resume_24.pdf",
         text: "Download"
     },
     github: {

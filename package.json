@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/thehelpfultipper/kleamerkuri"
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
