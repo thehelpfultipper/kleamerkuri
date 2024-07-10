@@ -13,8 +13,8 @@ module.exports = {
     description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI',
     author: 'Klea Merkuri',
     keywords: 'Web Developer, Frontend Developer, Full Stack Developer, JavaScript Developer, UI/UX Designer',
-    siteImage: 'https://thehelpfultipper.github.io/kleamerkuri/site-image.png',
-    siteUrl: 'https://thehelpfultipper.github.io/kleamerkuri/'
+    siteImage: 'https://thehelpfultipper/kleamerkuri/site-image.png',
+    siteUrl: 'https://thehelpfultipper/kleamerkuri/'
   },
   plugins: [
     'gatsby-plugin-image',
@@ -22,6 +22,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-offline',
     'gatsby-transformer-json',
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
