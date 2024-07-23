@@ -14,7 +14,7 @@ module.exports = {
     author: 'Klea Merkuri',
     keywords: 'Web Developer, Frontend Developer, Full Stack Developer, JavaScript Developer, UI/UX Designer',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
-    siteUrl: 'https://thehelpfultipper.com/kleamerkuri/'
+    siteUrl: 'https://thehelpfultipper.com/kleamerkuri'
   },
   plugins: [
     'gatsby-plugin-image',
@@ -28,6 +28,11 @@ module.exports = {
         output: '/sitemap.xml',
         query: `
           {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
             allSitePage {
               nodes {
                 path
@@ -35,14 +40,16 @@ module.exports = {
             }
           }
         `,
-        serialize: ({ site, allSitePage }) =>
-          allSitePage.nodes.map(node => {
+        serialize: ({ allSitePage: { nodes: allPages }, modifiedGmt, site: { siteMetadata: {siteUrl}} }) => {
+          return allPages.map(page => {
             return {
-              url: `${site.siteMetadata.siteUrl}${node.path}`,
+              url: `${siteUrl}${page.path}`,
+              lastmod: modifiedGmt,
               changefreq: `daily`,
               priority: 0.7,
             }
-          }),
+          });
+        }
       }
     },
     {
