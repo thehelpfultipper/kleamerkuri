@@ -40,15 +40,21 @@ module.exports = {
             }
           }
         `,
-        serialize: ({ allSitePage: { nodes: allPages }, modifiedGmt, site: { siteMetadata: {siteUrl}} }) => {
-          return allPages.map(page => {
-            return {
-              url: `${siteUrl}${page.path}`,
-              lastmod: modifiedGmt,
-              changefreq: `daily`,
-              priority: 0.7,
-            }
+        resolveSiteUrl: ({ site }) => {
+          return site.siteMetadata.siteUrl;
+        },
+        resolvePages: ({ allSitePage }) => {
+          return allSitePage.nodes.map(page => {
+            return { path: page.path };
           });
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+            changefreq: `daily`,
+            priority: 0.7,
+          }
         }
       }
     },
