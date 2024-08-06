@@ -1,11 +1,25 @@
 {
     "projects": [
         {
+            "title": "Dark Theme Landing Page",
+            "description": "This project creates the Fylo dark theme landing page using Bootstrap styles, based on a challenge from Frontend Mentor. The design features a sleek, modern interface with responsive elements, ensuring optimal performance across various devices. Attention to detail was key in achieving a visually appealing and user-friendly web page, demonstrating proficiency in both Bootstrap and modern web development practices.",
+            "image": "https://thehelpfultipper.com/wp-content/uploads/2024/07/fylo-dark-theme-landing-page-frontend-mentor.png", 
+            "links": {
+                "demo": "https://thehelpfultipper.com/frontendmentor_fylo_page/",
+                "blog": "https://thehelpfultipper.com/how-to-use-bootstrap-to-make-responsive-landing-page/"
+            },
+            "meta": {
+                "stack": ["HTML", "CSS", "JavaScript", "Bootstrap"],
+                "date": "2024-07-16",
+                "category": ["HTML", "CSS"]
+            }
+        },
+        {
             "title": "E-commerce Product Page",
             "description": "An e-commerce product page using React and Vite, featuring a responsive design that adapts seamlessly across devices. The project includes interactive elements such as a lightbox gallery, thumbnail navigation, and a cart system. This solution showcases modern web development practices and is part of a Frontend Mentor coding challenge.",
             "image": "https://thehelpfultipper.com/wp-content/uploads/2024/05/ecommerce-product-page-frontend-mentor.png",
             "links": {
-                "demo": "https://github.com/thehelpfultipper/frontendmentor_ecommerce_page",
+                "demo": "https://thehelpfultipper.com/frontendmentor_ecommerce_page/",
                 "blog": "https://thehelpfultipper.com/how-to-build-an-e-commerce-product-page-with-react-and-vite/"
             },
             "meta": {
