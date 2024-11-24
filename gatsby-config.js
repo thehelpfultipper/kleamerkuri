@@ -75,8 +75,6 @@ module.exports = {
   ],
   pathPrefix: "/kleamerkuri",
   flags: {
-    PRESERVE_WEBPACK_CACHE: true, // Preserve webpack cache between builds
-    PRESERVE_FILE_DOWNLOAD_CACHE: true, // Preserve file download cache between builds
     FAST_REFRESH: true, // Enable Fast Refresh for development
     PARALLEL_SOURCING: true, // Enable parallel sourcing to speed up sourcing plugins
     DEV_SSR: true, // Enable server-side rendering in development for better consistency

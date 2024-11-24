@@ -6,7 +6,7 @@ import GridTile from './GridTile';
 
 import * as s from '../styles/Grid.module.css';
 
-export default function GridContainer({ col, max, category }) {
+export default function GridContainer({ col, max, category, page, setPage }) {
   const data = useStaticQuery(graphql`
     query ProjectsData {
       allFile(
@@ -37,7 +37,6 @@ export default function GridContainer({ col, max, category }) {
 
   let projects = data.allFile.nodes[0].childDataJson.projects;
   const projectsPerPage = 6;
-  const [page, setPage] = useState(1);
   let projectsToShow;
 
   const categoryFilter = category => {

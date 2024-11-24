@@ -7,9 +7,11 @@ import GridContainer from './Grid';
 
 export default function Projects() {
     const [displayCat, setDisplayCat] = useState('All');
+    const [page, setPage] = useState(1);
 
     const categorySelectHandler = (category) => {
         setDisplayCat(category);
+        setPage(1); // Reset the page
     }
 
     return (
@@ -22,7 +24,7 @@ export default function Projects() {
                 <ProjectFilter category={ displayCat } onDisplayCat={ categorySelectHandler } />
             </header>
             <section className={ `container` }>
-                <GridContainer category={ displayCat } />
+                <GridContainer category={ displayCat } page={page} setPage={setPage} />
             </section>
         </>
     )
