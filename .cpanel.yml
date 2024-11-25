@@ -1,0 +1,6 @@
+deployment:
+  tasks:
+    - export DEPLOY_DIR=$HOME/public_html/portfolios/kleamerkuri 
+    - /bin/rm -rf $DEPLOY_DIR/*           # Clear existing files
+    - git --work-tree=$DEPLOY_DIR checkout gh-pages -- . # Check out all contents of `gh-pages`
+    - /bin/chmod -R 755 $DEPLOY_DIR       # Ensure correct permissions
