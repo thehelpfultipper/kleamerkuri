@@ -1,7 +1,13 @@
 deployment:
   tasks:
+    - export BUILD_DIR=$HOME/github/kleamerkuri
     - export DEPLOY_DIR=$HOME/public_html/portfolios/kleamerkuri 
-    - /bin/rm -rf $DEPLOY_DIR/*           # Clear existing files
-    - git --work-tree=$DEPLOY_DIR checkout gh-pages -- . 
-    - find $DEPLOY_DIR -type d -exec chmod 755 {} \;  # Set 0755 for directories
-    - find $DEPLOY_DIR -type f -exec chmod 644 {} \;  # Set 0644 for files
+    - /bin/rm -rf $DEPLOY_DIR                    
+    - cd $BUILD_DIR
+    - npm ci
+    - npm run build
+    - rsync -av --exclude='.git/' public/ $DEPLOY_DIR/
+    - /bin/find $DEPLOY_DIR -type d -exec chmod 0755 {} +  # Set 0755 permissions for directories
+    - /bin/find $DEPLOY_DIR -type f -exec chmod 0644 {} +  # Set 0644 permissions for files
+
+s
