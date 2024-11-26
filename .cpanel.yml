@@ -7,5 +7,3 @@ deployment:
     - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR checkout gh-pages -- .
     - /bin/find $DEPLOY_DIR -type d -exec chmod 0755 {} +  # Set 0755 permissions for directories
     - /bin/find $DEPLOY_DIR -type f -exec chmod 0644 {} +  # Set 0644 permissions for files
-
-s
