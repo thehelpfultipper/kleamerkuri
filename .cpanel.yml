@@ -1,7 +1,7 @@
 deployment:
   tasks:
     - export REPO_DIR=$HOME/github/kleamerkuri/.git
-    - export DEPLOY_DIR=$HOME/public_html/portfolios/kleamerkuri 
+    - export DEPLOY_DIR=$HOME/public_html/kleamerkuri 
     - /bin/rm -rf $DEPLOY_DIR      
     - mkdir -p $DEPLOY_DIR                 
     - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR checkout gh-pages -- .
