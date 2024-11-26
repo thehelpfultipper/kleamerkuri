@@ -3,7 +3,6 @@ deployment:
     - export REPO_DIR=$HOME/github/kleamerkuri
     - export DEPLOY_DIR=$HOME/public_html/portfolios/kleamerkuri 
     - /bin/rm -rf $DEPLOY_DIR                    
-    - mkdir -p $DEPLOY_DIR   
     - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR checkout gh-pages -- .
     - /bin/find $DEPLOY_DIR -type d -exec chmod 0755 {} +  # Set 0755 permissions for directories
     - /bin/find $DEPLOY_DIR -type f -exec chmod 0644 {} +  # Set 0644 permissions for files
