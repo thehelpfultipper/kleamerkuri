@@ -10,7 +10,7 @@
         Updated with portfolio v2 on Dec 31, 2024. Click <a href="https://thehelpfultipper.com/portfolios/v1/kleamerkuri/">this link for portfolio v1</a>.
     </em>
 </small>
-
+<br /><br />
 Welcome! This portfolio showcases my projects, skills, and experience in web development. It is built using Gatsby, a modern React-based framework for building fast and efficient websites, and Material UI, a popular React UI framework for creating beautiful and responsive user interfaces.
 
 _Looking for project walkthroughs, tips, and other fun coding things? Check out  [The Helpful Tipper blog](https://www.gatsbyjs.com/docs/gatsby-starters/)._
