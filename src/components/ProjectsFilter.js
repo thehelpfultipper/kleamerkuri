@@ -1,14 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { useLocation } from '@reach/router';
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { KeyboardArrowUp } from '@mui/icons-material';
-
-
 import { categories } from '../helpers/variables';
 
-import * as s from '../styles/Projects.module.css';
+import '../styles/filter.scss';
 
 const ToggleButton = styled(Button)({
     visibility: 'hidden',
@@ -21,12 +18,16 @@ const ToggleButton = styled(Button)({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderColor: 'var(--grey-txt)',
-    color: 'var(--grey-txt)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'rgba(211, 211, 211, .6)',
+    borderRadius: '50px',
+    background: '#d3d3d333',
+    color: '#787878',
     '&:hover': {
-        borderColor: 'var(--grey-txt)',
+        borderColor: 'rgba(211, 211, 211, .7)',
     },
-    '@media (max-width: 545px)': {
+    '@media (max-width: 600px)': {
         position: 'static',
         maxWidth: '80%',
         width: '100%',
@@ -39,23 +40,23 @@ const ToggleButton = styled(Button)({
 export default function ProjectFilter({onDisplayCat}) {
     const [ activeBtn, setActiveBtn ] = useState('All');
     const [ isOpen, setIsOpen ] = useState(false);
-    const location = useLocation();
     const menuRef = useRef(null);
+    const btnRef = useRef(null);
 
     const filterHandler = (category) => {
         setActiveBtn(category);
         onDisplayCat(category);
-        isOpen && setIsOpen(!isOpen);
+        isOpen && setIsOpen(prev => !prev);
 
         // Close the menu
-        menuRef.current.classList.remove(s.show);
+        menuRef.current.classList.remove('show');
     }
 
     const filterButtons = categories.map((category, index) => {
         return (
             <button
                 type="button"
-                className={ `${s.filterBtn}${category === activeBtn ? ` ${s.active}` : ''}` }
+                className={ `filterBtn${category === activeBtn ? ` active` : ''}` }
                 key={ index }
                 onClick={ () => filterHandler(category) }
             >
@@ -65,35 +66,39 @@ export default function ProjectFilter({onDisplayCat}) {
     });
 
     const showMenuHandler = () => {
-        setIsOpen(!isOpen);
-        menuRef.current.classList.toggle(s.show);
+        setIsOpen(prev => !prev);
+        menuRef.current.classList.toggle('show');
     }
 
     useEffect(() => {
-        // Access the query string from the current location
-        const queryString = location.search;
+        const outsideClickHandler = (e) => {
+            if(
+                btnRef && btnRef.current && !btnRef.current.contains(e.target) &&
+                menuRef && menuRef.current && !menuRef.current.contains(e.target)
+            ) {
+                showMenuHandler();
+            }
+        };
 
-        // Parse the query string into URLSearchParams
-        const searchParams = new URLSearchParams(queryString);
+        window.addEventListener('click', outsideClickHandler);
 
-        // Extract the specific query parameter you're interested in
-        const categoryParam = searchParams.get('q');
-
-        // Set the state with the extracted query parameter
-        categoryParam && filterHandler(categoryParam);
+        return () => {
+            window.removeEventListener('click', outsideClickHandler);
+        }
         
-    }, [location.search]);
+    }, []);
 
     return (
-        <div className={ `${s.filterContainer}` }>
+        <div className={ `filterContainer` }>
             <label 
                 htmlFor='filterMenu'
-            >Filters: </label>
+            >Categories: </label>
             <div 
                 id='filterMenu'
-                className={ `${s.filterBtnsMenu}` }
+                className={ `filterBtnsMenu` }
             >
                 <ToggleButton
+                ref={btnRef}
                     variant='outlined'
                     aria-controls={ 'filterMenuList' }
                     endIcon={ isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDownIcon />}
@@ -103,7 +108,7 @@ export default function ProjectFilter({onDisplayCat}) {
                 </ToggleButton>
                 <div 
                     id={'filterMenuList'}
-                    className={ `${s.filterBtns} ${s?.dMob}` }
+                    className={ `filterBtns dMob` }
                     ref={ menuRef }
                 >
                     { filterButtons }

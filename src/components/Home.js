@@ -1,30 +1,35 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Grid from '@mui/material/Unstable_Grid2';
+import Header from './Header';
+import About from './About';
+import Experience from './Experience';
+import Projects from './Projects';
+import Posts from './Posts';
+import Products from './Products';
 
-import * as s from '../styles/Home.module.css';
+import '../styles/home.scss';
 
-import GridContainer from './Grid';
-import Title from './Title';
-
-export default function Home() {
-  const itemsPerPage = 6;
-
+export default function Home({ profile }) {
   return (
-    <>
-      <header className={`${s.heroSection} container`}>
-        <Title size='lg'>
-          <h1>Hi, I'm Klea 👋</h1>
-          <p>Developer and digital creator based in LA transforming visions into immersive digital experiences.</p>
-        </Title>
-      </header>
-
-      <section className={`container`}>
-        <div className={s.projectsSection__header}>
-          <h3>Explore recent projects</h3>
-          <Link to='/portfolio'>View all</Link>
-        </div>
-        <GridContainer col={2} max={itemsPerPage} />
-      </section>
-    </>
+    <Grid container spacing={4} justifyContent="space-between" className={`container`} style={{ position: 'relative' }}>
+      <Grid md={4}>
+        <Header profile={profile} />
+      </Grid>
+      <Grid md={8}>
+        <main>
+          <About profile={profile} />
+          <Experience />
+          <Projects />
+          <Products />
+          <Posts />
+        </main>
+        <footer>
+          <div className='copyRight'>
+            <p>This portfolio is built with Gatsby and MaterialUI.</p>
+            <p><span className='copyYr'>© {new Date().getFullYear()}</span> <span>Portfolio by Klea Merkuri. All Rights Reserved.</span></p>
+          </div>
+        </footer>
+      </Grid>
+    </Grid>
   )
 }

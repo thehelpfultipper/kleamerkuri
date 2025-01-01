@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import {IconButton, Skeleton} from '@mui/material';
+import { IconButton, Skeleton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'gatsby';
-
-import * as s from '../../styles/Modal.module.css';
 import { Button } from '@mui/material';
+
+import '../../styles/modal.scss';
 
 export default function Modal({ setOpen, project }) {
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -30,45 +30,45 @@ export default function Modal({ setOpen, project }) {
     }, [image]);
 
     return ReactDOM.createPortal(
-        <div className={ s.modalOverlay } onClick={ closeModal }>
-            <div className={ s.modal }>
-                <div className={ s.modalContent } onClick={ e => e.stopPropagation() }>
-                    <div className={ s.modalHeader }>
-                        <div className={ s.modalHeader__info }>
-                            <h2>{ title }</h2>
-                            <p><small>{ date }</small></p>
+        <div className={`modalOverlay`} onClick={closeModal}>
+            <div className={`modal`}>
+                <div className={`modalContent`} onClick={e => e.stopPropagation()}>
+                    <div className={`modalHeader`}>
+                        <div className={`modalHeader__info`}>
+                            <h2>{title}</h2>
+                            <p><small>{date}</small></p>
                         </div>
-                        <IconButton className={ s.close } onClick={ closeModal }>
+                        <IconButton className={`close`} onClick={closeModal}>
                             <CloseIcon />
                         </IconButton>
                     </div>
-                    <div className={ s.modalBody }>
-                        <div className={ s.modalVisualsWrap }>
-                            <div className={ s.modalImgWrap }>
-                                {imageLoaded ? <img src={ image } alt={ title } /> : <Skeleton variant="rectangular" height={200} sx={{width:'100%'}} />}
+                    <div className={`modalBody`}>
+                        <div className={`modalVisualsWrap`}>
+                            <div className={`modalImgWrap`}>
+                                {imageLoaded ? <img src={image} alt={title} /> : <Skeleton variant="rectangular" height={200} sx={{ width: '100%' }} />}
                             </div>
-                            <div className={ s.action }>
-                                <Button variant="outlined" className={ s.actionBtn } href={ demo } target="_blank" rel="noreferrer">Demo</Button>
-                                <Button variant="outlined" className={ s.actionBtn } href={ blog } target="_blank" rel="noreferrer">Blog</Button>
+                            <div className={`action`}>
+                                <Button variant="outlined" className={`actionBtn`} href={demo} target="_blank" rel="noreferrer">Demo</Button>
+                                <Button variant="outlined" className={`actionBtn`} href={blog} target="_blank" rel="noreferrer">Blog</Button>
                             </div>
                         </div>
-                        <div className={ s.modalDetailsWrap }>
-                            <ul className={ s.catList }>
+                        <div className={`modalDetailsWrap`}>
+                            <ul className={`catList`}>
                                 {
                                     category.map((cat, i) => (
-                                        <li key={ i } className={ s.catItem } onClick={closeModal}><Link to={ `/portfolio/?q=${cat}` }>{ cat }</Link></li>
+                                        <li key={i} className={`catItem`} onClick={closeModal}>{cat}</li>
                                     ))
                                 }
                             </ul>
-                            <p><span className={ s.label }>Description</span> { description }</p>
-                            <div className={ s.stackWrap }>
+                            <p><span className={`label`}>Description</span> {description}</p>
+                            <div className={`stackWrap`}>
                                 <p>
-                                    <span className={ s.label }>Stack</span>
+                                    <span className={`label`}>Stack</span>
                                 </p>
-                                <ul className={ s.stackList }>
+                                <ul className={`stackList`}>
                                     {
                                         stack.map((tech, i) => (
-                                            <li key={ i }>{ tech }</li>
+                                            <li key={i}>{tech}</li>
                                         ))
                                     }
                                 </ul>

@@ -1,0 +1,22 @@
+{
+    "products": [
+        {
+            "title": "Pink Panda Dark",
+            "description": "A cozy dark VS Code theme providing a blend of dark pastel colors contrasted with soft pinks.",
+            "image": "https://thehelpfultipper.gallerycdn.vsassets.io/extensions/thehelpfultipper/pinkpanda-dark-theme/0.2.1/1672698802401/Microsoft.VisualStudio.Services.Icons.Default", 
+            "links": {
+                "demo": "https://marketplace.visualstudio.com/items?itemName=TheHelpfulTipper.pinkpanda-dark-theme",
+                "blog": "https://thehelpfultipper.com/create-a-custom-visual-studio-code-theme/"
+            }
+        },
+        {
+            "title": "Duplicate Link Finder",
+            "description": "A simple yet powerful tool designed to help you streamline your Google Docs™.",
+            "image": "https://lh3.googleusercontent.com/-EWu1GMSMYL0/Zv9boxY354I/AAAAAAAAA6k/WdD_h27dnyIMVw3ZMmTIIK840i8BWdu3QCNcBGAsYHQ/s220-w220-h140-nd/Scan%2Bfor%2Bduplicate%2Blinks%2Bin%2BDoc.webp",
+            "links": {
+                "demo": "https://workspace.google.com/marketplace/app/duplicate_link_finder/622480540695",
+                "blog": ""
+            }
+        }
+    ]
+}

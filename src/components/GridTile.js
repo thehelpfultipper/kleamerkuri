@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Skeleton } from '@mui/material';
-
 import Modal from './UI/Modal';
+import DisableItem from './UI/DisableItem';
 
-import * as s from '../styles/Grid.module.css';
-
-export default function GridTile({ project, col }) {
+export default function GridTile({ project, col, onMouseEnter, onMouseLeave, isDisabled }) {
     const [open, setOpen] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -47,32 +45,36 @@ export default function GridTile({ project, col }) {
     return (
         <>
             <Grid
-                className={ `${s.projectTile}` }
+                className={`projectTile`}
                 item
-                xs={ col === 2 ? 6 : 4 }
-                onClick={ openModal }
+                xs={col === 2 ? 6 : 4}
+                onClick={openModal}
             >
                 {
-                    !imageLoaded && <Skeleton variant="rectangular" height={ 200 } sx={ { width: '100%' } } />
+                    !imageLoaded && <Skeleton variant="rectangular" height={200} sx={{ width: '100%' }} />
                 }
-                {   imageLoaded &&
-                    <>
-                        <div className={ s.tileWrapper } style={ { backgroundImage: `url(${image})` } }>
-                            <div className={ s.tileOverlay }></div>
-                            <div className={ s.tileContent }>
+                {imageLoaded &&
+                    <DisableItem
+                        cs={` displayItem rnd`}
+                        isDisabled={isDisabled}
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}>
+                        <div className={`tileWrapper rnd`} style={{ backgroundImage: `url(${image})` }}>
+                            <div className={`tileOverlay rnd`}></div>
+                            <div className={`tileContent rnd`}>
                                 <p>
-                                    <span className={ s.tileContent__date }><small>{ date }</small></span>
+                                    <span className={`tileContent__date`}><small>{date}</small></span>
                                 </p>
-                                <h3>{ title }</h3>
-                                <p className={ s.tileContent_catWrap }>
-                                    <span className={ s.tileContent__category }>{ categoryStr }</span>
+                                <h3>{title}</h3>
+                                <p className={`tileContent_catWrap`}>
+                                    <span className={`tileContent__category`}>{categoryStr}</span>
                                 </p>
                             </div>
                         </div>
-                    </>
+                    </DisableItem>
                 }
             </Grid>
-            { open && <Modal open={ open } setOpen={ setOpen } project={ project } /> }
+            {open && <Modal open={open} setOpen={setOpen} project={project} />}
         </>
     )
 }

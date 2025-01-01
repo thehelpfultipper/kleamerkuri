@@ -18,7 +18,7 @@ export const links = {
         text: "LinkedIn"
     },
     resume: {
-        url: process.env.NODE_ENV === "development" ? "/Klea_Resume_24.pdf" : pathPrefix + "/Klea_Resume_24.pdf",
+        url: process.env.NODE_ENV === "development" ? "/klea-merkuri-software-engineer-resume.pdf" : pathPrefix + "/klea-merkuri-software-engineer-resume.pdf",
         text: "Download"
     },
     github: {
@@ -32,5 +32,10 @@ export const links = {
     blog: {
         url: "https://thehelpfultipper.com/",
         text: "Blog"
+    },
+    portfolios: {
+        km: {
+            v1: 'https://thehelpfultipper.com/portfolios/v1/kleamerkuri/'
+        }
     }
 }

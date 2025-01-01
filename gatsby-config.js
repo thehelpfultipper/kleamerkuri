@@ -22,6 +22,13 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-offline',
     'gatsby-transformer-json',
+    'gatsby-plugin-sass',
+    {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: -20
+      }
+    },
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
@@ -63,6 +70,13 @@ module.exports = {
       options: {
         name: 'assets',
         path: `${__dirname}/src/assets/`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'projects',
+        path: `${__dirname}/src/data/projects`,
       },
     },
     {

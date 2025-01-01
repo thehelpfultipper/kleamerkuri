@@ -1,41 +1,13 @@
 import React, { useState } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Grid, Pagination } from '@mui/material';
-
 import GridTile from './GridTile';
 
-import * as s from '../styles/Grid.module.css';
+import '../styles/grid.scss';
 
-export default function GridContainer({ col, max, category, page, setPage }) {
-  const data = useStaticQuery(graphql`
-    query ProjectsData {
-      allFile(
-        filter: {sourceInstanceName: {eq: "data"}, relativePath: {eq: "projects.json"}}
-        sort: {childDataJson: {projects: {meta: {date: DESC}}}}
-      ) {
-        nodes {
-          childDataJson {
-            projects {
-              title
-              image
-              description
-              meta {
-                category
-                date(formatString: "MMM DD, YYYY")
-                stack
-              }
-              links {
-                blog
-                demo
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+export default function GridContainer({ col, max, category, page, setPage, data }) {
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  let projects = data.allFile.nodes[0].childDataJson.projects;
+  let projects = data;
   const projectsPerPage = 6;
   let projectsToShow;
 
@@ -58,29 +30,32 @@ export default function GridContainer({ col, max, category, page, setPage }) {
   return (
     <>
       <Grid
-        className={ s.projectGrid }
+        className={`projectGrid`}
         container
-        spacing={ { xs: colCount / 2, md: colCount / 2 + 1 } }
-        columns={ { xs: colCount, sm: colCount * 2, md: 12 } }
+        spacing={{ xs: colCount / 2, md: colCount / 2 + 1 }}
+        columns={{ xs: colCount, sm: colCount * 2, md: 12 }}
       >
         {
-          projectsToShow && 
+          projectsToShow &&
           projectsToShow.map((project, index) => {
-            return <GridTile 
-                      key={ index } 
-                      project={ project } 
-                      col={ col } 
-                    />
+            return <GridTile
+              key={index}
+              project={project}
+              col={col}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(null)}
+              isDisabled={activeIndex !== null && index !== activeIndex}
+            />
           })
         }
       </Grid>
       {
         col !== 2 &&
         <Pagination
-          count={ Math.ceil(projects.length / projectsPerPage) }
-          page={ page }
-          onChange={ (event, value) => setPage(value) }
-          className={ s.pagination}
+          count={Math.ceil(projects.length / projectsPerPage)}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          className={`pagination`}
         />
       }
     </>

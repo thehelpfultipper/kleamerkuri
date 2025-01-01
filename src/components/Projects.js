@@ -1,31 +1,56 @@
 import React, { useState } from 'react';
-
-import Title from './Title';
-import ProjectFilter from './ProjectsFilter';
-import GridContainer from './Grid';
-
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ProjectItem from './ProjectItem';
 
 export default function Projects() {
-    const [displayCat, setDisplayCat] = useState('All');
-    const [page, setPage] = useState(1);
-
-    const categorySelectHandler = (category) => {
-        setDisplayCat(category);
-        setPage(1); // Reset the page
+  const [activeIndex, setActiveIndex] =  useState(null);
+  const data = useStaticQuery(graphql`
+    query FeaturedProjectsData {
+      allProjectsJson(filter: {featured: {eq: "true"}}, sort: {meta: {date: ASC}}) {
+        nodes {
+          title
+          featured
+          image
+          description
+          meta {
+            category
+            date(formatString: "MMM DD, YYYY")
+            stack
+          }
+          links {
+            blog
+            demo
+          }
+        }
+      }
     }
+`);
 
-    return (
-        <>
-            <header className={ `container` }>
-                <Title>
-                    <h2>Projects</h2>
-                    <p>Explore my latest projects and achievements</p>
-                </Title>
-                <ProjectFilter category={ displayCat } onDisplayCat={ categorySelectHandler } />
-            </header>
-            <section className={ `container` }>
-                <GridContainer category={ displayCat } page={page} setPage={setPage} />
-            </section>
-        </>
-    )
+if (!data) {
+    console.error('There was an error getting featured projects data.');
+    return;
+}
+  let projects = data.allProjectsJson.nodes;
+  return (
+    <section id='projects'>
+      {
+        projects.map((p, index) => {
+          return <ProjectItem
+            project={p}
+            key={index}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+            isDisabled={activeIndex !== null && index !== activeIndex}
+          />
+        })
+      }
+      <p className={`actionLink`}>
+        <Link to='/portfolio'>View projects archive</Link>
+        <span className={`arrowWrap`}>
+          <ArrowForwardIcon className={`arrow arrowIn`} />
+        </span>
+      </p>
+    </section>
+  )
 }

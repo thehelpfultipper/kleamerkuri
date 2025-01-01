@@ -1,0 +1,23 @@
+@mixin arrow-hover($parent-selector: null) {
+  @if $parent-selector {
+    #{$parent-selector}:hover .arrowOut {
+      transform: translate(2px, -5px);
+    }
+    #{$parent-selector}:hover .arrowIn {
+      transform: translate(5px, 0);
+    }
+    #{$parent-selector}:hover .arrowBack {
+      transform: translate(-5px, 0);
+    }
+  } @else {
+    .arrowOut {
+      transform: translate(2px, -5px);
+    }
+    .arrowIn {
+      transform: translate(5px, 0);
+    }
+    .arrowBack {
+      transform: translate(-5px, 0);
+    }
+  }
+}

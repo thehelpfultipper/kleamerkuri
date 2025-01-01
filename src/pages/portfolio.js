@@ -1,16 +1,15 @@
 import * as React from "react";
-
-import Projects from "../components/Projects";
+import Archive from "../components/Archive";
 import SEO from "../components/SEO";
 
 export default function PortfolioPage() {
-    return <Projects />;
+    return <Archive />;
 }
 
 export function Head() {
     return (
         <SEO
-            title="Portfolio"
+            title="Portfolio Archive"
             description="Explore my latest projects and achievements."
         />
     );

@@ -3,7 +3,13 @@
 </p>
 
 <h1 align="center">Klea Merkuri</h1>
-<p align="center"><a href="https://thehelpfultipper.github.io/kleamerkuri/">Web Developer Portfolio</a></p>
+<p align="center"><a href="https://thehelpfultipper.com/kleamerkuri/">Web Developer Portfolio</a></p>
+<br /><br />
+<small>
+    <em>
+        Updated with portfolio v2 on Dec 31, 2024. Click <a href="https://thehelpfultipper.com/portfolios/v1/kleamerkuri/">this link for portfolio v1</a>.
+    </em>
+</small>
 
 Welcome! This portfolio showcases my projects, skills, and experience in web development. It is built using Gatsby, a modern React-based framework for building fast and efficient websites, and Material UI, a popular React UI framework for creating beautiful and responsive user interfaces.
 

@@ -1,0 +1,69 @@
+@use "partials/variables" as *;
+
+.projectItem,
+.productItem,
+.postItem {
+  position: relative;
+  &:hover {
+    .imgWrap img {
+      border-color: $light-gray;
+    }
+    .stackWrap .stack {
+      opacity: 1;
+    }
+    .demo h3 {
+      color: $mulberry-pink;
+    }
+  }
+  .demo {
+    div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    h3 {
+      margin-bottom: 0;
+      color: $dark-gray;
+    }
+  }
+
+  p {
+    margin-top: 5px;
+  }
+  .imgWrap {
+    margin-top: 25px;
+    max-width: 400px;
+    min-width: 200px;
+    width: 100%;
+    height: 120px;
+    &.sml {
+      max-width: 200px;
+      min-width: 80px;
+    }
+
+    img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border: 2px solid $hover-bg;
+    }
+  }
+
+  .stackWrap {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    @media (max-width: 500px) {
+      font-size: .65rem;
+    }
+
+    .stack {
+      background: $dark-gray;
+      opacity: 0.8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      color: white;
+    }
+  }
+}

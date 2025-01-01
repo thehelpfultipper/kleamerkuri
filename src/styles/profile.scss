@@ -1,0 +1,24 @@
+@use "partials/variables" as *;
+
+.profileImg {
+  width: calc(3rem + 10vw);
+    height: calc(3rem + 10vw);
+  border-radius: 50%;
+  border: 2px solid #ede8ef;
+  padding: 3px;
+  box-shadow: inset 2em 1em 20px whitesmoke;
+  flex: 0 1 auto;
+  margin-top: -70px;
+
+  @media (min-width: 500px) {
+    // width: calc(3rem + 10vw);
+    // height: calc(3rem + 10vw);
+    margin-top: -140px;
+  }
+}
+.sidebarMenu {
+  margin: 1.2em 0;
+  @media (max-width: 900px) {
+    display: none;
+  }
+}

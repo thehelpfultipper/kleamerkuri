@@ -1,0 +1,16 @@
+{
+    "posts": [
+        {
+            "title": "Listen, Coding Isn’t for Everybody, and Here’s Why",
+            "image": "https://thehelpfultipper.com/wp-content/uploads/2024/12/coding-isnt-for-everyone.webp",
+            "date": "Dec 2024",
+            "link": "https://thehelpfultipper.com/coding-isnt-for-everybody-heres-why/"
+        },
+        {
+            "title": "How Building Something Useful Can Help You Become Better At Coding",
+            "image": "https://thehelpfultipper.com/wp-content/uploads/2024/11/build-something-useful-to-become-good-at-coding.webp",
+            "date": "Nov 2024",
+            "link": "https://thehelpfultipper.com/building-something-useful-can-help-you-become-better-at-coding/"
+        }
+    ]
+}
