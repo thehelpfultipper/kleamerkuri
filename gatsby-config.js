@@ -9,7 +9,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: 'KM Portfolio',
+    title: 'Klea Merkuri',
     description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI',
     author: 'Klea Merkuri',
     keywords: 'Web Developer, Frontend Developer, Full Stack Developer, JavaScript Developer, UI/UX Designer',
