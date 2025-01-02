@@ -17,7 +17,7 @@ export default function ProjectItem({ project, isDisabled, onMouseLeave, onMouse
             <Grid container spacing={4}>
                 <Grid item lg={4}>
                     <div className={`imgWrap`}>
-                        <img src={imageSrc} className={`respImg rnd`} loading='lazy' />
+                        <img src={imageSrc} className={`respImg rnd`} loading='lazy' alt={title} />
                     </div>
                 </Grid>
                 <Grid item lg={8}>

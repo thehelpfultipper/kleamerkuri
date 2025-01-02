@@ -89,9 +89,8 @@ module.exports = {
   ],
   pathPrefix: "/kleamerkuri",
   flags: {
-    FAST_REFRESH: true, // Enable Fast Refresh for development
-    PARALLEL_SOURCING: true, // Enable parallel sourcing to speed up sourcing plugins
-    DEV_SSR: true, // Enable server-side rendering in development for better consistency
+    PARALLEL_SOURCING: true, 
+    DEV_SSR: true, 
   },
   developMiddleware: app => {
     app.set('etag', 'strong') // Set ETag headers to strong for better caching

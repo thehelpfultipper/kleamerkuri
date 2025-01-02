@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { IconButton, Skeleton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'gatsby';
 import { Button } from '@mui/material';
 
 import '../../styles/modal.scss';
@@ -12,11 +11,15 @@ export default function Modal({ setOpen, project }) {
     const { title, description, image, links: { demo, blog }, meta } = project;
     const { category, date, stack } = meta;
 
-
     const closeModal = () => {
         setOpen(false);
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    }
     // Check if the image is loaded
     useEffect(() => {
         const img = new Image();
@@ -30,15 +33,27 @@ export default function Modal({ setOpen, project }) {
     }, [image]);
 
     return ReactDOM.createPortal(
-        <div className={`modalOverlay`} onClick={closeModal}>
-            <div className={`modal`}>
+        <div
+            className={`modalOverlay`}
+            role={`presentation`}
+            onClick={closeModal}
+            onKeyDown={handleKeyDown}
+            aria-hidden={true}
+        >
+            <div
+                className={`modal`}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modalTitle"
+                aria-describedby="modalDescription"
+            >
                 <div className={`modalContent`} onClick={e => e.stopPropagation()}>
                     <div className={`modalHeader`}>
                         <div className={`modalHeader__info`}>
-                            <h2>{title}</h2>
+                            <h2 id={`modalTitle`}>{title}</h2>
                             <p><small>{date}</small></p>
                         </div>
-                        <IconButton className={`close`} onClick={closeModal}>
+                        <IconButton className={`close`} onClick={closeModal} aria-label={`Close modal`}>
                             <CloseIcon />
                         </IconButton>
                     </div>
@@ -60,7 +75,7 @@ export default function Modal({ setOpen, project }) {
                                     ))
                                 }
                             </ul>
-                            <p><span className={`label`}>Description</span> {description}</p>
+                            <p id={`modalDescription`}><span className={`label`}>Description</span> {description}</p>
                             <div className={`stackWrap`}>
                                 <p>
                                     <span className={`label`}>Stack</span>

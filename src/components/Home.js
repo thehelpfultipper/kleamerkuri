@@ -1,4 +1,5 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@mui/material/Unstable_Grid2';
 import Header from './Header';
 import About from './About';
@@ -9,7 +10,44 @@ import Products from './Products';
 
 import '../styles/home.scss';
 
-export default function Home({ profile }) {
+export default function Home() {
+  const data = useStaticQuery(graphql`
+    query ProfileData {
+      allFile(
+        filter: {sourceInstanceName: {eq: "data"}, relativePath: {eq: "profile.json"}}
+      ) {
+        nodes {
+          childDataJson {
+            profile {
+              facts
+              name
+              pronouns
+              story
+              employer
+              title
+              contact {
+                email
+                phone
+              }
+              blog {
+                url
+                name
+              }
+              lead
+              about
+            }
+          }
+        }
+      }
+    }
+`);
+
+  if (!data) {
+    console.error('There was an error getting profile data.');
+    return;
+  }
+
+  const profile = data.allFile.nodes[0].childDataJson.profile;
   return (
     <Grid container spacing={4} justifyContent="space-between" className={`container`} style={{ position: 'relative' }}>
       <Grid md={4}>

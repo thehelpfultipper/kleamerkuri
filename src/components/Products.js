@@ -49,11 +49,11 @@ export default function Products() {
                             <Grid container spacing={4}>
                                 <Grid item lg={4}>
                                     <div className={`imgWrap sml`}>
-                                        <img src={p.image} className={`respImg rnd`} loading='lazy' />
+                                        <img src={p.image} className={`respImg rnd`} loading='lazy' alt={p.title} />
                                     </div>
                                 </Grid>
                                 <Grid item lg={8}>
-                                    <a className={`demo`} href={p.links.demo} target="_blank" rel="noreferer">
+                                    <a className={`demo`} href={p.links.demo} target="_blank" rel="noreferrer">
                                         <h3>
                                             {p.title}
                                             <span className={`arrowWrap`}>
