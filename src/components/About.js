@@ -2,9 +2,7 @@ import React from 'react';
 import parse from 'html-react-parser';
 import Title from './Title';
 
-export default function About({profile}) {
-    const { about } = profile;
-
+export default function About({about}) {
     return (
         <section id='about'>
             <Title>

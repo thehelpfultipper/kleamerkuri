@@ -48,6 +48,7 @@ export default function Home() {
   }
 
   const profile = data.allFile.nodes[0].childDataJson.profile;
+  const about = profile?.about || [];
   return (
     <Grid container spacing={4} justifyContent="space-between" className={`container`} style={{ position: 'relative' }}>
       <Grid md={4}>
@@ -55,7 +56,7 @@ export default function Home() {
       </Grid>
       <Grid md={8}>
         <main>
-          <About profile={profile} />
+          <About about={about} />
           <Experience />
           <Projects />
           <Products />

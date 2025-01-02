@@ -18,7 +18,6 @@ const sections = [
 
 function Profile({ profile }) {
     const [activeSection, setActiveSection] = useState(sections[0].id);
-    const { name, lead, title } = profile;
 
     const CustomList = styled(List)({
         '&': {
@@ -124,9 +123,9 @@ function Profile({ profile }) {
     return (
         <>
             <div className={`profileLead`}>
-                <h1>{name}</h1>
-                <h2>{title}</h2>
-                <p>{lead}</p>
+                <h1>{profile.name}</h1>
+                <h2>{profile.title}</h2>
+                <p>{profile.lead}</p>
             </div>
             <nav className={`sidebarMenu`}>
                 <CustomList>
