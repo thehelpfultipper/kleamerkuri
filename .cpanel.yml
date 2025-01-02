@@ -4,7 +4,6 @@ deployment:
     - export DEPLOY_DIR=$HOME/public_html/kleamerkuri 
     - /bin/rm -rf $DEPLOY_DIR      
     - mkdir -p $DEPLOY_DIR                 
-    - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR fetch --all
-    - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR reset --hard origin/gh-pages
+    - git --work-tree=$DEPLOY_DIR --git-dir=$REPO_DIR checkout gh-pages -- .
     - /bin/find $DEPLOY_DIR -type d -exec chmod 755 {} +  
     - /bin/find $DEPLOY_DIR -type f -exec chmod 644 {} +  
