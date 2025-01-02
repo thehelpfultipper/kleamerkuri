@@ -4,7 +4,7 @@ import GridTile from './GridTile';
 
 import '../styles/grid.scss';
 
-export default function GridContainer({ col, max, category, page, setPage, data }) {
+export default function GridContainer({ col = 4, max, category, page, setPage, data }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   let projects = data;
@@ -61,8 +61,4 @@ export default function GridContainer({ col, max, category, page, setPage, data 
     </>
 
   )
-}
-
-GridContainer.defaultProps = {
-  col: 4
 }

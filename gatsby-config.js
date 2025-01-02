@@ -89,7 +89,6 @@ module.exports = {
   ],
   pathPrefix: "/kleamerkuri",
   flags: {
-    PARALLEL_SOURCING: true, 
     DEV_SSR: true, 
   },
   developMiddleware: app => {

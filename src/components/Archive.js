@@ -41,8 +41,7 @@ export default function Archive() {
         console.error('There was an error getting projects data.');
         return;
     }
-    const projects = data.allProjectsJson.nodes;
-    
+    const projects = data.allProjectsJson.nodes || [];
     return (
         <section className={`container`} id='archive'>
             <header>
@@ -58,7 +57,11 @@ export default function Archive() {
             </header>
             <main>
                 <ProjectFilter category={displayCat} onDisplayCat={categorySelectHandler} />
-                <GridContainer category={displayCat} page={page} setPage={setPage} data={projects} />
+                {
+                    (projects && projects.length > 0) ? (
+                        <GridContainer category={displayCat} page={page} setPage={setPage} data={projects} />
+                    ) : <p>No projects found...😓</p>
+                }
             </main>
             <Footer />
         </section>
