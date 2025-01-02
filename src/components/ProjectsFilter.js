@@ -76,7 +76,10 @@ export default function ProjectFilter({onDisplayCat}) {
                 btnRef && btnRef.current && !btnRef.current.contains(e.target) &&
                 menuRef && menuRef.current && !menuRef.current.contains(e.target)
             ) {
-                showMenuHandler();
+                setIsOpen(false);
+                if(menuRef.current.classList.contains('show')) {
+                    menuRef.current.classList.remove('show');
+                }
             }
         };
 
