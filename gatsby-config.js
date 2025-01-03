@@ -10,9 +10,9 @@
 module.exports = {
   siteMetadata: {
     title: 'Klea Merkuri',
-    description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI',
+    description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI.',
     author: 'Klea Merkuri',
-    keywords: 'Web Developer, Frontend Developer, Full Stack Developer, JavaScript Developer, UI/UX Designer',
+    keywords: 'Web Developer, Frontend Developer, Full Stack Developer, Software Engineer, JavaScript Developer, UI/UX Designer',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri'
   },
