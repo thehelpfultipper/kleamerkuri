@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://thehelpfultipper.com/kleamerkuri/sitemap-index.xml
+Host: https://thehelpfultipper.com
