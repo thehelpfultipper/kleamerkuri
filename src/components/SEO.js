@@ -1,8 +1,7 @@
 import React from 'react';
-import { pathPrefix } from '../../gatsby-config';
-
 import useSiteMetadata from '../hooks/use-sitemetadata';
 
+const pathPrefix = '/kleamerkuri';
 
 export default function SEO({ title, description, children }) {
   const prefix = process.env.NODE_ENV === 'development' ? '' : pathPrefix;

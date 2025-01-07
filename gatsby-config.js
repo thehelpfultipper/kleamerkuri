@@ -1,19 +1,20 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
+if(process.env.NODE_ENV === 'production') {
+  require("dotenv").config({
+    path: `./environments/.env.production`,
+  });
+} else {
+  require("dotenv").config({
+    path: `./environments/.env.development`,
+  });
+}
 
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
 module.exports = {
   siteMetadata: {
     title: 'Klea Merkuri',
     description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI.',
     author: 'Klea Merkuri',
     keywords: 'Web Developer, Frontend Developer, Full Stack Developer, Software Engineer, JavaScript Developer, UI/UX Designer',
-    siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
+    siteImage: `https://thehelpfultipper.com/kleamerkuri/site-image.png`,
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri'
   },
   plugins: [
@@ -31,7 +32,6 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        output: '/sitemap.xml',
         query: `
           {
             site {
@@ -57,12 +57,22 @@ module.exports = {
         serialize: ({ path, modifiedGmt }) => {
           return {
             url: path,
-            lastmod: modifiedGmt,
+            lastmod: modifiedGmt || new Date().toISOString(),
             changefreq: `daily`,
             priority: 0.7,
           }
         }
       }
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        policy: [
+          { userAgent: '*', allow: '/' }, 
+        ],
+        sitemap: `${process.env.SITE_ROOT}/sitemap-index.xml`, 
+        host: process.env.SITE_ROOT, 
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -84,7 +94,13 @@ module.exports = {
         name: 'data',
         path: `${__dirname}/src/data/`,
       },
-    }
+    },
+    {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        allowList: ["SITE_ROOT"]
+      },
+    },
   ],
   pathPrefix: "/kleamerkuri",
   flags: {
