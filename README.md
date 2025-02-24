@@ -14,10 +14,10 @@
 Welcome! This portfolio showcases my projects, skills, and experience in web development. It is built using Gatsby, a modern React-based framework for building fast and efficient websites, and Material UI, a popular React UI framework for creating beautiful and responsive user interfaces.
 <br /><br />
 
-_Looking for project walkthroughs, tips, and other fun coding things? Check out  [The Helpful Tipper blog](https://www.gatsbyjs.com/docs/gatsby-starters/)._
-
+_Looking for project walkthroughs, tips, and other fun coding things? Check out [The Helpful Tipper blog](https://www.gatsbyjs.com/docs/gatsby-starters/)._
 
 ## Features
+
 - **Projects Showcase:** View a curated selection of my projects, including web applications, websites, and prototypes.
 - **Skills Highlight:** Explore my skills and expertise in various web development technologies, frameworks, and tools.
 - **About Me:** Learn more about me, my background, interests, and passion for web development.

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["dom", "ESNext"],
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["react-dom", "node"],
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@types", ".src/types"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "public", ".cache"],
+  "include": ["src/**/*", "gatsby-*.ts", "gatsby-browser.tsx", "gatsby-ssr.tsx"]
+}

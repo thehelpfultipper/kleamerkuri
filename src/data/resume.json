@@ -1,174 +1,158 @@
 {
-    "resume": {
-        "summary": "Passionate web developer with expertise in designing and optimizing web applications and APIs, committed to delivering innovative solutions and driving business growth. Skilled in enhancing system performance, streamlining processes, and resolving technical challenges to exceed client expectations and elevate user experiences.",
-        "skills": [
-            {
-                "category": "Programming Languages",
-                "items": [
-                    "JavaScript (ES6+)",
-                    "Python",
-                    "PHP"
-                ]
-            },
-            {
-                "category": "Frontend Technologies",
-                "items": [
-                    "HTML5",
-                    "CSS3",
-                    "React",
-                    "Gatsby",
-                    "GraphQL",
-                    "jQuery",
-                    "Bootstrap",
-                    "Sass"                ]
-            },
-            {
-                "category": "Backend Technologies",
-                "items": [
-                    "Node.js",
-                    "Express",
-                    "Django",
-                    "Flask",
-                    "RESTful APIs"
-                ]
-            },
-            {
-                "category": "Database Systems",
-                "items": [
-                    "MongoDB",
-                    "MySQL",
-                    "PostgreSQL"
-                ]
-            },
-            {
-                "category": "Version Control",
-                "items": [
-                    "Git",
-                    "GitHub"
-                ]
-            },
-            {
-                "category": "Development Tools",
-                "items": [
-                    "VS Code",
-                    "Postman",
-                    "CI/CD Pipelines",
-                    "npm", 
-                    "OpenAI",
-                    "Browser DevTools"
-                ]
-            },
-            {
-                "category": "Other",
-                "items": [
-                    "Agile Methodologies",
-                    "JIRA",
-                    "Confluence",
-                    "Slack",
-                    "WordPress"
-                ]
-            }
-        ],
-        "experience": [
-            {
-                "title": "Web Developer",
-                "company": "Experian",
-                "location": "Remote",
-                "dates": "Sep 2023-Present",
-                "desc": [
-                    {
-                        "action": "architect",
-                        "support": [
-                            "Re-architect and migrate a high-traffic blog from WordPress to a modern headless CMS using React, Gatsby, and GraphQL, improving SEO performance and reducing load times by 20%.", 
-                            "Develop scalable APIs in Node.js to integrate with third-party tools and internal systems, enabling seamless data flow and improving overall functionality."
-                        ]
-                    },
-                    {
-                        "action": "automate",
-                        "support": [
-                            "Automate workflows by creating a Node.js application integrated with Google APIs, increasing content staging efficiency by 10x and saving hundreds of manual hours.",
-                            "Optimize performance by debugging complex frontend and backend issues using DevTools, improving responsiveness and system reliability across distributed environments."
-                        ]
-                    },
-                    {
-                        "action": "collaborate",
-                        "support": [
-                            "Collaborate with cross-functional teams including designers, product managers, and other engineers to define technical requirements and ship high-quality features in an Agile environment.",
-                            "Enhance reliability by integrating monitoring and error reporting tools like DataDog, providing full production visibility and reducing system downtime."
-                        ]
-                    },
-                    {
-                        "action": "mentor",
-                        "support": [
-                            "Mentor teammates through knowledge-sharing sessions, ensuring adherence to best readability, testing, performance, and scalability practices."
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Content Marketing Coordinator",
-                "company": "Experian",
-                "location": "Remote",
-                "dates": "Nov 2022-Sep 2023",
-                "desc": [
-                    {
-                        "action": "develop",
-                        "support": [
-                            "Design, test, and implement new features for internal web application platforms and APIs.",
-                            "Monitor, update, and modify existing code for enhanced system performance."
-                        ]
-                    },
-                    {
-                        "action": "resolve",
-                        "support": [
-                            "Facilitate during internal system issues, leading to timely resolutions.",
-                            "Identify areas for system performance and availability improvements, resulting in optimized user experiences."
-                        ]
-                    },
-                    {
-                        "action": "communicate",
-                        "support": [
-                            "Regularly communicate with management and technical support colleagues to ensure project alignment.",
-                            "Compile timely, comprehensive, and accurate documentation and reports as requested by stakeholders."
-                        ]
-                    },
-                    {
-                        "action": "analyze",
-                        "support": [
-                            "Analyze user requirements and convert them into comprehensive design documents.",
-                            "Make sound technical decisions that produce resilient, reliable systems.",
-                            "Maintain up-to-date knowledge of technological developments in the industry."
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Resident Analyst",
-                "company": "obo. Agency",
-                "location": "Remote",
-                "dates": "Sep 2022-Nov 2022",
-                "desc": [
-                    {
-                        "action": "design",
-                        "support": [
-                            "Designed business logic and created technical specifications to extract key data elements from B2B client databases, enhancing personalization through data-driven insights.",
-                            "Improved customer engagement by translating user requirements into digital transformation initiatives, including CRM integrations, data migrations, and custom database implementations."
-                        ]
-                    },
-                    {
-                        "action": "build",
-                        "support": [
-                            "Developed automation workflows for client sales and marketing teams, implementing web templates and landing pages optimized for target personas and customer journeys using HTML, CSS, and JavaScript."
-                        ]
-                    },
-                    {
-                        "action": "upskill",
-                        "support": [
-                            "Completed Salesforce Trailhead training, gaining foundational knowledge in CRM tools and marketing automation principles, which informed best practices in project design and execution."
-                        ]
-                    }
-                ]
-            }
+  "resume": {
+    "summary": "Passionate web developer with expertise in designing and optimizing web applications and APIs, committed to delivering innovative solutions and driving business growth. Skilled in enhancing system performance, streamlining processes, and resolving technical challenges to exceed client expectations and elevate user experiences.",
+    "skills": [
+      {
+        "category": "Programming Languages",
+        "items": ["JavaScript (ES6+)", "Python", "PHP"]
+      },
+      {
+        "category": "Frontend Technologies",
+        "items": [
+          "HTML5",
+          "CSS3",
+          "React",
+          "Gatsby",
+          "GraphQL",
+          "jQuery",
+          "Bootstrap",
+          "Sass"
         ]
-    }
+      },
+      {
+        "category": "Backend Technologies",
+        "items": ["Node.js", "Express", "Django", "Flask", "RESTful APIs"]
+      },
+      {
+        "category": "Database Systems",
+        "items": ["MongoDB", "MySQL", "PostgreSQL"]
+      },
+      {
+        "category": "Version Control",
+        "items": ["Git", "GitHub"]
+      },
+      {
+        "category": "Development Tools",
+        "items": [
+          "VS Code",
+          "Postman",
+          "CI/CD Pipelines",
+          "npm",
+          "OpenAI",
+          "Browser DevTools"
+        ]
+      },
+      {
+        "category": "Other",
+        "items": [
+          "Agile Methodologies",
+          "JIRA",
+          "Confluence",
+          "Slack",
+          "WordPress"
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "title": "Web Developer",
+        "company": "Experian",
+        "location": "Remote",
+        "dates": "Sep 2023-Present",
+        "desc": [
+          {
+            "action": "architect",
+            "support": [
+              "Re-architect and migrate a high-traffic blog from WordPress to a modern headless CMS using React, Gatsby, and GraphQL, improving SEO performance and reducing load times by 20%.",
+              "Develop scalable APIs in Node.js to integrate with third-party tools and internal systems, enabling seamless data flow and improving overall functionality."
+            ]
+          },
+          {
+            "action": "automate",
+            "support": [
+              "Automate workflows by creating a Node.js application integrated with Google APIs, increasing content staging efficiency by 10x and saving hundreds of manual hours.",
+              "Optimize performance by debugging complex frontend and backend issues using DevTools, improving responsiveness and system reliability across distributed environments."
+            ]
+          },
+          {
+            "action": "collaborate",
+            "support": [
+              "Collaborate with cross-functional teams including designers, product managers, and other engineers to define technical requirements and ship high-quality features in an Agile environment.",
+              "Enhance reliability by integrating monitoring and error reporting tools like DataDog, providing full production visibility and reducing system downtime."
+            ]
+          },
+          {
+            "action": "mentor",
+            "support": [
+              "Mentor teammates through knowledge-sharing sessions, ensuring adherence to best readability, testing, performance, and scalability practices."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Content Marketing Coordinator",
+        "company": "Experian",
+        "location": "Remote",
+        "dates": "Nov 2022-Sep 2023",
+        "desc": [
+          {
+            "action": "develop",
+            "support": [
+              "Design, test, and implement new features for internal web application platforms and APIs.",
+              "Monitor, update, and modify existing code for enhanced system performance."
+            ]
+          },
+          {
+            "action": "resolve",
+            "support": [
+              "Facilitate during internal system issues, leading to timely resolutions.",
+              "Identify areas for system performance and availability improvements, resulting in optimized user experiences."
+            ]
+          },
+          {
+            "action": "communicate",
+            "support": [
+              "Regularly communicate with management and technical support colleagues to ensure project alignment.",
+              "Compile timely, comprehensive, and accurate documentation and reports as requested by stakeholders."
+            ]
+          },
+          {
+            "action": "analyze",
+            "support": [
+              "Analyze user requirements and convert them into comprehensive design documents.",
+              "Make sound technical decisions that produce resilient, reliable systems.",
+              "Maintain up-to-date knowledge of technological developments in the industry."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Resident Analyst",
+        "company": "obo. Agency",
+        "location": "Remote",
+        "dates": "Sep 2022-Nov 2022",
+        "desc": [
+          {
+            "action": "design",
+            "support": [
+              "Designed business logic and created technical specifications to extract key data elements from B2B client databases, enhancing personalization through data-driven insights.",
+              "Improved customer engagement by translating user requirements into digital transformation initiatives, including CRM integrations, data migrations, and custom database implementations."
+            ]
+          },
+          {
+            "action": "build",
+            "support": [
+              "Developed automation workflows for client sales and marketing teams, implementing web templates and landing pages optimized for target personas and customer journeys using HTML, CSS, and JavaScript."
+            ]
+          },
+          {
+            "action": "upskill",
+            "support": [
+              "Completed Salesforce Trailhead training, gaining foundational knowledge in CRM tools and marketing automation principles, which informed best practices in project design and execution."
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

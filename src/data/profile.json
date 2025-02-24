@@ -1,32 +1,32 @@
 {
-    "profile": {
-        "name": "Klea Merkuri",
-        "employer": "Experian",
-        "title": "Full Stack Engineer",
-        "blog": {
-            "name": "The Helpful Tipper",
-            "url": "https://www.thehelpfultipper.com"
-        },
-        "pronouns": "she/her",
-        "story": "I’m an LA-based web developer and digital content creator who developed a genuine passion for coding when trying to automate Excel billing spreadsheets. I’m eager to bring my unique blend of analytical skills and coding enthusiasm to innovative projects to create intuitive and accessible software.",
-        "facts": [
-            "Self-taught developer",
-            "Background in finance and accounting",
-            "Blogger and content creator",
-            "Codes when traveling", 
-            "Pet-parent of Eve the Beagle", 
-            "Enthusiast of Asian cuisine",
-            "Named after an Egyptian queen"
-        ],
-        "contact": {
-            "email": "kleamdev@gmail.com",
-            "phone": "(818) 355-3683"
-        },
-        "lead": "I bring ideas to life with robust, user-focused web solutions.",
-        "about": [
-            "I’m a developer passionate about creating <strong>intuitive, scalable, and user-friendly</strong> web experiences. I thrive in collaborative spaces, bridging the gap between design and technical feasibility to deliver impactful features that users love. Whether it’s <strong>optimizing backend data structures, enhancing accessibility, or solving complex issues</strong>, I enjoy crafting thoughtful solutions that empower users and streamline workflows.",
-            "Currently, I’m leading the migration of a high-traffic blog from a traditional WordPress setup to a cutting-edge headless CMS. Using React, Gatsby, and GraphQL, I’ve transformed the site to be faster, scalable, and easier to maintain. My day-to-day involves building <strong>custom APIs</strong>, <strong>designing automation tools</strong> that increase efficiency tenfold, and writing <strong>clean, maintainable code</strong> to improve performance and usability.",
-            "Beyond development, I’m curious and love to explore—whether it’s traveling to new places, sharing coding tutorials and tips on my blog, or finding creative inspiration through paint-by-numbers and sketching alongside my beagle. I’m driven to <strong>create impactful digital experiences</strong> that solve real-world problems and inspire meaningful connections."
-        ]
-    }
+  "profile": {
+    "name": "Klea Merkuri",
+    "employer": "Experian",
+    "title": "Full Stack Engineer",
+    "blog": {
+      "name": "The Helpful Tipper",
+      "url": "https://www.thehelpfultipper.com"
+    },
+    "pronouns": "she/her",
+    "story": "I’m an LA-based web developer and digital content creator who developed a genuine passion for coding when trying to automate Excel billing spreadsheets. I’m eager to bring my unique blend of analytical skills and coding enthusiasm to innovative projects to create intuitive and accessible software.",
+    "facts": [
+      "Self-taught developer",
+      "Background in finance and accounting",
+      "Blogger and content creator",
+      "Codes when traveling",
+      "Pet-parent of Eve the Beagle",
+      "Enthusiast of Asian cuisine",
+      "Named after an Egyptian queen"
+    ],
+    "contact": {
+      "email": "kleamdev@gmail.com",
+      "phone": "(818) 355-3683"
+    },
+    "lead": "I bring ideas to life with robust, user-focused web solutions.",
+    "about": [
+      "I’m a developer passionate about creating <strong>intuitive, scalable, and user-friendly</strong> web experiences. I thrive in collaborative spaces, bridging the gap between design and technical feasibility to deliver impactful features that users love. Whether it’s <strong>optimizing backend data structures, enhancing accessibility, or solving complex issues</strong>, I enjoy crafting thoughtful solutions that empower users and streamline workflows.",
+      "Currently, I’m leading the migration of a high-traffic blog from a traditional WordPress setup to a cutting-edge headless CMS. Using React, Gatsby, and GraphQL, I’ve transformed the site to be faster, scalable, and easier to maintain. My day-to-day involves building <strong>custom APIs</strong>, <strong>designing automation tools</strong> that increase efficiency tenfold, and writing <strong>clean, maintainable code</strong> to improve performance and usability.",
+      "Beyond development, I’m curious and love to explore—whether it’s traveling to new places, sharing coding tutorials and tips on my blog, or finding creative inspiration through paint-by-numbers and sketching alongside my beagle. I’m driven to <strong>create impactful digital experiences</strong> that solve real-world problems and inspire meaningful connections."
+    ]
+  }
 }
