@@ -10,7 +10,6 @@ import '../styles/experience.scss';
 
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
   const expData = useStaticQuery(graphql`
     query ResumeData {
       allFile(filter: { sourceInstanceName: { eq: "data" }, relativePath: { eq: "resume.json" } }) {
@@ -38,23 +37,21 @@ export default function Experience() {
       }
     }
   `);
-  if (!expData) {
+  if (!expData || !expData.allFile.nodes.length) {
     console.error('Error getting experience data.');
   }
-  const res: IResume = expData.allFile.nodes[0].childDataJson.resume || {};
+  const res: IResume = expData.allFile.nodes[0]?.childDataJson.resume || {};
   const exp = res?.experience || null;
 
   const renderExpError = (
     <p>
-      {`Something's not showing up but here's more on me 👉${' '}
-      ${(
-        <a
-          href={links.linkedin.url}
-          target="_blank"
-          rel="noreferrer">
-          LinkedIn
-        </a>
-      )}`}
+      Something's not showing up but here's more on me 👉{' '}
+      <a
+        href={links.linkedin.url}
+        target="_blank"
+        rel="noreferrer">
+        LinkedIn
+      </a>
     </p>
   );
 
@@ -92,16 +89,14 @@ export default function Experience() {
       <InlineNotice
         icon="📝"
         type="highlight">
-        {`Checkout${' '}
-        ${(
-          <a
-            href={portfolios.km.v1}
-            target="_blank"
-            rel="noreferrer">
-            portfolio v1
-          </a>
-        )}${' '}
-        for predecessor`}
+        Checkout{' '}
+        <a
+          href={portfolios.km.v1}
+          target="_blank"
+          rel="noreferrer">
+          portfolio v1
+        </a>{' '}
+        for predecessor
       </InlineNotice>
     </section>
   );

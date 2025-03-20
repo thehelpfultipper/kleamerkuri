@@ -1,10 +1,16 @@
 {
   "posts": [
     {
-      "title": "Listen, Coding Isn’t for Everybody, and Here’s Why",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2024/12/coding-isnt-for-everyone.webp",
-      "date": "Dec 2024",
-      "link": "https://thehelpfultipper.com/coding-isnt-for-everybody-heres-why/"
+      "title": "How To Create A Responsive Landing Page With Bootstrap: 15 Essential Tips",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/03/robot-holding-paint-brush.webp",
+      "date": "Mar 2025",
+      "link": "https://thehelpfultipper.com/create-responsive-landing-page-with-bootstrap-15-essential-tips/"
+    },
+    {
+      "title": "I Decoded a Project Challenge Just for Fun—and Didn’t Even Apply to the Job",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/02/girl-with-magnifying-glass-decoding.webp",
+      "date": "Feb 2025",
+      "link": "https://thehelpfultipper.com/i-decoded-a-project-challenge-just-for-fun-and-didnt-even-apply-to-the-job/"
     },
     {
       "title": "How Building Something Useful Can Help You Become Better At Coding",

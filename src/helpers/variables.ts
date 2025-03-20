@@ -17,9 +17,7 @@ export const links: IHelperLinks = {
     text: 'LinkedIn',
   },
   resume: {
-    url: `${
-      (process.env.NODE_ENV === 'development' && pathPrefix) || ''
-    }/klea-merkuri-software-engineer-resume.pdf`,
+    url: `${pathPrefix}/klea-merkuri-software-engineer-resume.pdf`,
     text: 'Download',
   },
   github: {
