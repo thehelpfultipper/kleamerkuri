@@ -99,14 +99,16 @@ export default function Modal({ setOpen, project }: IModalProps) {
                   rel="noreferrer">
                   Demo
                 </Button>
-                <Button
-                  variant="outlined"
-                  className="actionBtn"
-                  href={blog}
-                  target="_blank"
-                  rel="noreferrer">
-                  Blog
-                </Button>
+                {blog && (
+                  <Button
+                    variant="outlined"
+                    className="actionBtn"
+                    href={blog}
+                    target="_blank"
+                    rel="noreferrer">
+                    Blog
+                  </Button>
+                )}
               </div>
             </div>
             <div className="modalDetailsWrap">

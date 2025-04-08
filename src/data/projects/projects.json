@@ -1,5 +1,20 @@
 [
   {
+    "title": "Experian Blog",
+    "featured": "true",
+    "description": "Enterprise blog migration from traditional custom WordPress theme to headless architecture using Gatsby and GraphQL. Built with a focus on scalability, content delivery optimization, and automated deployments. It involved re-architecting content models for a library of 5K+ articles, optimizing image loading, third-party integrations, and ensuring high performance across multiple environments.",
+    "image": "https://thehelpfultipper.com/wp-content/uploads/2025/04/experian-blog.webp",
+    "links": {
+      "demo": "https://experian.com/blogs/ask-experian",
+      "blog": null
+    },
+    "meta": {
+      "stack": ["Gatsby", "GraphQL", "Apollo Client", "Bootstrap", "PHP"],
+      "date": "2025-02-18",
+      "category": ["React", "JavaScript"]
+    }
+  },
+  {
     "title": "Dark Theme Landing Page",
     "featured": "false",
     "description": "This project creates the Fylo dark theme landing page using Bootstrap styles, based on a challenge from Frontend Mentor. The design features a sleek, modern interface with responsive elements, ensuring optimal performance across various devices. Attention to detail was key in achieving a visually appealing and user-friendly web page, demonstrating proficiency in both Bootstrap and modern web development practices.",

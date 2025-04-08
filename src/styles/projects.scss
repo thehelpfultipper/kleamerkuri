@@ -1,4 +1,4 @@
-@use "partials/variables" as *;
+@use 'partials/variables' as *;
 
 .projectItem,
 .productItem,
@@ -52,10 +52,11 @@
 
   .stackWrap {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     font-size: 0.9rem;
     @media (max-width: 500px) {
-      font-size: .65rem;
+      font-size: 0.65rem;
     }
 
     .stack {

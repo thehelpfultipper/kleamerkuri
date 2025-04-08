@@ -8,16 +8,7 @@
       },
       {
         "category": "Frontend Technologies",
-        "items": [
-          "HTML5",
-          "CSS3",
-          "React",
-          "Gatsby",
-          "GraphQL",
-          "jQuery",
-          "Bootstrap",
-          "Sass"
-        ]
+        "items": ["HTML5", "CSS3", "React", "Gatsby", "GraphQL", "jQuery", "Bootstrap", "Sass"]
       },
       {
         "category": "Backend Technologies",
@@ -33,24 +24,11 @@
       },
       {
         "category": "Development Tools",
-        "items": [
-          "VS Code",
-          "Postman",
-          "CI/CD Pipelines",
-          "npm",
-          "OpenAI",
-          "Browser DevTools"
-        ]
+        "items": ["VS Code", "Postman", "CI/CD Pipelines", "npm", "OpenAI", "Browser DevTools"]
       },
       {
         "category": "Other",
-        "items": [
-          "Agile Methodologies",
-          "JIRA",
-          "Confluence",
-          "Slack",
-          "WordPress"
-        ]
+        "items": ["Agile Methodologies", "JIRA", "Confluence", "Slack", "WordPress"]
       }
     ],
     "experience": [
@@ -63,7 +41,7 @@
           {
             "action": "architect",
             "support": [
-              "Re-architect and migrate a high-traffic blog from WordPress to a modern headless CMS using React, Gatsby, and GraphQL, improving SEO performance and reducing load times by 20%.",
+              "Architect migration of a high-traffic blog from WordPress to a modern headless CMS leveraging React, Gatsby, and GraphQL, achieving a 20% reduction in load times and enhanced SEO performance while maintaining a responsive design for optimal user experience.",
               "Develop scalable APIs in Node.js to integrate with third-party tools and internal systems, enabling seamless data flow and improving overall functionality."
             ]
           },
@@ -84,7 +62,7 @@
           {
             "action": "mentor",
             "support": [
-              "Mentor teammates through knowledge-sharing sessions, ensuring adherence to best readability, testing, performance, and scalability practices."
+              "Mentor teammates by leading sessions on scalable code design, testing, and performance optimizations, ensuring adherence to high technical standards and improving team-wide code quality."
             ]
           }
         ]
@@ -99,7 +77,7 @@
             "action": "develop",
             "support": [
               "Design, test, and implement new features for internal web application platforms and APIs.",
-              "Monitor, update, and modify existing code for enhanced system performance."
+              "Streamline content quality assurance as measured by 30% reduction in broken links and 25% decrease in duplicate content by auditing pages using browser developer tools for frontend validation while building custom Python and Node.js scripts to automate sitewide integrity checks and compliance remediation."
             ]
           },
           {

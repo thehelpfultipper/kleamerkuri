@@ -8,7 +8,7 @@ export default function Projects() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const data = useStaticQuery(graphql`
     query FeaturedProjectsData {
-      allProjectsJson(filter: { featured: { eq: "true" } }, sort: { meta: { date: ASC } }) {
+      allProjectsJson(filter: { featured: { eq: "true" } }, sort: { meta: { date: DESC } }) {
         nodes {
           title
           featured
