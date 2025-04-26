@@ -7,7 +7,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ act
       rules: [
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          exclude: /node_modules/,
+          exclude: /node_modules\/(?!(@types\/react|@types\/react-dom)\/)/,
         },
       ],
     },
@@ -17,5 +17,8 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ act
         failOnError: false, // set to true if you want to fail on lint errors
       }),
     ],
+    optimization: {
+      minimize: true,
+    },
   });
 };
