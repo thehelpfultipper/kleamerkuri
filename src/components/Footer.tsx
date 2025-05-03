@@ -1,8 +1,6 @@
 import React from 'react';
 import ActionLinks from './ActionLinks';
 
-import '../styles/footer.scss';
-
 export default function Footer() {
   return (
     <footer className="footerContainer">

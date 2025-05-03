@@ -5,7 +5,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { KeyboardArrowUp } from '@mui/icons-material';
 import { categories } from '../helpers/variables';
 
-import '../styles/filter.scss';
+// import '../styles/filter.scss';
 
 interface IProjectFilterProps {
   onDisplayCat: (val: string) => void;

@@ -9,8 +9,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ActionLinks from './ActionLinks';
 import { IProfile } from '../helpers/interfaces';
 
-import '../styles/profile.scss';
-
 const sections = [
   { id: 'about', name: 'About' },
   { id: 'experience', name: 'Experience' },

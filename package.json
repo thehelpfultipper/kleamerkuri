@@ -17,9 +17,12 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@google/genai": "^0.9.0",
     "@mui/icons-material": "^5.15.9",
     "@mui/lab": "^5.0.0-alpha.166",
     "@mui/material": "^5.15.9",
+    "@supabase/supabase-js": "^2.49.4",
+    "@xenova/transformers": "^2.17.2",
     "classnames": "^2.5.1",
     "gatsby": "^5.14.1",
     "gatsby-plugin-anchor-links": "^1.2.1",
@@ -37,7 +40,8 @@
     "prop-types": "^15.8.1",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "uuid": "^11.1.0"
   },
   "repository": {
     "type": "git",

@@ -2,8 +2,6 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import GatsbyImg from './UI/GatsbyImg';
 
-import '../styles/profile.scss';
-
 export default function ProfileLogo() {
   const q = useStaticQuery(graphql`
     {

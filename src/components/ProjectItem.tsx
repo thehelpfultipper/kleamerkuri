@@ -4,8 +4,6 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import DisableItem from './UI/DisableItem';
 import { IProject, IMouseEvents } from '../helpers/interfaces';
 
-import '../styles/projects.scss';
-
 interface IProjectItemProps {
   project: IProject;
   isDisabled: boolean;

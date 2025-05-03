@@ -6,8 +6,6 @@ import DisableItem from './UI/DisableItem';
 import InlineNotice from './UI/InlineNotice';
 import { IPost } from '../helpers/interfaces';
 
-import '../styles/projects.scss';
-
 export default function Products() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const data = useStaticQuery(graphql`

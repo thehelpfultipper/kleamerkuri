@@ -94,7 +94,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-env-variables',
       options: {
-        allowList: ['SITE_ROOT'],
+        allowList: ['SITE_ROOT', 'SUPABASE_URL', 'SUPABASE_ANON_KEY'],
       },
     },
   ],

@@ -1,35 +1,34 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.renderSideBySide": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.wordWrap": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "editor.quickSuggestions": {
-    "other": "on",
     "comments": "on",
+    "other": "on",
     "strings": "on"
   },
-  "files.eol": "\n",
-  "files.autoSave": "off",
-  "files.insertFinalNewline": true,
-  "files.trimTrailingWhitespace": true,
+  "editor.wordWrap": "on",
+  "emmet.showSuggestionsAsSnippets": true,
   "files.associations": {
     "*.json": "json"
   },
-  "prettier.printWidth": 100,
-  "diffEditor.renderSideBySide": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "html.format.enable": true,
+  "files.autoSave": "off",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "html.autoClosingTags": true,
+  "html.format.enable": true,
   "html.format.indentHandlebars": true,
-  "prettier.configPath": ".prettierrc",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "relative",
-  "scss.lint.important": "warning",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "prettier.configPath": ".prettierrc",
+  "prettier.printWidth": 100,
   "scss.lint.duplicateProperties": "warning",
-  "css.lint.duplicateProperties": "warning",
-  "emmet.showSuggestionsAsSnippets": true
+  "scss.lint.important": "warning",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

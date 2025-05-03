@@ -5,8 +5,7 @@ import Title from './Title';
 import ProjectFilter from './ProjectsFilter';
 import GridContainer from './Grid';
 import Footer from './Footer';
-
-import '../styles/archive.scss';
+import ChatbotLoader from './ChatbotLoader';
 
 export default function Archive() {
   const [displayCat, setDisplayCat] = useState('All');
@@ -69,6 +68,7 @@ export default function Archive() {
           <p>No projects found...😓</p>
         )}
       </main>
+      <ChatbotLoader />
       <Footer />
     </section>
   );

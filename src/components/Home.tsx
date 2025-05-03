@@ -7,8 +7,7 @@ import Experience from './Experience';
 import Projects from './Projects';
 import Posts from './Posts';
 import Products from './Products';
-
-import '../styles/home.scss';
+import ChatbotLoader from './ChatbotLoader';
 
 export default function Home() {
   const data = useStaticQuery(graphql`
@@ -68,13 +67,21 @@ export default function Home() {
         </main>
         <footer>
           <div className="copyRight">
-            <p>This portfolio is built with Gatsby and MaterialUI.</p>
             <p>
+              🙌 This portfolio is built with <strong>Gatsby</strong> and{' '}
+              <strong>MaterialUI</strong>.
+            </p>
+            <p>
+              🤖 Eve the AI is powered by <strong>Gemini</strong> and served through{' '}
+              <strong>Supabase</strong>. She can sometimes be wrong.
+            </p>
+            <p className="mb-0">
               <span className="copyYr">© {new Date().getFullYear()}</span>{' '}
               <span>Portfolio by Klea Merkuri. All Rights Reserved.</span>
             </p>
           </div>
         </footer>
+        <ChatbotLoader />
       </Grid>
     </Grid>
   );

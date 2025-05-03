@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import Footer from '../components/Footer';
 
-import '../styles/404.scss';
-
 export default function NotFoundPage() {
   return (
     <section className="container">

@@ -3,8 +3,6 @@ import { Grid, Pagination } from '@mui/material';
 import GridTile from './GridTile';
 import { IProject } from '../helpers/interfaces';
 
-import '../styles/grid.scss';
-
 interface IGridContainerProps {
   col?: number;
   max?: number;

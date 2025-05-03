@@ -6,8 +6,6 @@ import { links, portfolios } from '../helpers/variables';
 import InlineNotice from './UI/InlineNotice';
 import { IResume } from '../helpers/interfaces';
 
-import '../styles/experience.scss';
-
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const expData = useStaticQuery(graphql`

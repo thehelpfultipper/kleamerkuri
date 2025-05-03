@@ -4,8 +4,6 @@ import { IconButton, Skeleton, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { IProject } from '../../helpers/interfaces';
 
-import '../../styles/modal.scss';
-
 interface IModalProps {
   open?: boolean;
   setOpen: (isOpen: boolean) => void;
