@@ -53,13 +53,11 @@ export function useChatbot() {
     text: string,
     role: 'assistant' | 'user',
     time: Date = new Date(),
-  ): IChatMessage => {
-    return {
-      role,
-      content: text,
-      timestamp: time,
-    };
-  };
+  ): IChatMessage => ({
+    role,
+    content: text,
+    timestamp: time,
+  });
 
   const loadSessionHistory = async (sid: string) => {
     console.log('Loading session history for ID:', sid);
@@ -116,11 +114,12 @@ export function useChatbot() {
         const parsed = JSON.parse(storedCache);
         const now = Date.now();
         const freshCache: Record<string, ICachedItem> = {};
-        for (const key in parsed) {
-          if (now - parsed[key].timestamp < CACHE_TTL_MS) {
-            freshCache[key] = parsed[key];
+        Object.entries(parsed).forEach(([key, value]: [string, unknown]) => {
+          const cachedItem = value as ICachedItem;
+          if (now - cachedItem.timestamp < CACHE_TTL_MS) {
+            freshCache[key] = cachedItem;
           }
-        }
+        });
         setLocalCache(freshCache);
         localStorage.setItem('chatCache', JSON.stringify(freshCache));
         console.log('Fresh cache set:', freshCache);
@@ -349,17 +348,7 @@ export function useChatbot() {
         console.log('Chat process completed');
       }
     },
-    [
-      input,
-      localCache,
-      sessionId,
-      isLoading,
-      isTyping,
-      buildMessage,
-      CACHE_TTL_MS,
-      supabaseUrl,
-      supabaseKey,
-    ],
+    [input, localCache, sessionId, isLoading, buildMessage, CACHE_TTL_MS],
   );
 
   return {
