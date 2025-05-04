@@ -14,18 +14,17 @@ export default function NotFoundPage() {
         </p>
         <ol className="optionsList">
           <li>
-            {`${(<strong>Check the URL:</strong>)} Make sure you've entered the correct
-            URL. Sometimes a small typo can lead you astray.`}
+            <strong>Check the URL:</strong> Make sure you've entered the correct URL. Sometimes a
+            small typo can lead you astray.
           </li>
           <li>
-            {`${(<strong>Go Back to the Homepage:</strong>)} Click${' '}
-            ${(<Link to="/">here</Link>)} to return to the homepage and explore from
-            there.`}
+            <strong>Go Back to the Homepage:</strong> Click <Link to="/">here</Link> to return to
+            the homepage and explore from there.
           </li>
           <li>
-            {`${(<strong>Explore My Portfolio:</strong>)} While you're here, why not
-            take a look at some of my recent projects? Click${' '}
-            ${(<Link to="/portfolio/">here</Link>)} to browse through my portfolio.`}
+            <strong>Explore My Portfolio:</strong> While you're here, why not take a look at some of
+            my recent projects? Click <Link to="/portfolio/">here</Link> to browse through my
+            portfolio.
           </li>
         </ol>
         <p>Thanks for visiting!</p>
