@@ -35,7 +35,7 @@ Getting this working involved several modern web development and AI concepts:
   - An **RPC function (`match_portfolio_content`)** in the database handles similarity search, finding content relevant to your query based on its vector embedding. This significantly speeds up retrieval.
 - **Vector Embeddings:** Portfolio content and user queries are converted into numerical "embeddings" where similar meanings are close together. This enables **semantic search**, allowing the chatbot to understand different ways of asking the same question, moving beyond simple keyword matching. The vector dimension must **exactly match** what the AI model outputs and what Supabase expects.
 - **Google Gemini:** After encountering issues with Hugging Face (availability, rate limits), I switched to Google Gemini, which was stable and developer-friendly. Gemini generates the final responses based on your query and relevant content found via the similarity search.
-- **Server-Sent Events (SSE):** To make the experience feel fast and responsive, Gemini's responses are **streamed back to the frontend in real-time** using SSE. This creates a "typing" effectx.
+- **Server-Sent Events (SSE):** To make the experience feel fast and responsive, Gemini's responses are **streamed back to the frontend in real-time** using SSE. This creates a "typing" effect.
 - **Frontend (React/Gatsby):** Built with React, the chatbot incorporates performance optimizations like `React.memo` for individual messages, `useCallback` for event handlers, and `useMemo` for the message list to ensure smooth performance. The entire component is also lazy-loaded.
 
 This approach resulted in a solution that is **fast, accurate, cost-effective** (running within free tiers), and low-maintenance.
