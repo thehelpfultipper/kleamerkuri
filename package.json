@@ -2,7 +2,7 @@
   "name": "klea-merkuri-portofolio",
   "private": true,
   "description": "A creative minimalist developer portfolio built with Gatsby and Material-UI",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build --prefix-paths",

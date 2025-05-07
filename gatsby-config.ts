@@ -7,6 +7,7 @@ if (process.env.NODE_ENV === 'production') {
     path: './environments/.env.development',
   });
 }
+console.log(process.env.NODE_ENV);
 
 module.exports = {
   siteMetadata: {
