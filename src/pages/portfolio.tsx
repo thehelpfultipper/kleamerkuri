@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Archive from '../components/Archive';
 import SEO from '../components/SEO';
 
