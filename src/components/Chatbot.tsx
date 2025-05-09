@@ -255,6 +255,7 @@ export default function Chatbot({ isOpen, onOpen }: IChatbot) {
             disabled={isLoading}
             size="small"
             sx={{ mr: 1 }}
+            data-gtm-track="chat-input"
           />
           <IconButton
             type="submit"

@@ -37,6 +37,7 @@ export default function ChatbotLoader() {
             <Fab
               onClick={() => setIsActive(!isActive)}
               aria-label="open chat"
+              data-gtm-track="chat-button"
               sx={{
                 bgcolor: '#c71585',
                 color: 'white',

@@ -1,7 +1,7 @@
 import { GatsbyNode } from 'gatsby';
 import ESLintPlugin from 'eslint-webpack-plugin';
 
-export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
+export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions, stage }) => {
   actions.setWebpackConfig({
     module: {
       rules: [
@@ -18,7 +18,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ act
       }),
     ],
     optimization: {
-      minimize: true,
+      minimize: stage === 'build-javascript',
     },
   });
 };
