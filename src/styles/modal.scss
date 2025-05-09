@@ -1,4 +1,4 @@
-@use "partials/variables" as *;
+@use 'partials/variables' as *;
 
 .modalOverlay {
   position: fixed;
@@ -24,7 +24,7 @@
     align-items: center;
 
     .modalContent {
-      background: $bg-color;
+      background: var(--bg-color);
       width: 100%;
       padding: 2em;
       margin: 1em;
@@ -45,7 +45,7 @@
           }
           p {
             margin-top: 0.2em;
-            color: $grey-txt;
+            color: var(--grey-txt);
           }
         }
 
@@ -77,7 +77,7 @@
 
           .modalImgWrap {
             width: 100%;
-            height: auto;
+            // height: auto;
             height: 200px;
 
             img {
@@ -92,15 +92,15 @@
             gap: 10px;
 
             .actionBtn {
-              border-color: $dark-gray !important;
-              color: $dark-gray !important;
+              border-color: var(--dark-gray) !important;
+              color: var(--dark-gray) !important;
               cursor: pointer;
               transition: background 0.3s ease;
 
               &:hover {
-                background: $mulberry-pink !important;
-                color: $bg-color !important;
-                border-color: $light-gray !important;
+                background: var(--accent-color) !important;
+                color: var(--bg-color) !important;
+                border-color: var(--light-gray) !important;
               }
             }
           }
@@ -120,7 +120,7 @@
             display: inline-flex;
             gap: 10px;
             .catItem {
-              background: $dark-gray;
+              background: var(--dark-gray);
               padding: 0.5em 0.8em;
               font-size: 0.8em;
               border-radius: 50px;
@@ -134,7 +134,7 @@
             gap: 10px;
 
             .label {
-              color: $grey-txt;
+              color: var(--grey-txt);
               font-size: 0.9rem;
               letter-spacing: 0.05rem;
               font-weight: 600;

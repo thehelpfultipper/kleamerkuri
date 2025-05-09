@@ -41,9 +41,9 @@
           height: max-content;
           z-index: 99999;
           overflow: hidden;
-          border: 1px solid $hover-bg;
+          border: 1px solid var(--hover-bg);
           border-radius: 20px;
-          background: $bg-color;
+          background: var(--bg-color);
 
           .filterBtn {
             width: 100% !important;

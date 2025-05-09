@@ -8,6 +8,7 @@ import Projects from './Projects';
 import Posts from './Posts';
 import Products from './Products';
 import ChatbotLoader from './ChatbotLoader';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Home() {
   const data = useStaticQuery(graphql`
@@ -59,6 +60,7 @@ export default function Home() {
       </Grid>
       <Grid md={8}>
         <main>
+          <ThemeSwitcher />
           <About about={about} />
           <Experience />
           <Projects />

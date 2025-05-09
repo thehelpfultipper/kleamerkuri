@@ -6,13 +6,13 @@
   position: relative;
   &:hover {
     .imgWrap img {
-      border-color: $light-gray;
+      border-color: var(--light-gray);
     }
     .stackWrap .stack {
       opacity: 1;
     }
     .demo h3 {
-      color: $mulberry-pink;
+      color: var(--accent-color);
     }
   }
   .demo {
@@ -25,7 +25,7 @@
     }
     h3 {
       margin-bottom: 0;
-      color: $dark-gray;
+      color: var(--dark-gray);
     }
   }
 
@@ -46,7 +46,7 @@
     img {
       aspect-ratio: 4 / 3;
       object-fit: cover;
-      border: 2px solid $hover-bg;
+      border: 2px solid var(--hover-bg);
     }
   }
 
@@ -60,7 +60,7 @@
     }
 
     .stack {
-      background: $dark-gray;
+      background: var(--dark-gray);
       opacity: 0.8;
       padding: 0.2rem 0.5rem;
       border-radius: 5px;

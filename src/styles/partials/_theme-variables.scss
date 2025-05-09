@@ -1,0 +1,119 @@
+// Default Theme (Current)
+$default-bg-color: #f5f5f5;
+$default-dark-gray: #333;
+$default-grey-txt: #787878;
+$default-mulberry-pink: #c71585;
+$default-light-gray: #d3d3d3;
+$default-hover-bg: #d3d3d333;
+
+$default-note-bg: hsla(310, 84%, 83%, 0.29);
+$default-note-span-bg: rgb(248 177 236 / 79%);
+$default-message-bg: rgba(177, 248, 230, 0.29);
+$default-message-span-bg: rgba(177, 248, 230, 0.79);
+$default-highlight-bg: rgba(243, 234, 154, 0.29);
+$default-highlight-span-bg: rgba(234, 218, 77, 0.79);
+
+// Fun Theme (Studio Ghibli-Inspired)
+$fun-bg-color: #fffaf0;
+$fun-dark-gray: #403d26;
+$fun-grey-txt: #6c7a8e;
+$fun-accent: #32527b;
+$fun-light-gray: #f5f5dc;
+$fun-hover-bg: rgba(166, 215, 132, 0.2);
+$fun-secondary: #a6d784;
+$fun-highlight: #ff5c5c;
+
+$fun-note-bg: hsla(20, 80%, 70%, 0.29); // Adjusted to fit the fun theme's aesthetic
+$fun-note-span-bg: rgb(255 192 203 / 79%);
+$fun-message-bg: rgba(240, 230, 140, 0.29);
+$fun-message-span-bg: rgba(240, 230, 140, 0.79);
+$fun-highlight-bg: rgba(150, 220, 100, 0.29);
+$fun-highlight-span-bg: rgba(100, 200, 50, 0.79);
+
+// Clean Theme (Modern Professional)
+$clean-bg-color: #ffffff;
+$clean-dark-gray: #1a202c;
+$clean-grey-txt: #718096;
+$clean-accent: #3182ce;
+$clean-light-gray: #f7fafc;
+$clean-hover-bg: rgba(160, 174, 192, 0.1);
+$clean-secondary: #a0aec0;
+$clean-highlight: #2e3a59;
+
+$clean-note-bg: hsla(200, 80%, 90%, 0.29); // Adjusted to fit the clean theme's aesthetic
+$clean-note-span-bg: rgb(180 220 240 / 79%);
+$clean-message-bg: rgba(140, 200, 240, 0.29);
+$clean-message-span-bg: rgba(140, 200, 240, 0.79);
+$clean-highlight-bg: rgba(100, 180, 220, 0.29);
+$clean-highlight-span-bg: rgba(50, 150, 200, 0.79);
+
+// Theme class variables
+:root {
+  // Default variables
+  --bg-color: #{$default-bg-color};
+  --dark-gray: #{$default-dark-gray};
+  --grey-txt: #{$default-grey-txt};
+  --accent-color: #{$default-mulberry-pink};
+  --light-gray: #{$default-light-gray};
+  --hover-bg: #{$default-hover-bg};
+
+  --note-bg: #{$default-note-bg};
+  --note-span-bg: #{$default-note-span-bg};
+  --message-bg: #{$default-message-bg};
+  --message-span-bg: #{$default-message-span-bg};
+  --highlight-bg: #{$default-highlight-bg};
+  --highlight-span-bg: #{$default-highlight-span-bg};
+}
+
+// Theme-specific classes
+.theme-default {
+  --bg-color: #{$default-bg-color};
+  --dark-gray: #{$default-dark-gray};
+  --grey-txt: #{$default-grey-txt};
+  --accent-color: #{$default-mulberry-pink};
+  --light-gray: #{$default-light-gray};
+  --hover-bg: #{$default-hover-bg};
+
+  --note-bg: #{$default-note-bg};
+  --note-span-bg: #{$default-note-span-bg};
+  --message-bg: #{$default-message-bg};
+  --message-span-bg: #{$default-message-span-bg};
+  --highlight-bg: #{$default-highlight-bg};
+  --highlight-span-bg: #{$default-highlight-span-bg};
+}
+
+.theme-fun {
+  --bg-color: #{$fun-bg-color};
+  --dark-gray: #{$fun-dark-gray};
+  --grey-txt: #{$fun-grey-txt};
+  --accent-color: #{$fun-accent};
+  --light-gray: #{$fun-light-gray};
+  --hover-bg: #{$fun-hover-bg};
+  --secondary-color: #{$fun-secondary};
+  --highlight-color: #{$fun-highlight};
+
+  --note-bg: #{$fun-note-bg};
+  --note-span-bg: #{$fun-note-span-bg};
+  --message-bg: #{$fun-message-bg};
+  --message-span-bg: #{$fun-message-span-bg};
+  --highlight-bg: #{$fun-highlight-bg};
+  --highlight-span-bg: #{$fun-highlight-span-bg};
+}
+
+.theme-clean {
+  --bg-color: #{$clean-bg-color};
+  --dark-gray: #{$clean-dark-gray};
+  --grey-txt: #{$clean-grey-txt};
+  --accent-color: #{$clean-accent};
+  --light-gray: #{$clean-light-gray};
+  --hover-bg: #{$clean-hover-bg};
+  --secondary-color: #{$clean-secondary};
+  --highlight-color: #{$clean-highlight};
+
+  --note-bg: #{$clean-note-bg};
+  --note-span-bg: #{$clean-note-span-bg};
+  --message-bg: #{$clean-message-bg};
+  --message-span-bg: #{$clean-message-span-bg};
+  --highlight-bg: #{$clean-highlight-bg};
+  --highlight-span-bg: #{$clean-highlight-span-bg};
+}

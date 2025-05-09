@@ -2,7 +2,10 @@
 import type { GatsbyBrowser } from 'gatsby';
 import React from 'react';
 import LayoutSidebar from './src/components/LayoutSidebar';
+import { ThemeProvider } from './src/context/ThemeContext';
 
 export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({ element, props }) => (
-  <LayoutSidebar {...props}>{element}</LayoutSidebar>
+  <ThemeProvider>
+    <LayoutSidebar {...props}>{element}</LayoutSidebar>
+  </ThemeProvider>
 );

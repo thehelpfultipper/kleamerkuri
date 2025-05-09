@@ -1,48 +1,66 @@
 @use 'partials/variables' as *;
 
 .notice {
-    display: inline-block;
-    background: $hover-bg;
-    border-radius: 20px;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.8em;
-    margin: 0.5em;
+  display: inline-block;
+  background: var(--hover-bg);
+  border-radius: 20px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8em;
+  margin: 0.5em;
 
-    &:hover {
-        span {
-            transform: scale(1.2);
-        }
-    }
-
+  &:hover {
     span {
-        margin-right: .5rem;
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        background-color: #d3d3d3ca;
-        transition: $hover-transition;
-    }
-
-    &.note {
-        background-color: rgb(248 177 236 / 29%);
-        span {
-            background-color: rgb(248 177 236 / 79%);
-        }
-    }
-    &.message {
-        background-color: rgba(177, 248, 230, 0.29);
-        span {
-            background-color: rgba(177, 248, 230, 0.79);
-        }
-    }
-    &.highlight {
-        background-color: rgba(243, 234, 154, 0.29);
-        span {
-            background-color: rgba(234, 218, 77, 0.79);
-        }
+      transform: scale(1.2);
     }
   }
+
+  span {
+    margin-right: 0.5rem;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--hover-bg);
+    transition: $hover-transition;
+  }
+
+  //   &.note {
+  //     background-color: hsla(310, 84%, 83%, 0.29);
+  //     span {
+  //       background-color: rgb(248 177 236 / 79%);
+  //     }
+  //   }
+  //   &.message {
+  //     background-color: rgba(177, 248, 230, 0.29);
+  //     span {
+  //       background-color: rgba(177, 248, 230, 0.79);
+  //     }
+  //   }
+  //   &.highlight {
+  //     background-color: rgba(243, 234, 154, 0.29);
+  //     span {
+  //       background-color: rgba(234, 218, 77, 0.79);
+  //     }
+  //   }
+  &.note {
+    background-color: var(--note-bg);
+    span {
+      background-color: var(--note-span-bg);
+    }
+  }
+  &.message {
+    background-color: var(--message-bg);
+    span {
+      background-color: var(--message-span-bg);
+    }
+  }
+  &.highlight {
+    background-color: var(--highlight-bg);
+    span {
+      background-color: var(--highlight-span-bg);
+    }
+  }
+}
