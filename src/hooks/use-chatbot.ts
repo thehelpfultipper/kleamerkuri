@@ -35,6 +35,7 @@ export function useChatbot() {
   const isTypingRef = useRef(false);
   const welcomeMessagesShownRef = useRef(false);
   const [localCache, setLocalCache] = useState<Record<string, ICachedItem>>({});
+  const currentResponseRef = useRef<string>(''); // Track the current response being built
 
   const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -46,7 +47,7 @@ export function useChatbot() {
     const newId = uuidv4();
     localStorage.setItem('chatSessionId', newId);
     setSessionId(newId);
-    console.log('Session cleared and new session ID created:', newId);
+    // console.log('Session cleared and new session ID created:', newId);
   };
 
   const buildMessage = (
@@ -60,7 +61,7 @@ export function useChatbot() {
   });
 
   const loadSessionHistory = async (sid: string) => {
-    console.log('Loading session history for ID:', sid);
+    // console.log('Loading session history for ID:', sid);
     try {
       const { data, error } = await supabase
         .from('chat_sessions')
@@ -71,7 +72,7 @@ export function useChatbot() {
       if (error) {
         // Handle "no rows" error gracefully
         if (error.code === 'PGRST116') {
-          console.log('No history found for this session ID, starting fresh');
+          // console.log('No history found for this session ID, starting fresh');
           setInitialized(true);
           return;
         }
@@ -79,7 +80,7 @@ export function useChatbot() {
       }
 
       const history = data?.data?.history || [];
-      console.log(history);
+      // console.log(history);
       const restored: IChatMessage[] = history.flatMap(({ query, response, timestamp }: any) => {
         const time = new Date(timestamp);
         return [buildMessage(query, 'user', time), buildMessage(response, 'assistant', time)];
@@ -88,10 +89,10 @@ export function useChatbot() {
       setMessages(restored);
       setInitialized(true);
 
-      console.log('Session history restored:', restored);
+      // console.log('Session history restored:', restored);
     } catch (error) {
       setInitialized(true);
-      console.error('Failed to load session history', error);
+      // console.error('Failed to load session history', error);
     }
   };
 
@@ -102,13 +103,13 @@ export function useChatbot() {
   // Check cache
   useEffect(() => {
     const storedSession = localStorage.getItem('chatSessionId');
-    console.log('Stored session:', storedSession);
+    // console.log('Stored session:', storedSession);
     const newSessionId = storedSession || uuidv4();
     if (!storedSession) localStorage.setItem('chatSessionId', newSessionId);
     setSessionId(newSessionId);
 
     const storedCache = localStorage.getItem('chatCache');
-    console.log('Stored cache:', storedCache);
+    // console.log('Stored cache:', storedCache);
     if (storedCache) {
       try {
         const parsed = JSON.parse(storedCache);
@@ -122,10 +123,10 @@ export function useChatbot() {
         });
         setLocalCache(freshCache);
         localStorage.setItem('chatCache', JSON.stringify(freshCache));
-        console.log('Fresh cache set:', freshCache);
+        // console.log('Fresh cache set:', freshCache);
       } catch {
         localStorage.removeItem('chatCache');
-        console.log('Failed to parse stored cache, removed.');
+        // console.log('Failed to parse stored cache, removed.');
       }
     }
   }, []);
@@ -138,12 +139,12 @@ export function useChatbot() {
 
     if (sessionId && !initialized) {
       loadSessionHistory(sessionId);
-      console.log('loadSessionHistory');
+      // console.log('loadSessionHistory');
     }
 
     if (initialized && messages.length === 0 && !welcomeMessagesShownRef.current) {
       welcomeMessagesShownRef.current = true;
-      console.log('No history found, showing welcome messages.');
+      // console.log('No history found, showing welcome messages.');
 
       // Start streaming
       setIsTyping(true);
@@ -176,7 +177,7 @@ export function useChatbot() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    console.log('Messages updated, scrolled to bottom.');
+    // console.log('Messages updated, scrolled to bottom.');
   }, [messages]);
 
   const handleSubmit = useCallback(
@@ -190,10 +191,11 @@ export function useChatbot() {
       setIsLoading(true);
       setIsTyping(false);
       isTypingRef.current = false;
-      console.log('User input submitted:', userInput);
+      currentResponseRef.current = ''; // Reset current response
+      // console.log('User input submitted:', userInput);
 
       try {
-        const cacheKey = input.toLowerCase();
+        const cacheKey = userInput.toLowerCase();
         const cached = localCache[cacheKey];
         if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
           // Add small delay to make cached response less jarring
@@ -201,9 +203,10 @@ export function useChatbot() {
             setMessages((prev) => [...prev, buildMessage(cached.text, 'assistant')]);
             setIsLoading(false);
           }, 200);
-          console.log('Response served from cache:', cached.text);
+          // console.log('Response served from cache:', cached.text);
           return;
         }
+
         // API Call and Streaming Logic
         const apiUrl = `${supabaseUrl}/functions/v1/chats`;
         const response = await fetch(apiUrl, {
@@ -215,6 +218,7 @@ export function useChatbot() {
           },
           body: JSON.stringify({ query: userInput, sessionId }),
         });
+
         if (!response.ok || !response.body) {
           let errorBody = 'Failed to get response';
           try {
@@ -228,18 +232,20 @@ export function useChatbot() {
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder('utf-8');
-        let fullResponse = '';
         let buffer = ''; // Buffer for incomplete JSON
+        let isFirstAssistantMessage = true; // Flag to track first assistant message
 
-        let firstChunkReceived = false;
+        setIsLoading(false);
+        setIsTyping(true);
 
         while (true) {
           const { value, done } = await reader.read();
           if (done) {
-            console.log('Stream finished');
+            // console.log('Stream finished');
             setIsTyping(false);
             break;
           }
+
           const chunk = decoder.decode(value, { stream: true });
           // Process potentially multiple SSE messages within a single chunk
           const lines = (buffer + chunk).split('\n');
@@ -251,91 +257,101 @@ export function useChatbot() {
 
           for (let line of lines) {
             line = line.trim();
-            console.log(line);
             if (!line) continue;
 
             if (line.startsWith('data: ')) {
-              const jsonStr = line.substring(6).trim();
-              // Check if this is the last line and potentially incomplete
-              const isLastLine = line.endsWith('\n');
-              if (!isLastLine) {
-                try {
-                  JSON.parse(jsonStr);
-                } catch (e) {
-                  // Add as buffer to reprocess
-                  buffer = 'data: ' + jsonStr;
-                  continue;
-                }
-              }
-              const payload = JSON.parse(jsonStr);
-
-              // Handle first chunk
-              if (!firstChunkReceived) {
-                setIsLoading(false);
-                // setIsTyping(true);
-                firstChunkReceived = true;
+              try {
+                const jsonStr = line.substring(6).trim();
+                const payload = JSON.parse(jsonStr);
 
                 if (payload.sessionId && payload.sessionId !== sessionId) {
                   setSessionId(payload.sessionId);
                   localStorage.setItem('chatSessionId', payload.sessionId);
-                  console.log('Session ID updated from response:', payload.sessionId);
-                }
-              }
-
-              if (payload.isCached && payload.text) {
-                fullResponse = payload.text;
-
-                setMessages((prev) => [...prev, buildMessage(payload.text, 'assistant')]);
-
-                setIsTyping(false);
-                setIsTyping(false);
-
-                setLocalCache((prev) => {
-                  const updated = {
-                    ...prev,
-                    [cacheKey]: { text: payload.text, timestamp: Date.now() },
-                  };
-                  localStorage.setItem('chatCache', JSON.stringify(updated));
-                  return updated;
-                });
-                console.log('Response cached:', payload.text);
-                await reader.cancel();
-                console.log('Stream cancelled due to cached response.');
-                break;
-              } else if (payload.text) {
-                if (!isTypingRef.current) {
-                  setIsTyping(true);
+                  // console.log('Session ID updated from response:', payload.sessionId);
                 }
 
-                const textPart = payload.text;
-                fullResponse += textPart;
+                if (payload.isCached && payload.text) {
+                  // Handle cached response
+                  currentResponseRef.current = payload.text;
 
-                setMessages((prev) => {
-                  const lastMessage = prev[prev.length - 1];
-                  if (lastMessage && lastMessage.role === 'assistant' && isTypingRef.current) {
-                    return [
-                      ...prev.slice(0, -1),
-                      { ...lastMessage, content: lastMessage.content + textPart },
-                    ];
-                  }
-                  return [...prev, buildMessage(fullResponse, 'assistant')];
-                });
-                console.log('Full response updated:', fullResponse);
+                  setMessages((prev) => {
+                    // Add new message only if it's not already there
+                    const lastMsg = prev[prev.length - 1];
+                    if (
+                      lastMsg &&
+                      lastMsg.role === 'assistant' &&
+                      lastMsg.content === payload.text
+                    ) {
+                      return prev; // Avoid duplicate
+                    }
+                    return [...prev, buildMessage(payload.text, 'assistant')];
+                  });
+
+                  setIsTyping(false);
+
+                  // Update cache
+                  setLocalCache((prev) => {
+                    const updated = {
+                      ...prev,
+                      [cacheKey]: { text: payload.text, timestamp: Date.now() },
+                    };
+                    localStorage.setItem('chatCache', JSON.stringify(updated));
+                    return updated;
+                  });
+
+                  // console.log('Response cached:', payload.text);
+                  await reader.cancel();
+                  break;
+                } else if (payload.text) {
+                  const textPart = payload.text;
+
+                  // Update current response with new text part
+                  currentResponseRef.current += textPart;
+
+                  // Handle streaming updates
+                  setMessages((prev) => {
+                    if (isFirstAssistantMessage) {
+                      // First part of the assistant's response
+                      isFirstAssistantMessage = false;
+                      return [...prev, buildMessage(textPart, 'assistant')];
+                    } else {
+                      // Update the existing assistant message with the accumulated response
+                      const allButLast = prev.slice(0, -1);
+                      const lastMessage = prev[prev.length - 1];
+
+                      if (lastMessage && lastMessage.role === 'assistant') {
+                        return [
+                          ...allButLast,
+                          { ...lastMessage, content: currentResponseRef.current },
+                        ];
+                      }
+
+                      // Fallback if something went wrong with message tracking
+                      return [...prev, buildMessage(textPart, 'assistant')];
+                    }
+                  });
+                }
+              } catch (error) {
+                // console.error('Error parsing payload:', error, line);
+                // Continue processing other lines even if one fails
               }
             }
           }
         }
-        setIsTyping(false);
-        if (fullResponse && !localCache[cacheKey]) {
+
+        // Finalize and add to cache if needed
+        if (currentResponseRef.current && !localCache[cacheKey]) {
           setLocalCache((prev) => {
-            const updated = { ...prev, [cacheKey]: { text: fullResponse, timestamp: Date.now() } };
+            const updated = {
+              ...prev,
+              [cacheKey]: { text: currentResponseRef.current, timestamp: Date.now() },
+            };
             localStorage.setItem('chatCache', JSON.stringify(updated));
-            console.log('Full response cached:', fullResponse);
             return updated;
           });
         }
       } catch (error) {
-        console.log(`Chat error: ${error}`);
+        // console.error(`Chat error:`, error);
         setMessages((prev) => [
           ...prev,
           buildMessage('Something went wrong. Please try again later.', 'assistant'),
@@ -345,10 +361,10 @@ export function useChatbot() {
       } finally {
         setIsTyping(false);
         setIsLoading(false);
-        console.log('Chat process completed');
+        // console.log('Chat process completed');
       }
     },
-    [input, localCache, sessionId, isLoading, buildMessage, CACHE_TTL_MS],
+    [input, localCache, sessionId, isLoading, isTyping],
   );
 
   return {
