@@ -1,6 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 import { GoogleGenAI } from 'https://esm.sh/@google/genai';
-import { generateContext, generateHash, generatePrompt } from './helpers.js';
+import { generateContext, generateHash, generatePrompt, systemInstruction } from './helpers.js';
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -55,14 +55,43 @@ async function getGenAiEmbeddingModel(text) {
         throw error;
     }
 }
-async function getGenerateModel(prompt) {
+async function getGenerateModel(query, sessionId) {
     try {
+        let chat;
         // Generate the response
-        const response = await genAI.models.generateContent({
-            model: "gemini-2.0-flash",
-            contents: prompt,
+        if (sessionId) {
+            // Retrieve chat history from Supabase
+            const history = await getConversationHistory(sessionId);
+
+            // Format history for Gemini API
+            const formattedHistory = history.map(h => ({
+                role: "user",
+                parts: [{ text: h.query }],
+            }, {
+                role: "model",
+                parts: [{ text: h.response }],
+            })).flat();
+
+            // Create chat with system instruction and history
+            chat = genAI.chats.create({
+                model: "gemini-2.0-flash",
+                systemInstruction: systemInstruction,
+                history: formattedHistory
+            });
+        } else {
+            // If no sessionId, create a new chat with system instruction
+            chat = genAI.chats.create({
+                model: "gemini-2.0-flash",
+                systemInstruction: systemInstruction,
+            });
+        }
+
+        // Send message to the chat
+        const response = await chat.sendMessage({
+            message: query,
         });
-        return response.text;
+
+        return response.text();
     } catch (error) {
         console.error('Error generating response:', error);
         throw error;
@@ -140,6 +169,31 @@ async function smartSearch(query, embedding) {
     }
 
     return relevantContent;
+}
+
+/**
+ * Retrieve conversation history from the session
+ */
+async function getConversationHistory(sessionId) {
+    if (!sessionId) return [];
+
+    try {
+        const { data: sessionData } = await supabaseClient
+            .from('chat_sessions')
+            .select('data')
+            .eq('id', sessionId)
+            .maybeSingle();
+
+        if (!sessionData || !sessionData.data || !sessionData.data.history) {
+            console.log('No session data found for ID:', sessionId);
+            return [];
+        }
+
+        return sessionData.data.history;
+    } catch (error) {
+        console.error('Error retrieving conversation history:', error);
+        return [];
+    }
 }
 
 Deno.serve(async (req) => {
@@ -223,7 +277,7 @@ Deno.serve(async (req) => {
         }
         // Generate response using the model
         const promptTemplate = generatePrompt(context, query);
-        const result = await getGenerateModel(promptTemplate);
+        const result = await getGenerateModel(promptTemplate, sessionId);
         // Clean up the response
         const response = result.trim();
         // Cache the response
