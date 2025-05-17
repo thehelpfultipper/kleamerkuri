@@ -63,6 +63,20 @@ $clean-highlight-span-bg: rgba(50, 150, 200, 0.79);
   --message-span-bg: #{$default-message-span-bg};
   --highlight-bg: #{$default-highlight-bg};
   --highlight-span-bg: #{$default-highlight-span-bg};
+
+  // Layout and spacing
+  --border-radius: 8px;
+  --border-radius-large: 50px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  // Shadows
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 // Theme-specific classes
@@ -98,6 +112,14 @@ $clean-highlight-span-bg: rgba(50, 150, 200, 0.79);
   --message-span-bg: #{$fun-message-span-bg};
   --highlight-bg: #{$fun-highlight-bg};
   --highlight-span-bg: #{$fun-highlight-span-bg};
+
+  // Specific component overrides
+  --nav-hover-color: #a6d784;
+  --border-radius: 20px;
+  --border-radius-large: 50px;
+  --shadow-sm: 0 2px 5px rgba(64, 61, 38, 0.15);
+  --shadow-md: 0 4px 10px rgba(64, 61, 38, 0.15);
+  --shadow-lg: 0 8px 20px rgba(64, 61, 38, 0.15);
 }
 
 .theme-clean {
@@ -116,4 +138,12 @@ $clean-highlight-span-bg: rgba(50, 150, 200, 0.79);
   --message-span-bg: #{$clean-message-span-bg};
   --highlight-bg: #{$clean-highlight-bg};
   --highlight-span-bg: #{$clean-highlight-span-bg};
+
+  // Specific component overrides
+  --nav-hover-color: #3182ce;
+  --border-radius: 8px;
+  --border-radius-large: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.05);
 }
