@@ -27,14 +27,6 @@ This repository contains the source code for my personal portfolio website. It's
 
 <br />
 
-## 📋 Table of Contents
-
-- [✨ Key Features](#key-features)
-- [🤖 Featured Highlight: The AI Chatbot](#featured-highlight-the-ai-chatbot)
-  - [How It Works (Client-Side Architecture)](#how-it-works-client-side-architecture)
-- [🛠️ Tech Stack](#tech-stack)
-- [👋 Contact](#contact)
-
 ## ✨ Key Features
 
 - **Interactive AI Assistant**: Engage with a custom-trained chatbot (powered by Google Gemini) that can answer questions about my skills, projects, and experience.
