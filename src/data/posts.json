@@ -1,22 +1,53 @@
 {
   "posts": [
     {
-      "title": "How To Create A Responsive Landing Page With Bootstrap: 15 Essential Tips",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/03/robot-holding-paint-brush.webp",
-      "date": "Mar 2025",
-      "link": "https://thehelpfultipper.com/create-responsive-landing-page-with-bootstrap-15-essential-tips/"
+      "title": "A Smart Free Chrome Extension That Upgrades AI Prompts",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/feathered-pen-writing-on-tablet-digital-drawing.webp",
+      "date": "Oct 2025",
+      "link": "https://thehelpfultipper.com/smart-free-chrome-extension-that-upgrades-ai-prompts/",
+      "featured": "false"
+    },
+    {
+      "title": "How To Get Siri AI Mode In 15 Minutes On Any iPhone No Apple Intelligence",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/smart-ai-siri.webp",
+      "date": "Oct 2025",
+      "link": "https://thehelpfultipper.com/how-to-get-siri-ai-mode-15-minutes-any-iphone-no-apple-intelligence/",
+      "featured": "true"
+    },
+    {
+      "title": "I Tell People I Do “Fusion Engineering” Because Being a Developer in 2025 Feels Like Gluing the Future Together",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/people-on-plane-chasing-idea.webp",
+      "date": "Oct 2025",
+      "link": "https://thehelpfultipper.com/i-tell-people-i-do-fusion-engineering/",
+      "featured": "true"
+    },
+    {
+      "title": "This Is How To Build A Smart Custom AI Chatbot",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/05/chatbot-ai-robot-ui.webp",
+      "date": "May 2025",
+      "link": "https://thehelpfultipper.com/how-to-build-a-smart-custom-ai-chatbot/",
+      "featured": "true"
+    },
+    {
+      "title": "This Is The Simple Reason I Choose To Co-Code Instead Of Vibe Code",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/girl-droid.webp",
+      "date": "July 2025",
+      "link": "https://thehelpfultipper.com/this-is-the-simple-reason-i-choose-to-co-code-instead-of-vibe-code/",
+      "featured": "false"
+    },
+    {
+      "title": "I Built A Free AI Chatbot For The First Time – Here’s Everything That Went Wrong (And Right)",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/how-to-build-chatbot.webp",
+      "date": "July 2025",
+      "link": "https://thehelpfultipper.com/built-free-ai-chatbot-for-first-time-heres-everything-that-went-wrong-and-right/",
+      "featured": "false"
     },
     {
       "title": "I Decoded a Project Challenge Just for Fun—and Didn’t Even Apply to the Job",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/02/girl-with-magnifying-glass-decoding.webp",
-      "date": "Feb 2025",
-      "link": "https://thehelpfultipper.com/i-decoded-a-project-challenge-just-for-fun-and-didnt-even-apply-to-the-job/"
-    },
-    {
-      "title": "How Building Something Useful Can Help You Become Better At Coding",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2024/11/build-something-useful-to-become-good-at-coding.webp",
-      "date": "Nov 2024",
-      "link": "https://thehelpfultipper.com/building-something-useful-can-help-you-become-better-at-coding/"
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/02/girl-with-magnifying-glass-decoding.webp",
+      "date": "February 2025",
+      "link": "https://thehelpfultipper.com/i-decoded-a-project-challenge-just-for-fun-and-didnt-even-apply-to-the-job/",
+      "featured": "false"
     }
   ]
 }

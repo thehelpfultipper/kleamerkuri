@@ -1,5 +1,27 @@
 [
   {
+    "title": "SplitFlow App",
+    "featured": "true",
+    "description": "SplitFlow is an AI-powered expense splitting Minimum Viable Product (MVP) app designed to make shared expense tracking fast, flexible, and hands-free. Its core innovation is AI-powered expense capture using Google’s Gemini. The goal is to make capturing an expense so frictionless that it doesn’t interrupt the moment.",
+    "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/splitflow-ai-expense-splitting-app.webp",
+    "links": {
+      "demo": "https://thehelpfultipper.com/splitflow/",
+      "blog": "https://thehelpfultipper.com/this-simple-ai-tool-makes-money-talks-easy-again/"
+    },
+    "meta": {
+      "stack": [
+        "Google Gemini",
+        "Google AI Studio",
+        "Supabase",
+        "TailwindCSS",
+        "TypeScript",
+        "Vite"
+      ],
+      "date": "2025-10-26",
+      "category": ["React", "JavaScript"]
+    }
+  },
+  {
     "title": "Experian Blog",
     "featured": "true",
     "description": "Enterprise blog migration from traditional custom WordPress theme to headless architecture using Gatsby and GraphQL. Built with a focus on scalability, content delivery optimization, and automated deployments. It involved re-architecting content models for a library of 5K+ articles, optimizing image loading, third-party integrations, and ensuring high performance across multiple environments.",
@@ -31,7 +53,7 @@
   },
   {
     "title": "E-commerce Product Page",
-    "featured": "true",
+    "featured": "false",
     "description": "An e-commerce product page using React and Vite, featuring a responsive design that adapts seamlessly across devices. The project includes interactive elements such as a lightbox gallery, thumbnail navigation, and a cart system. This solution showcases modern web development practices and is part of a Frontend Mentor coding challenge.",
     "image": "https://thehelpfultipper.com/wp-content/uploads/2024/05/ecommerce-product-page-frontend-mentor.png",
     "links": {

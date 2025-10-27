@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 import { v4 as uuidv4 } from 'uuid';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_ANON_KEY!;
+const supabaseUrl = process.env.GATSBY_SUPABASE_URL!;
+const supabaseKey = process.env.GATSBY_SUPABASE_ANON_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface IChatMessage {
@@ -67,16 +67,18 @@ export function useChatbot() {
         .from('chat_sessions')
         .select('data')
         .eq('id', sid)
-        .single();
+        .maybeSingle();
 
       if (error) {
-        // Handle "no rows" error gracefully
-        if (error.code === 'PGRST116') {
-          // console.log('No history found for this session ID, starting fresh');
-          setInitialized(true);
-          return;
-        }
-        throw error;
+        console.error('Error loading session history:', error);
+        setInitialized(true);
+        return;
+      }
+
+      if (!data) {
+        // console.log('No history found for this session ID, starting fresh');
+        setInitialized(true);
+        return;
       }
 
       const history = data?.data?.history || [];
@@ -238,6 +240,7 @@ export function useChatbot() {
         setIsLoading(false);
         setIsTyping(true);
 
+        // eslint-disable-next-line no-constant-condition
         while (true) {
           const { value, done } = await reader.read();
           if (done) {

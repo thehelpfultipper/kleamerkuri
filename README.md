@@ -1,30 +1,54 @@
 <p align="center">
-  <img src="./src/assets/profile-header.webp">
+  <img src="./src/assets/profile-header.webp" alt="Klea Merkuri Portfolio Header">
 </p>
 
-<h1 align="center">Klea Merkuri</h1>
-<p align="center"><a href="https://thehelpfultipper.com/kleamerkuri/">Web Developer Portfolio</a></p>
-<br /><br />
-<small>
- <em>
-        Updated with AI Chatbot EVE on May 3, 2025. Click <a href="https://thehelpfultipper.com/how-to-build-a-smart-custom-ai-chatbot/">this link for blog post</a>.
-    </em>
 <br />
-    <em>
-        Updated with portfolio v2 on Dec 31, 2024. Click <a href="https://thehelpfultipper.com/portfolios/v1/kleamerkuri/">this link for portfolio v1</a>.
-    </em>
-</small>
-<br /><br />
-Welcome! This portfolio showcases my projects, skills, and experience in web development. It is built using Gatsby, a modern React-based framework for building fast and efficient websites, and Material UI, a popular React UI framework for creating beautiful and responsive user interfaces. A key recent addition is the interactive AI Chatbot (called EVE), designed to provide visitors with a more dynamic and personal way to learn about my work.
-<br /><br />
 
-_Looking for project walkthroughs, tips, and other fun coding things? Check out [The Helpful Tipper blog](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+<h1 align="center">Klea Merkuri - Modern React Developer Portfolio</h1>
+<p align="center">
+  A professional, performant, and SEO-optimized portfolio featuring a custom AI assistant powered by the Google Gemini API.
+</p>
+<p align="center">
+  <a href="https://thehelpfultipper.com/kleamerkuri/" target="_blank">
+    <strong>View Live Demo »</strong>
+  </a>
+</p>
+<p align="center">
+    <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white" alt="React">
+    <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap 5">
+    <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
+    <img src="https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google&logoColor=white" alt="Google Gemini">
+    <img src="https://img.shields.io/github/license/thehelpfultipper/kleamerkuri" alt="License">
+</p>
 
-## Featured Highlight: The AI Portfolio Chatbot!
+<br />
 
-I wanted to move beyond static portfolio pages and create a truly interactive experience. Inspired by a desire to integrate AI into my work, I built a custom AI chatbot directly into this site. The core goals were clear: build a chatbot that was **fast, efficient, affordable (ideally free), and intelligent**.
+This repository contains the source code for my personal portfolio website. It's designed to showcase my skills in modern frontend development, from creating pixel-perfect, responsive UIs to integrating advanced features like a real-time AI chatbot. The entire project is built with a focus on clean code, performance, and an exceptional user experience.
 
-This chatbot allows you to **ask questions about my background, projects, skills, and experience** and receive meaningful, intelligent responses based on my actual portfolio content. It's a technical demonstration that also adds a genuine layer of personality and engagement.
+<br />
+
+## 📋 Table of Contents
+
+- [✨ Key Features](#key-features)
+- [🤖 Featured Highlight: The AI Chatbot](#featured-highlight-the-ai-chatbot)
+  - [How It Works (Client-Side Architecture)](#how-it-works-client-side-architecture)
+- [🛠️ Tech Stack](#tech-stack)
+- [👋 Contact](#contact)
+
+## ✨ Key Features
+
+- **Interactive AI Assistant**: Engage with a custom-trained chatbot (powered by Google Gemini) that can answer questions about my skills, projects, and experience.
+- **Dynamic Project Showcase**: Projects are displayed in a clean grid and feature detailed modals with key achievements, tech stacks, and live links.
+- **Light & Dark Mode**: A sleek, user-configurable theme toggle for comfortable viewing in any lighting condition.
+- **Fully Responsive Design**: Meticulously crafted with Bootstrap 5 to ensure a seamless experience on all devices, from mobile phones to desktops.
+- **Performance Optimized**: Lazy loading for components like the chatbot and efficient state management ensure fast load times and a smooth user experience.
+- **Clean, Modern UI/UX**: A professional and aesthetically pleasing design with subtle animations and a focus on readability.
+
+## 🤖 Featured Highlight: The AI Chatbot
+
+To create a more engaging and interactive experience beyond a static portfolio, I developed a custom AI assistant directly integrated into the site. The goal was to build a tool that was fast, intelligent, and could provide real value to visitors like recruiters and fellow developers.
+
+This chatbot allows you to **ask questions about my background, projects, and skills** and receive meaningful, context-aware responses based on my portfolio's content.
 
 ### How It Works (Key Technologies):
 
@@ -40,17 +64,11 @@ Getting this working involved several modern web development and AI concepts:
 
 This approach resulted in a solution that is **fast, accurate, cost-effective** (running within free tiers), and low-maintenance.
 
-## Portfolio Features
+## 🛠️ Tech Stack
 
-- **Projects Showcase:** View a curated selection of my projects, including web applications, websites, and prototypes.
-- **Skills Highlight:** Explore my skills and expertise in various web development technologies, frameworks, and tools.
-- **About Me:** Learn more about me, my background, interests, and passion for web development.
-- **Contact:** Reach out to me easily through resume info or by connecting with me on social media.
-
-## Technologies Used
+This project was built using a modern, scalable, and maintainable technology stack.
 
 - [Gatsby](https://www.gatsbyjs.com/): A modern React-based framework for building fast and efficient websites.
-- [Material UI](https://material-ui.com/): A popular React UI framework for creating beautiful and responsive user interfaces.
 - [React](https://reactjs.org/): A JavaScript library for building user interfaces.
 - [GraphQL](https://graphql.org/): A query language for APIs used to query data in Gatsby sites.
 - Vector Embeddings / Semantic Search
@@ -60,4 +78,12 @@ This approach resulted in a solution that is **fast, accurate, cost-effective** 
 - React Performance Optimizations (useCallback, useMemo, React.memo, Lazy Loading)
 - JavaScript/TypeScript (full-stack or backend focus)
 
-Thanks for stopping by 👋
+## 👋 Contact
+
+Thanks for stopping by! Feel free to connect with me:
+
+- **LinkedIn**: [linkedin.com/in/kmerkuri97](https://www.linkedin.com/in/kmerkuri97)
+- **GitHub**: [@thehelpfultipper](https://github.com/thehelpfultipper/)
+- **Blog**: [The Helpful Tipper](https://thehelpfultipper.com/)
+
+Thanks for stopping by!

@@ -1,0 +1,66 @@
+:root {
+  color-scheme: light dark;
+  @each $name, $value in $dark-theme-vars {
+    #{$name}: #{$value};
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed header */
+
+  &[data-bs-theme='light'] {
+    @each $name, $value in $light-theme-vars {
+      #{$name}: #{$value};
+    }
+  }
+}
+
+html,
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
+  margin: 0;
+}
+
+// General body styles and resets
+body {
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+::selection {
+  background-color: var(--bs-teal-accent);
+  color: var(--bs-navy);
+}
+
+// Global utility classes from original index.html
+.font-monospace {
+  font-family: $font-family-monospace !important;
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.container-px {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}

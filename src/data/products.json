@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "title": "Prompt Optimizer",
+      "description": "A Chrome extension that helps users write better prompts for AI models like ChatGPT and Google Gemini.",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/feathered-pen-writing-on-tablet-digital-drawing.webp",
+      "links": {
+        "demo": "https://drive.google.com/file/d/1IdULZn4NYrpjzBOyJFku5vcRV7fpyltB/view?usp=sharing",
+        "blog": ""
+      }
+    },
+    {
       "title": "Pink Panda Dark",
       "description": "A cozy dark VS Code theme providing a blend of dark pastel colors contrasted with soft pinks.",
       "image": "https://thehelpfultipper.gallerycdn.vsassets.io/extensions/thehelpfultipper/pinkpanda-dark-theme/0.2.1/1672698802401/Microsoft.VisualStudio.Services.Icons.Default",

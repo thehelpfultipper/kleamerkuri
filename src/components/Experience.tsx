@@ -1,33 +1,22 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import ExperienceItem from './ExperienceItem';
-import { links, portfolios } from '../helpers/variables';
-import InlineNotice from './UI/InlineNotice';
+import { links } from '../helpers/variables';
 import { IResume } from '../helpers/interfaces';
 
-export default function Experience() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+const Experience: React.FC = () => {
+  const [activeTab, setActiveTab] = useState(0);
   const expData = useStaticQuery(graphql`
-    query ResumeData {
+    query experienceData {
       allFile(filter: { sourceInstanceName: { eq: "data" }, relativePath: { eq: "resume.json" } }) {
         nodes {
           childDataJson {
             resume {
-              summary
               experience {
                 company
                 dates
-                desc {
-                  action
-                  support
-                }
+                desc
                 location
                 title
-              }
-              skills {
-                category
-                items
               }
             }
           }
@@ -35,11 +24,13 @@ export default function Experience() {
       }
     }
   `);
-  if (!expData || !expData.allFile.nodes.length) {
+  if (!expData || !expData.allFile.nodes) {
     console.error('Error getting experience data.');
   }
-  const res: IResume = expData.allFile.nodes[0]?.childDataJson.resume || {};
+  const res: IResume = expData.allFile.nodes[0]?.childDataJson?.resume || {};
   const exp = res?.experience || null;
+
+  const activeExperience = exp[activeTab];
 
   const renderExpError = (
     <p>
@@ -54,48 +45,54 @@ export default function Experience() {
   );
 
   return (
-    <section id="experience">
-      <InlineNotice
-        type="note"
-        icon="💡">
-        Click on the each action to learn more
-      </InlineNotice>
-      {exp
-        ? exp.map((item, index) => (
-            <ExperienceItem
-              exp={item}
-              key={index}
-              onMouseEnter={() => setActiveIndex(index)}
-              onMouseLeave={() => setActiveIndex(null)}
-              isDisabled={activeIndex !== null && index !== activeIndex}
-            />
-          ))
-        : renderExpError}
-      <div className="expActionWrap">
-        <p className="actionLink">
-          <a
-            href={links.resume.url}
-            target="_blank"
-            rel="noreferrer">
-            View full resume
-          </a>
-          <span className="arrowWrap">
-            <ArrowOutwardIcon className="arrow arrowOut" />
-          </span>
-        </p>
+    <section
+      id="experience"
+      className="py-5 my-5 mx-auto">
+      <h2 className="fs-2 fw-bold text-slate-light mb-5 text-center">
+        <span className="text-sky-blue font-monospace">04.</span> Where I've Worked
+      </h2>
+      <div className="experience-container">
+        <div
+          className="experience-tabs font-monospace"
+          role="tablist"
+          aria-label="Job tabs">
+          {exp
+            ? exp.map((job, index) => (
+                <button
+                  key={`${job.title}_${index + 1}`}
+                  className={`experience-tab ${index === activeTab ? 'active' : ''}`}
+                  onClick={() => setActiveTab(index)}
+                  role="tab"
+                  aria-selected={index === activeTab}
+                  aria-controls={`panel-${index}`}
+                  id={`tab-${index}`}>
+                  {job.company}
+                </button>
+              ))
+            : renderExpError}
+        </div>
+        {activeExperience && (
+          <div
+            className="experience-content animate-fade-in"
+            id={`panel-${activeTab}`}
+            role="tabpanel"
+            tabIndex={0}
+            aria-labelledby={`tab-${activeTab}`}>
+            <h3 className="fs-5 fw-bold text-slate-light mb-1">
+              {activeExperience.title}{' '}
+              <span className="text-sky-blue">@ {activeExperience.company}</span>
+            </h3>
+            <p className="font-monospace text-slate-dark small mb-4">{activeExperience.dates}</p>
+            <ul className="text-slate-dark">
+              {activeExperience.desc.map((item, i) => (
+                <li key={i + 1}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-      <InlineNotice
-        icon="📝"
-        type="highlight">
-        Checkout{' '}
-        <a
-          href={portfolios.km.v1}
-          target="_blank"
-          rel="noreferrer">
-          portfolio v1
-        </a>{' '}
-        for predecessor
-      </InlineNotice>
     </section>
   );
-}
+};
+
+export default Experience;

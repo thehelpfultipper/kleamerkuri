@@ -2,10 +2,10 @@ import { IHelperLinks } from './interfaces';
 
 const pathPrefix = '/kleamerkuri';
 
-// exports
 export const portfolios = {
   km: {
     v1: 'https://thehelpfultipper.com/portfolios/v1/kleamerkuri/',
+    v2: 'https://thehelpfultipper.com/portfolios/v2/kleamerkuri/',
   },
 };
 
@@ -18,7 +18,7 @@ export const links: IHelperLinks = {
   },
   resume: {
     url: `${pathPrefix}/klea-merkuri-software-engineer-resume.pdf`,
-    text: 'Download',
+    text: 'Resume',
   },
   github: {
     url: 'https://github.com/thehelpfultipper/',

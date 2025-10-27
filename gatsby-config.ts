@@ -7,7 +7,6 @@ if (process.env.NODE_ENV === 'production') {
     path: './environments/.env.development',
   });
 }
-console.log(process.env.NODE_ENV);
 
 module.exports = {
   siteMetadata: {
@@ -15,7 +14,7 @@ module.exports = {
     description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI.',
     author: 'Klea Merkuri',
     keywords:
-      'Web Developer, Frontend Developer, Full Stack Developer, Software Engineer, JavaScript Developer, UI/UX Designer',
+      'Web Developer, Frontend Developer, Full Stack Developer, Software Engineer, JavaScript Developer, UI/UX Designer, React Developer, Performance Optimization, AI Engineer, Typescript',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri',
   },
@@ -25,12 +24,6 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-json',
     'gatsby-plugin-sass',
-    {
-      resolve: 'gatsby-plugin-anchor-links',
-      options: {
-        offset: -20,
-      },
-    },
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
@@ -67,8 +60,8 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         policy: [{ userAgent: '*', allow: '/' }],
-        sitemap: `${process.env.SITE_ROOT}/sitemap-index.xml`,
-        host: process.env.SITE_ROOT,
+        sitemap: `${process.env.GATSBY_SITE_ROOT}/sitemap-index.xml`,
+        host: process.env.GATSBY_SITE_ROOT,
       },
     },
     {
@@ -90,14 +83,9 @@ module.exports = {
       options: {
         name: 'data',
         path: `${__dirname}/src/data/`,
+        ignore: [`**/projects/**`],
       },
-    },
-    {
-      resolve: 'gatsby-plugin-env-variables',
-      options: {
-        allowList: ['SITE_ROOT', 'SUPABASE_URL', 'SUPABASE_ANON_KEY'],
-      },
-    },
+    }
   ],
   pathPrefix: '/kleamerkuri',
   flags: {

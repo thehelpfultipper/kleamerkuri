@@ -1,0 +1,25 @@
+#about {
+  min-height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+
+  div.profile-wrapper {
+    height: 80px;
+
+    div {
+      width: 24px;
+      height: 24px;
+      z-index: 1;
+
+      img {
+        width: 112px;
+        height: 112px;
+        border: 2px solid var(--bs-navy);
+      }
+    }
+  }
+
+  .profile-tech-wrapper {
+    max-width: 42rem;
+  }
+}

@@ -1,35 +1,29 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import Footer from '../components/Footer';
 
-export default function NotFoundPage() {
+const NotFoundPage: React.FC = () => {
   return (
-    <section className="container">
-      <div className="wrapper">
-        <h1 className="title">{'< 404 />'}</h1>
-        <h2 className="subTitle">Page Not Found</h2>
-        <p>
-          {`You either stumbled upon a page that doesn't exist or broke the site
-          😓. Here are a few things you can try:`}
+    <section
+      id="not-found"
+      className="min-vh-100 d-flex flex-column justify-content-center align-items-center text-center py-5">
+      <div className="animate-fade-in">
+        <p className="display-1 fw-bold font-monospace text-sky-blue mb-4">404</p>
+        <h1 className="display-4 fw-bold text-slate-light tracking-tight">Page Not Found</h1>
+        <p
+          className="mt-4 fs-5 text-slate-dark"
+          style={{ maxWidth: '42rem' }}>
+          Oops! The page you’re looking for doesn’t exist. It might have been moved or deleted.
         </p>
-        <ol className="optionsList">
-          <li>
-            <strong>Check the URL:</strong> Make sure you've entered the correct URL. Sometimes a
-            small typo can lead you astray.
-          </li>
-          <li>
-            <strong>Go Back to the Homepage:</strong> Click <Link to="/">here</Link> to return to
-            the homepage and explore from there.
-          </li>
-          <li>
-            <strong>Explore My Portfolio:</strong> While you're here, why not take a look at some of
-            my recent projects? Click <Link to="/portfolio/">here</Link> to browse through my
-            portfolio.
-          </li>
-        </ol>
-        <p>Thanks for visiting!</p>
+        <div className="mt-5">
+          <Link
+            to="/"
+            className="btn-cta">
+            Go Back Home
+          </Link>
+        </div>
       </div>
-      <Footer />
     </section>
   );
-}
+};
+
+export default NotFoundPage;

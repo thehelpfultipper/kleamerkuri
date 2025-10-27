@@ -1,8 +1,9 @@
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { GatsbyBrowser } from 'gatsby';
 import React from 'react';
-import LayoutSidebar from './src/components/LayoutSidebar';
+import Layout from './src/components/Layout';
+import './src/styles/main.scss';
 
 export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({ element, props }) => (
-  <LayoutSidebar {...props}>{element}</LayoutSidebar>
+  <Layout {...props}>{element}</Layout>
 );

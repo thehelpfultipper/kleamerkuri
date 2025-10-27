@@ -1,0 +1,49 @@
+.card.card-custom {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  .card-title-link {
+    text-decoration: none;
+    color: var(--bs-slate-light);
+    transition: color 0.3s ease-in-out;
+  }
+
+  &:hover .card-title-link {
+    color: var(--bs-sky-blue);
+  }
+
+  .card-img-container {
+    overflow: hidden;
+
+    .card-img-top {
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  &:hover .card-img-container .card-img-top {
+    transform: scale(1.05);
+  }
+
+  .card-img-overlay.project-overlay {
+    background-color: rgba(#282828, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover .card-img-overlay.project-overlay {
+    opacity: 1;
+  }
+
+  .card-footer {
+    border-top-color: var(--bs-slate-900);
+    background-color: rgba(#282828, 0.5); // Add translucent background to footer
+  }
+}

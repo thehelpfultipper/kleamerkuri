@@ -1,0 +1,161 @@
+$body-font-family: 'Inter', sans-serif;
+$font-family-monospace: 'Fira Code', monospace;
+
+/* Dark Theme (Default) */
+$navy-dark: #1e1e1e;
+$slate-light-dark: #f5ebe0;
+$slate-dark-dark: #d5c6b7;
+$sky-blue-dark: #bd93f9;
+$teal-accent-dark: #bd93f9; // Same as sky-blue, kept for consistency with original
+$orange-cta-dark: #ff79c6;
+$orange-cta-hover-dark: #f75ac0;
+$slate-900-dark: #282828;
+$slate-800-dark: #323232;
+$slate-700-dark: #414141;
+
+/* Light Theme */
+$navy-light: #fdfdff; /* Page BG */
+$slate-light-light: #1e1e1e; /* Main text */
+$slate-dark-light: #5c657a; /* Secondary text */
+$sky-blue-light: #6d28d9; /* Purple accent */
+$teal-accent-light: #6d28d9;
+$orange-cta-light: #d9006c; /* Pink CTA */
+$orange-cta-hover-light: #b30059;
+$slate-900-light: #f8f9fa; /* Card footer */
+$slate-800-light: #ffffff; /* Card bg */
+$slate-700-light: #e9ecef; /* Borders, badges */
+
+// Theme Maps
+$dark-theme-vars: (
+  --bs-navy: $navy-dark,
+  --bs-slate-light: $slate-light-dark,
+  --bs-slate-dark: $slate-dark-dark,
+  --bs-sky-blue: $sky-blue-dark,
+  --bs-teal-accent: $teal-accent-dark,
+  --bs-orange-cta: $orange-cta-dark,
+  --bs-orange-cta-hover: $orange-cta-hover-dark,
+  --bs-slate-900: $slate-900-dark,
+  --bs-slate-800: $slate-800-dark,
+  --bs-slate-700: $slate-700-dark,
+
+  // Bootstrap-related tokens
+  --bs-body-color: $slate-light-light,
+  --bs-body-bg: $navy-dark,
+  --bs-link-color: $slate-dark-dark,
+  --bs-link-hover-color: $sky-blue-dark,
+  --bs-navbar-color: $slate-dark-dark,
+  --bs-navbar-hover-color: $sky-blue-dark,
+  --bs-navbar-active-color: $sky-blue-dark,
+  --bs-navbar-toggler-icon-bg: unquote(
+      "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BD93F9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M4 6h16M4 12h16m-7 6h7'%3e%3c/path%3e%3c/svg%3e\")"
+    ),
+  // Buttons & cards
+  --bs-btn-border-radius: 0.375rem,
+  --bs-card-bg: $slate-800-dark,
+  --bs-card-border-color: transparent,
+  --bs-card-cap-bg: $slate-900-dark,
+
+  // Modal
+  --bs-modal-content-bg: $slate-800-dark,
+  --bs-modal-content-border-color: $slate-700-dark,
+  --bs-modal-header-border-color: $slate-700-dark,
+  --bs-modal-backdrop-bg: $navy-dark,
+  --bs-modal-backdrop-opacity: 0.8,
+  --bs-modal-close-color: #fff,
+
+  // Chatbot specific
+  --bs-chatbot-indicator-bg: $sky-blue-dark,
+  --bs-chatbot-indicator-color: $navy-dark,
+  --bs-chatbot-bg: $slate-900-dark,
+  --bs-chatbot-border-color: $slate-700-dark,
+  --bs-chatbot-header-bg: $slate-800-dark,
+  --bs-chatbot-header-border-color: $slate-700-dark,
+  --bs-chatbot-header-btn-color: $slate-dark-dark,
+  --bs-chatbot-header-btn-hover-color: $slate-light-dark,
+  --bs-chatbot-header-btn-hover-bg: $slate-700-dark,
+  --bs-chatbot-disclaimer-color: $slate-dark-dark,
+  --bs-chatbot-disclaimer-border-color: $slate-800-dark,
+  --bs-chatbot-user-message-bg: $sky-blue-dark,
+  --bs-chatbot-user-message-color: $navy-dark,
+  --bs-chatbot-ai-message-bg: $slate-800-dark,
+  --bs-chatbot-ai-message-color: $slate-light-dark,
+  --bs-chatbot-loading-dot-color: $slate-dark-dark,
+  --bs-chatbot-footer-bg: $slate-800-dark,
+  --bs-chatbot-input-bg: $slate-900-dark,
+  --bs-chatbot-input-color: $slate-light-dark,
+  --bs-chatbot-input-border-color: $slate-700-dark,
+  --bs-chatbot-input-focus-border-color: $sky-blue-dark,
+  --bs-chatbot-error-color: $orange-cta-dark,
+  --bs-chatbot-error-border-color: $orange-cta-dark,
+  --bs-chatbot-send-btn-bg: $sky-blue-dark,
+  --bs-chatbot-send-btn-color: $navy-dark,
+  --bs-chatbot-exit-dialog-bg: $slate-800-dark,
+  --bs-chatbot-exit-dialog-border-color: $slate-700-dark,
+);
+
+$light-theme-vars: (
+  --bs-navy: $navy-light,
+  --bs-slate-light: $slate-light-light,
+  --bs-slate-dark: $slate-dark-light,
+  --bs-sky-blue: $sky-blue-light,
+  --bs-teal-accent: $teal-accent-light,
+  --bs-orange-cta: $orange-cta-light,
+  --bs-orange-cta-hover: $orange-cta-hover-light,
+  --bs-slate-900: $slate-900-light,
+  --bs-slate-800: $slate-800-light,
+  --bs-slate-700: $slate-700-light,
+
+  // Bootstrap-related tokens
+  --bs-body-color: $slate-light-dark,
+  --bs-body-bg: $navy-light,
+  --bs-link-color: $slate-dark-light,
+  --bs-link-hover-color: $sky-blue-light,
+  --bs-navbar-color: $slate-dark-light,
+  --bs-navbar-hover-color: $sky-blue-light,
+  --bs-navbar-active-color: $sky-blue-light,
+  --bs-navbar-toggler-icon-bg: unquote(
+      "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23BD93F9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M4 6h16M4 12h16m-7 6h7'%3e%3c/path%3e%3c/svg%3e\")"
+    ),
+  // Buttons & cards
+  --bs-btn-border-radius: 0.375rem,
+  --bs-card-bg: $slate-800-light,
+  --bs-card-border-color: transparent,
+  --bs-card-cap-bg: $slate-900-light,
+
+  // Modal
+  --bs-modal-content-bg: $slate-800-light,
+  --bs-modal-content-border-color: $slate-700-light,
+  --bs-modal-header-border-color: $slate-700-light,
+  --bs-modal-backdrop-bg: $navy-light,
+  --bs-modal-backdrop-opacity: 0.6,
+  --bs-modal-close-color: $navy-light,
+
+  // Chatbot specific
+  --bs-chatbot-indicator-bg: $sky-blue-light,
+  --bs-chatbot-indicator-color: $navy-light,
+  --bs-chatbot-bg: $slate-900-light,
+  --bs-chatbot-border-color: $slate-700-light,
+  --bs-chatbot-header-bg: $slate-800-light,
+  --bs-chatbot-header-border-color: $slate-700-light,
+  --bs-chatbot-header-btn-color: $slate-dark-light,
+  --bs-chatbot-header-btn-hover-color: $slate-light-light,
+  --bs-chatbot-header-btn-hover-bg: $slate-700-light,
+  --bs-chatbot-disclaimer-color: $slate-dark-light,
+  --bs-chatbot-disclaimer-border-color: $slate-800-light,
+  --bs-chatbot-user-message-bg: $sky-blue-light,
+  --bs-chatbot-user-message-color: $navy-light,
+  --bs-chatbot-ai-message-bg: $slate-800-light,
+  --bs-chatbot-ai-message-color: $slate-light-light,
+  --bs-chatbot-loading-dot-color: $slate-dark-light,
+  --bs-chatbot-footer-bg: $slate-800-light,
+  --bs-chatbot-input-bg: $slate-900-light,
+  --bs-chatbot-input-color: $slate-light-light,
+  --bs-chatbot-input-border-color: $slate-700-light,
+  --bs-chatbot-input-focus-border-color: $sky-blue-light,
+  --bs-chatbot-error-color: $orange-cta-light,
+  --bs-chatbot-error-border-color: $orange-cta-light,
+  --bs-chatbot-send-btn-bg: $sky-blue-light,
+  --bs-chatbot-send-btn-color: $navy-light,
+  --bs-chatbot-exit-dialog-bg: $slate-800-light,
+  --bs-chatbot-exit-dialog-border-color: $slate-700-light,
+);

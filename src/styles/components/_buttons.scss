@@ -1,0 +1,68 @@
+.btn-cta {
+  background-color: var(--bs-orange-cta);
+  color: var(--bs-navy);
+  font-weight: bold;
+  border-radius: 0.375rem;
+  padding: 0.75rem 2rem;
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--bs-orange-cta-hover);
+    color: var(--bs-navy);
+    transform: scale(1.05);
+  }
+}
+
+.btn-outline-sky-blue {
+  --bs-btn-color: var(--bs-sky-blue);
+  --bs-btn-border-color: var(--bs-sky-blue);
+  --bs-btn-hover-bg: rgba(189, 147, 249, 0.2);
+  --bs-btn-hover-border-color: var(--bs-sky-blue);
+  --bs-btn-active-bg: rgba(189, 147, 249, 0.3);
+  color: var(--bs-sky-blue) !important; // !important to override .btn-outline
+}
+
+.social-link {
+  color: var(--bs-slate-dark);
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: var(--bs-sky-blue);
+  }
+}
+
+.theme-toggle-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 50%;
+  color: var(--bs-sky-blue);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(189, 147, 249, 0.1);
+  }
+}
+
+.pagination {
+  --bs-pagination-color: var(--bs-slate-light);
+  --bs-pagination-bg: var(--bs-slate-800);
+  --bs-pagination-border-color: var(--bs-slate-800);
+  --bs-pagination-hover-color: var(--bs-slate-light);
+  --bs-pagination-hover-bg: var(--bs-slate-700);
+  --bs-pagination-hover-border-color: var(--bs-slate-700);
+  --bs-pagination-focus-color: var(--bs-slate-light);
+  --bs-pagination-focus-bg: var(--bs-slate-700);
+  --bs-pagination-active-color: var(--bs-navy);
+  --bs-pagination-active-bg: var(--bs-sky-blue);
+  --bs-pagination-active-border-color: var(--bs-sky-blue);
+  --bs-pagination-disabled-color: var(--bs-slate-dark);
+  --bs-pagination-disabled-bg: var(--bs-slate-800);
+  --bs-pagination-disabled-border-color: var(--bs-slate-800);
+}

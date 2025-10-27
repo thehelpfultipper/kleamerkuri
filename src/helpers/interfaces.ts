@@ -30,10 +30,7 @@ export interface IResumeExperience {
   company: string;
   location: string;
   dates: string;
-  desc: {
-    action: string;
-    support: string[];
-  }[];
+  desc: string[];
 }
 
 export interface IResume {
@@ -56,6 +53,7 @@ export interface IPost {
   image: string;
   date: string;
   link: string;
+  featured: string;
 }
 
 export interface IHelperLinks {

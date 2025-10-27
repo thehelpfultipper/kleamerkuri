@@ -1,19 +1,82 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import parse from 'html-react-parser';
-import Title from './Title';
+import { graphql, useStaticQuery } from 'gatsby';
+import profilePic from '../assets/profile-pic.webp';
 
-export default function About({ about }: { about: string[] }) {
+const About: React.FC = () => {
+  const data = useStaticQuery(graphql`
+    query ProfileData {
+      allFile(
+        filter: { sourceInstanceName: { eq: "data" }, relativePath: { eq: "profile.json" } }
+      ) {
+        nodes {
+          childDataJson {
+            profile {
+              about
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (!data || !data.allFile.nodes) {
+    console.error('There was an error getting profile data.');
+  }
+
+  const { profile } = data.allFile.nodes[0].childDataJson || {};
+
+  const about = profile?.about || [];
+
+  const skills = [
+    'React',
+    'Gatsby',
+    'TypeScript',
+    'Node.js',
+    'GraphQL',
+    'Python',
+    'LLMs/AI Integrations',
+    'CI/CD Pipelines',
+    'WebGL',
+    'Google AI Studio',
+  ];
+
   return (
-    <section id="about">
-      <Title>
-        <h2>Hi, I'm Klea 👋</h2>
-      </Title>
-      {about ? (
-        about.map((item, index) => <p key={index + 1}>{parse(item)}</p>)
-      ) : (
-        <p>It seems I'll remain a secret 👀</p>
-      )}
+    <section
+      id="about"
+      className="py-5 my-5 text-center">
+      <h2 className="fs-2 fw-bold text-slate-light mb-5">
+        <span className="text-sky-blue font-monospace">05.</span> About Me
+      </h2>
+      <div className="mb-5 position-relative profile-wrapper">
+        <div className="position-absolute start-50 top-50 translate-middle bg-slate-800 rounded-circle d-flex align-items-center justify-content-center">
+          <img
+            src={profilePic}
+            alt="Klea Merkuri"
+            className="rounded-circle shadow-lg"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div className="mt-5">
+        <div className="text-slate-dark d-flex flex-column gap-3 fs-5 mx-auto">
+          {about.map((item: string, i: number) => (
+            <p key={i + 1}>{item}</p>
+          ))}
+          <p>Here are a few technologies I’ve been working with recently:</p>
+        </div>
+        <ul className="list-unstyled row mt-4 font-monospace mx-auto profile-tech-wrapper">
+          {skills.map((skill) => (
+            <li
+              key={skill}
+              className="col-12 col-sm-6 col-lg-4 d-flex align-items-center mb-2">
+              <span className="text-sky-blue me-2">▹</span>
+              <span className="text-slate-light small">{skill}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
-}
+};
+
+export default About;
