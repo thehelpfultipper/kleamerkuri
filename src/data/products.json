@@ -1,13 +1,64 @@
 {
   "products": [
     {
+      "title": "DIRA – Design Research Insight Assistant",
+      "description": "DIRA (Design Research Insight Assistant) is the ultimate side-panel utility for UI/UX Designers, Product Managers, and Frontend Developers. Stop inspecting elements one by one—DIRA deconstructs the design DNA of any website in a single click. Turn the web into your pattern library.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png?resize=768%2C480&ssl=1",
+      "links": {
+        "demo": "https://thehelpfultipper.com/dira/",
+        "blog": ""
+      },
+      "featured": false
+    },
+    {
+      "title": "Tab Atlas",
+      "description": "Tab Atlas transforms your chaotic browser into an organized, “human-readable map” of your digital workspaces. This intelligent Chrome Extension automatically names your windows (e.g., “Project Alpha,” “Japan Trip,” “React Docs”) based on your active tabs and provides a powerful side panel to manage everything with ease.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png?w=640&ssl=1",
+      "links": {
+        "demo": "https://thehelpfultipper.com/tab-atlas/",
+        "blog": ""
+      },
+      "featured": false
+    },
+    {
+      "title": "SEO & Accessibility Helper",
+      "description": "Boost your website’s ranking and user experience with the all-in-one SEO & Accessibility Helper. Get an instant on-page SEO analysis, accessibility checks, and Core Web Vitals performance tracking directly in your side panel.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/sah-image.png?resize=768%2C723&ssl=1",
+      "links": {
+        "demo": "https://thehelpfultipper.com/seo-accessibility-helper/",
+        "blog": ""
+      },
+      "featured": false
+    },
+    {
+      "title": "NoteApply AI",
+      "description": "NoteApply AI is a privacy-first research companion that turns passive reading into active knowledge gathering. Capture insights, dictate voice notes with AI refinement, and generate actionable summaries using Local Ollama, OpenAI, or Gemini.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/noteapply-ai-sidepanel.png?resize=768%2C480&ssl=1",
+      "links": {
+        "demo": "https://thehelpfultipper.com/noteapply/",
+        "blog": ""
+      },
+      "featured": false
+    },
+    {
+      "title": "gac – Git Auto Commit",
+      "description": "An open source AI-powered Git co-pilot that writes high-quality commit messages, generates changelogs, and even automates full semantic releases.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png?resize=768%2C608&ssl=1",
+      "links": {
+        "demo": "https://thehelpfultipper.com/gac/",
+        "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/"
+      },
+      "featured": true
+    },
+    {
       "title": "Prompt Optimizer",
       "description": "A Chrome extension that helps users write better prompts for AI models like ChatGPT and Google Gemini.",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/feathered-pen-writing-on-tablet-digital-drawing.webp",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/11/prompt-optimizer-promo-tile-ba6574.svg",
       "links": {
         "demo": "https://drive.google.com/file/d/1IdULZn4NYrpjzBOyJFku5vcRV7fpyltB/view?usp=sharing",
         "blog": ""
-      }
+      },
+      "featured": true
     },
     {
       "title": "Pink Panda Dark",
@@ -16,16 +67,18 @@
       "links": {
         "demo": "https://marketplace.visualstudio.com/items?itemName=TheHelpfulTipper.pinkpanda-dark-theme",
         "blog": "https://thehelpfultipper.com/create-a-custom-visual-studio-code-theme/"
-      }
+      },
+      "featured": true
     },
     {
       "title": "Duplicate Link Finder",
       "description": "A simple yet powerful tool designed to help you streamline your Google Docs™.",
-      "image": "https://lh3.googleusercontent.com/-EWu1GMSMYL0/Zv9boxY354I/AAAAAAAAA6k/WdD_h27dnyIMVw3ZMmTIIK840i8BWdu3QCNcBGAsYHQ/s220-w220-h140-nd/Scan%2Bfor%2Bduplicate%2Blinks%2Bin%2BDoc.webp",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/duplicate_link_finder_docs.png?resize=768%2C608&ssl=1",
       "links": {
         "demo": "https://workspace.google.com/marketplace/app/duplicate_link_finder/622480540695",
         "blog": ""
-      }
+      },
+      "featured": false
     }
   ]
 }

@@ -46,6 +46,7 @@ export interface IProduct {
     demo: string;
     blog: string;
   };
+  featured: boolean;
 }
 
 export interface IPost {

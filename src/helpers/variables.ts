@@ -32,4 +32,8 @@ export const links: IHelperLinks = {
     url: 'https://thehelpfultipper.com/',
     text: 'Blog',
   },
+  resources: {
+    url: 'https://thehelpfultipper.com/resources/',
+    text: 'Resources',
+  },
 };
