@@ -10,11 +10,11 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   siteMetadata: {
-    title: 'Klea Merkuri',
-    description: 'A creative minimalist developer portfolio built with Gatsby and Material-UI.',
+    title: 'Klea Merkuri | Front-End Engineer',
+    description: 'Front-End Engineer specializing in high-performance web applications, accessible design systems, and modern React architectures.',
     author: 'Klea Merkuri',
     keywords:
-      'Web Developer, Frontend Developer, Full Stack Developer, Software Engineer, JavaScript Developer, UI/UX Designer, React Developer, Performance Optimization, AI Engineer, Typescript',
+      'Front-End Engineer, React Developer, TypeScript, Web Performance, Design Systems, Finance of America, Gatsby, JavaScript, UI/UX, Software Engineer',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri',
   },

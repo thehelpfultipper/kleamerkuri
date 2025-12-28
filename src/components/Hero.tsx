@@ -1,9 +1,31 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import GitHubIcon from '../icons/GitHubIcon';
 import LinkedInIcon from '../icons/LinkedInIcon';
 import { links } from '../helpers/variables';
 
 const Hero: React.FC = () => {
+  const data = useStaticQuery(graphql`
+    query HeroProfileData {
+      allFile(
+        filter: { sourceInstanceName: { eq: "data" }, relativePath: { eq: "profile.json" } }
+      ) {
+        nodes {
+          childDataJson {
+            profile {
+              name
+              title
+              lead
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const { profile } = data.allFile.nodes[0].childDataJson || {};
+  const { name, title, lead } = profile || {};
+
   return (
     <section
       id="hero"
@@ -11,31 +33,31 @@ const Hero: React.FC = () => {
       <div className="hero-content">
         <p className="text-sky-blue font-monospace mb-4 fs-5">Hi, my name is</p>
         <h1 className="display-4 display-sm-2 display-lg-1 fw-bold text-slate-light tracking-tight">
-          Klea Merkuri.
+          {name}.
+          <span className="d-block mt-2 display-5 display-sm-3 display-lg-2 text-slate-dark fw-bold tracking-tight">
+            {title}
+          </span>
         </h1>
-        <h2 className="mt-2 display-5 display-sm-3 display-lg-2 fw-bold text-slate-dark tracking-tight">
-          Full-Stack Web Developer | React | Node.js
-        </h2>
-        <p className="mt-4 fs-5 text-slate-dark hero-intro">
-          I am a passionate <span className="text-slate-light">web developer</span> specializing in
-          building exceptional digital experiences. My expertise lies in{' '}
-          <span className="text-slate-light">React development</span> and creating robust back-end
-          systems with Node.js, with a strong focus on{' '}
-          <span className="text-slate-light">performance optimization</span> and user-centric
-          design.
+        <p className="mt-4 fs-5 text-slate-dark hero-intro max-w-700">
+          I’m a <span className="text-slate-light">software engineer</span> specializing in building
+          exceptional digital experiences. Currently, I’m focused on crafting high-performance,{' '}
+          <span className="text-slate-light">accessible front-end patterns</span> and{' '}
+          <span className="text-slate-light">design systems</span> that bridge the gap between
+          visionary design and scalable technology.
         </p>
         <div className="mt-5 d-flex flex-column flex-sm-row align-items-sm-center gap-4">
           <a
             href="#experience"
-            className="btn-cta text-center text-sm-left">
-            My Experience
+            className="btn-cta text-center text-sm-left"
+            title="View my professional experience">
+            Check out my work
           </a>
           <div className="d-flex align-items-center justify-content-center gap-3">
             <a
               href={links.github.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
+              aria-label={`${name}'s GitHub profile`}
               className="social-link">
               <GitHubIcon className="w-7 h-7 icon-175" />
             </a>
@@ -43,7 +65,7 @@ const Hero: React.FC = () => {
               href={links.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
+              aria-label={`${name}'s LinkedIn profile`}
               className="social-link">
               <LinkedInIcon className="w-7 h-7 icon-175" />
             </a>
