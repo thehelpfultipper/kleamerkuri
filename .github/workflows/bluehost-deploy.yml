@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public/
           server-dir: /kleamerkuri/
-          dangerous-clean-slate: false # set to true to delete old files
+          dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.git*/**

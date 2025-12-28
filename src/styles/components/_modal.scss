@@ -2,6 +2,7 @@
   --bs-backdrop-opacity: 0.8;
   backdrop-filter: blur(4px);
 }
+
 .modal {
   --bs-modal-bg: var(--bs-slate-800);
   --bs-modal-border-color: var(--bs-slate-700);
@@ -10,15 +11,22 @@
 
 .modal-content {
   background-color: transparent;
+
   .modal-body {
     background-color: var(--bs-modal-content-bg);
   }
 }
 
 .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+  background-color: transparent;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 html[data-bs-theme='dark'] .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+  filter: invert(1) brightness(2);
 }

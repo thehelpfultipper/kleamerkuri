@@ -30,5 +30,8 @@
   "scss.lint.duplicateProperties": "warning",
   "scss.lint.important": "warning",
   "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  }
 }

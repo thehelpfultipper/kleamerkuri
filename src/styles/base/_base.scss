@@ -1,5 +1,6 @@
 :root {
   color-scheme: light dark;
+
   @each $name, $value in $dark-theme-vars {
     #{$name}: #{$value};
   }
@@ -7,13 +8,15 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed header */
+  scroll-padding-top: 80px;
+  /* Account for fixed header */
 
   &[data-bs-theme='light'] {
     @each $name, $value in $light-theme-vars {
       #{$name}: #{$value};
     }
   }
+
 }
 
 html,
@@ -34,6 +37,15 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+  background-image: var(--bs-starry-bg-image);
+  background-size: var(--bs-starry-bg-size);
+  background-attachment: var(--bs-starry-bg-attachment);
+  background-repeat: var(--bs-starry-bg-repeat);
+  animation: var(--bs-starry-animation) 100s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+  }
 }
 
 ::selection {
