@@ -38,6 +38,8 @@ const About: React.FC = () => {
     'CI/CD Pipelines',
     'WebGL',
     'Google AI Studio',
+    'Next.js',
+    'Git'
   ];
 
   return (
