@@ -1,6 +1,20 @@
 {
   "posts": [
     {
+      "title": "How To Make Auditing Your Website In Real-Time Easy",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png?w=800&ssl=1",
+      "date": "Dec 2025",
+      "link": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/",
+      "featured": "true"
+    },
+    {
+      "title": "10 Things People Get Wrong About My Developer Job",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/young-girl-coding-illustration.png?w=800&ssl=1",
+      "date": "Dec 2025",
+      "link": "https://thehelpfultipper.com/things-people-get-wrong-about-developer-job",
+      "featured": "false"
+    },
+    {
       "title": "A Smart Free Chrome Extension That Upgrades AI Prompts",
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/feathered-pen-writing-on-tablet-digital-drawing.webp",
       "date": "Oct 2025",
@@ -12,7 +26,7 @@
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/smart-ai-siri.webp",
       "date": "Oct 2025",
       "link": "https://thehelpfultipper.com/how-to-get-siri-ai-mode-15-minutes-any-iphone-no-apple-intelligence/",
-      "featured": "true"
+      "featured": "false"
     },
     {
       "title": "I Tell People I Do “Fusion Engineering” Because Being a Developer in 2025 Feels Like Gluing the Future Together",
@@ -40,13 +54,6 @@
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/how-to-build-chatbot.webp",
       "date": "July 2025",
       "link": "https://thehelpfultipper.com/built-free-ai-chatbot-for-first-time-heres-everything-that-went-wrong-and-right/",
-      "featured": "false"
-    },
-    {
-      "title": "I Decoded a Project Challenge Just for Fun—and Didn’t Even Apply to the Job",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/02/girl-with-magnifying-glass-decoding.webp",
-      "date": "February 2025",
-      "link": "https://thehelpfultipper.com/i-decoded-a-project-challenge-just-for-fun-and-didnt-even-apply-to-the-job/",
       "featured": "false"
     }
   ]
