@@ -33,6 +33,18 @@
     ],
     "experience": [
       {
+        "title": "Front-End Engineer",
+        "company": "Finance of America",
+        "location": "Remote",
+        "dates": "Sep 2025-Present",
+        "desc": [
+          "Design and ship consumer-facing features, including calculators and reusable UI components, across enterprise WordPress and PHP properties, enhancing page performance, UX consistency, and content discoverability across business units.",
+          "Collaborate across product, design, SEO, and backend engineering to define requirements and deliver iterative improvements in an Agile workflow, maintaining code standards and Git-based CI/CD deployment hygiene to ensure stable releases.",
+          "Implement SEO-focused, WCAG-compliant front-end patterns using HTML5, CSS/SCSS, and JavaScript while integrating REST APIs, optimizing load paths with browser DevTools, and resolving cross-browser/device edge-case issues.",
+          "Contribute to design system maturity by extending modular components and pattern libraries across marketing properties, accelerating delivery velocity while improving consistency and governance across CMS environments."
+        ]
+      },
+      {
         "title": "Web Developer",
         "company": "Experian",
         "location": "Remote",
