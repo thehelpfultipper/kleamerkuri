@@ -8,7 +8,7 @@ import ProjectModal from './ProjectModal';
 
 const PROJECTS_PER_PAGE = 6;
 
-const Archive: React.FC<PageProps> = ({ location }) => {
+const Archive: React.FC<PageProps> = ({ location, path }) => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<IProject | null>(null);
@@ -67,14 +67,14 @@ const Archive: React.FC<PageProps> = ({ location }) => {
       newParams.set('category', category);
     }
     newParams.set('page', '1'); // Reset to first page on category change
-    navigate(`${location.pathname}?${newParams.toString()}`);
+    navigate(`${path}?${newParams.toString()}`);
   };
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
     const newParams = new URLSearchParams(location.search);
     newParams.set('page', page.toString());
-    navigate(`${location.pathname}?${newParams.toString()}`);
+    navigate(`${path}?${newParams.toString()}`);
     // Scroll to top of the project list on page change
     if (typeof window !== 'undefined') {
       document.getElementById('projects-archive')?.scrollIntoView({ behavior: 'smooth' });
