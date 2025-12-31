@@ -208,17 +208,36 @@ const SpaceEarth: React.FC = () => {
                 title={isZoomedState ? "Welcome to California!" : "Tap Earth to Locate Me"}
             />
             {!isZoomedState && (
-                <div className="position-absolute bottom-0 mb-4 text-sky-blue small font-monospace animate-pulse pointer-events-none opacity-75">
+                <div
+                    className="position-absolute bottom-0 mb-4 px-3 py-1 rounded-pill small font-monospace animate-pulse pointer-events-none"
+                    style={{
+                        background: isDarkTheme ? 'rgba(30, 30, 30, 0.5)' : 'rgba(255, 255, 255, 0.6)',
+                        backdropFilter: 'blur(8px)',
+                        color: isDarkTheme ? 'var(--bs-sky-blue)' : '#4c1d95', // Darker purple for light theme
+                        border: `1px solid ${isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
+                        opacity: 0.9
+                    }}
+                >
                     [ Tap Earth to Locate ]
                 </div>
             )}
             {isZoomedState && (
-                <div className="position-absolute bottom-0 mb-4 text-center animate-fade-in px-3">
-                    <p className="font-monospace text-orange-cta mb-0 fw-bold small">LOCATED: Los Angeles, CA</p>
+                <div
+                    className="position-absolute bottom-0 mb-4 text-center animate-fade-in px-4 py-2 rounded-3"
+                    style={{
+                        background: isDarkTheme ? 'rgba(30, 30, 30, 0.5)' : 'rgba(255, 255, 255, 0.7)',
+                        backdropFilter: 'blur(10px)',
+                        border: `1px solid ${isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)'
+                    }}
+                >
+                    <p className="font-monospace mb-0 fw-bold small" style={{ color: isDarkTheme ? 'var(--bs-orange-cta)' : '#be123c' }}>
+                        LOCATED: Los Angeles, CA
+                    </p>
                     <button
                         onClick={handleReset}
-                        className="btn btn-sm btn-outline-sky-blue mt-2 px-3 py-1"
-                        style={{ zIndex: 10, fontSize: '0.75rem' }}
+                        className={`btn btn-sm ${isDarkTheme ? 'btn-outline-sky-blue' : 'btn-outline-dark'} mt-2 px-3 py-1`}
+                        style={{ zIndex: 10, fontSize: '0.75rem', fontWeight: 'bold' }}
                     >
                         Reset
                     </button>
