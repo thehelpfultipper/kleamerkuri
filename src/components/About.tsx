@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import profilePic from '../assets/profile-pic.webp';
+import SpaceEarth from './SpaceEarth';
 
 const About: React.FC = () => {
   const data = useStaticQuery(graphql`
@@ -49,18 +49,11 @@ const About: React.FC = () => {
     <section
       id="about"
       className="py-5 my-5 text-center">
-      <h2 className="fs-2 fw-bold text-slate-light mb-5">
+      <h2 className="fs-2 fw-bold text-slate-light mb-3">
         <span className="text-sky-blue font-monospace">05.</span> About Me
       </h2>
-      <div className="mb-5 position-relative profile-wrapper">
-        <div className="position-absolute start-50 top-50 translate-middle bg-slate-800 rounded-circle d-flex align-items-center justify-content-center">
-          <img
-            src={profilePic}
-            alt="Klea Merkuri"
-            className="rounded-circle shadow-lg"
-            loading="lazy"
-          />
-        </div>
+      <div className="mb-5 position-relative mx-auto" style={{ height: '450px', maxWidth: '900px' }}>
+        <SpaceEarth />
       </div>
       <div className="mt-5">
         <div className="text-slate-dark d-flex flex-column gap-3 fs-5 mx-auto">

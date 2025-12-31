@@ -3,8 +3,14 @@ import { graphql, useStaticQuery } from 'gatsby';
 import GitHubIcon from '../icons/GitHubIcon';
 import LinkedInIcon from '../icons/LinkedInIcon';
 import { links } from '../helpers/variables';
+import PlexusBackground from './PlexusBackground';
+import WireframeOverlay from './WireframeOverlay';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Hero: React.FC = () => {
+  const { theme } = useTheme();
+  const isDarkTheme = theme === 'dark';
+
   const data = useStaticQuery(graphql`
     query HeroProfileData {
       allFile(
@@ -24,12 +30,18 @@ const Hero: React.FC = () => {
   `);
 
   const { profile } = data.allFile.nodes[0].childDataJson || {};
-  const { name, title, lead } = profile || {};
+  const { name, title } = profile || {};
 
   return (
     <section
       id="hero"
-      className="min-vh-100 d-flex flex-column justify-content-center py-5 mt-5 mt-md-3 mt-xs-0">
+      className="position-relative min-vh-100 d-flex flex-column justify-content-center py-5 mt-5 mt-md-3 mt-xs-0">
+      {isDarkTheme && (
+        <>
+          <PlexusBackground />
+          <WireframeOverlay />
+        </>
+      )}
       <div className="hero-content">
         <p className="text-sky-blue font-monospace mb-4 fs-5">Hi, my name is</p>
         <h1 className="display-4 display-sm-2 display-lg-1 fw-bold text-slate-light tracking-tight">

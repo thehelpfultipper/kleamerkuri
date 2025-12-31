@@ -65,3 +65,10 @@ export interface IHelperLinks {
 }
 
 export type IMouseEvents = (event: React.MouseEvent<HTMLDivElement>) => void;
+
+export interface Point {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+}

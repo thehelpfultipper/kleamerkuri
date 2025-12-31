@@ -33,6 +33,7 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^17.0.0 || ^18.0.0",
     "sass": "^1.83.0",
+    "three": "^0.182.0",
     "uuid": "^11.1.0"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
+    "@types/three": "^0.182.0",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "eslint": "^8.57.1",
