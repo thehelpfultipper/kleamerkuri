@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import profilePic from '../assets/profile-pic.webp';
 import { useTheme } from '../contexts/ThemeContext';
@@ -11,16 +11,28 @@ const SpaceEarth: React.FC = () => {
     const isZoomedRef = useRef(false);
     const prefersReducedMotion = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
 
-    const handleInteraction = () => {
+    const handleInteraction = useCallback(() => {
         isZoomedRef.current = true;
         setIsZoomedState(true);
-    };
+    }, []);
 
-    const handleReset = (e: React.MouseEvent) => {
+    const handleReset = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
         isZoomedRef.current = false;
         setIsZoomedState(false);
-    }
+    }, []);
+
+    const sceneRef = useRef<{
+        scene: THREE.Scene;
+        camera: THREE.PerspectiveCamera;
+        renderer: THREE.WebGLRenderer;
+        earthMaterial: THREE.MeshPhongMaterial;
+        atmosphereMaterial: THREE.MeshPhongMaterial;
+        ambientLight: THREE.AmbientLight;
+        pointLight: THREE.PointLight;
+        rimLight?: THREE.PointLight;
+        topLight?: THREE.DirectionalLight;
+    } | null>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -40,7 +52,7 @@ const SpaceEarth: React.FC = () => {
         // Renderer Setup
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(width, height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         containerRef.current.appendChild(renderer.domElement);
 
         // Textures
@@ -74,7 +86,7 @@ const SpaceEarth: React.FC = () => {
         const atmosphere = new THREE.Mesh(atmosphereGeo, atmosphereMat);
         scene.add(atmosphere);
 
-        // Stars - Reduced count for mobile and lowered visibility in light mode
+        // Stars
         const starGeometry = new THREE.BufferGeometry();
         const starCount = isMobile ? 800 : 1800;
         const starPositions = new Float32Array(starCount * 3);
@@ -91,7 +103,7 @@ const SpaceEarth: React.FC = () => {
         const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
 
-        // Lights - Boosted for light theme to prevent dark silhouette
+        // Lights
         const ambientLight = new THREE.AmbientLight(isDarkTheme ? 0x999999 : 0xcccccc);
         scene.add(ambientLight);
 
@@ -99,18 +111,20 @@ const SpaceEarth: React.FC = () => {
         pointLight.position.set(20, 10, 20);
         scene.add(pointLight);
 
-        // Secondary rim light for light theme to pop more
+        let rimLight: THREE.PointLight | undefined;
+        let topLight: THREE.DirectionalLight | undefined;
+
         if (!isDarkTheme) {
-            const rimLight = new THREE.PointLight(0xffffff, 2.0);
+            rimLight = new THREE.PointLight(0xffffff, 2.0);
             rimLight.position.set(-20, -10, -20);
             scene.add(rimLight);
 
-            const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            topLight = new THREE.DirectionalLight(0xffffff, 1.0);
             topLight.position.set(0, 20, 0);
             scene.add(topLight);
         }
 
-        // Profile Picture Marker (Circular)
+        // Profile Picture Marker
         const profileTexture = textureLoader.load(profilePic);
         profileTexture.colorSpace = THREE.SRGBColorSpace;
         const markerGeo = new THREE.CircleGeometry(isMobile ? 0.25 : 0.35, 32);
@@ -121,7 +135,6 @@ const SpaceEarth: React.FC = () => {
         });
         const marker = new THREE.Mesh(markerGeo, markerMat);
 
-        // Position slightly above surface to prevent z-fighting
         const offsetRadius = radius * 1.02;
         const lat = 34.1425;
         const lon = -118.2470;
@@ -132,28 +145,28 @@ const SpaceEarth: React.FC = () => {
         const posZ = (offsetRadius * Math.sin(phi) * Math.sin(theta));
 
         marker.position.set(posX, posY, posZ);
-        marker.lookAt(posX * 2, posY * 2, posZ * 2); // Face outwards
+        marker.lookAt(posX * 2, posY * 2, posZ * 2);
         earth.add(marker);
 
-        let animationId: number;
+        sceneRef.current = {
+            scene, camera, renderer,
+            earthMaterial: material,
+            atmosphereMaterial: atmosphereMat,
+            ambientLight, pointLight, rimLight, topLight
+        };
 
+        let animationId: number;
         const animate = () => {
             animationId = requestAnimationFrame(animate);
 
             if (isZoomedRef.current) {
                 const markerWorldPos = new THREE.Vector3();
                 marker.getWorldPosition(markerWorldPos);
-
-                // Closer zoom on mobile
                 const zoomDist = isMobile ? 4.8 : 5.5;
                 const offset = markerWorldPos.clone().normalize().multiplyScalar(zoomDist);
-
                 camera.position.lerp(offset, 0.05);
                 camera.lookAt(0, 0, 0);
-
-                if (!prefersReducedMotion) {
-                    earth.rotation.y += 0.0005;
-                }
+                if (!prefersReducedMotion) earth.rotation.y += 0.0005;
             } else {
                 if (!prefersReducedMotion) {
                     earth.rotation.y += 0.0025;
@@ -163,7 +176,6 @@ const SpaceEarth: React.FC = () => {
                 camera.position.lerp(new THREE.Vector3(0, 0, targetZ), 0.05);
                 camera.lookAt(0, 0, 0);
             }
-
             renderer.render(scene, camera);
         };
 
@@ -197,8 +209,46 @@ const SpaceEarth: React.FC = () => {
             atmosphereMat.dispose();
             starGeometry.dispose();
             starMaterial.dispose();
+            sceneRef.current = null;
         };
-    }, [prefersReducedMotion, isDarkTheme]);
+    }, [prefersReducedMotion]); // Only recreate on motion preference change
+
+    // Handle Theme Changes without recreating the scene
+    useEffect(() => {
+        const refs = sceneRef.current;
+        if (!refs) return;
+
+        const { earthMaterial, atmosphereMaterial, ambientLight, pointLight, scene } = refs;
+
+        earthMaterial.specular.set(isDarkTheme ? 0x888888 : 0xaaaaaa);
+        atmosphereMaterial.opacity = isDarkTheme ? 0.25 : 0.15;
+        ambientLight.color.set(isDarkTheme ? 0x999999 : 0xcccccc);
+        pointLight.intensity = isDarkTheme ? 2.5 : 4.0;
+
+        if (!isDarkTheme) {
+            if (!refs.rimLight) {
+                refs.rimLight = new THREE.PointLight(0xffffff, 2.0);
+                refs.rimLight.position.set(-20, -10, -20);
+                scene.add(refs.rimLight);
+            }
+            if (!refs.topLight) {
+                refs.topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+                refs.topLight.position.set(0, 20, 0);
+                scene.add(refs.topLight);
+            }
+        } else {
+            if (refs.rimLight) {
+                scene.remove(refs.rimLight);
+                refs.rimLight.dispose();
+                refs.rimLight = undefined;
+            }
+            if (refs.topLight) {
+                scene.remove(refs.topLight);
+                refs.topLight.dispose();
+                refs.topLight = undefined;
+            }
+        }
+    }, [isDarkTheme]);
 
     return (
         <div className="position-relative w-100 h-100 d-flex flex-column align-items-center justify-content-center">
@@ -213,7 +263,7 @@ const SpaceEarth: React.FC = () => {
                     style={{
                         background: isDarkTheme ? 'rgba(30, 30, 30, 0.5)' : 'rgba(255, 255, 255, 0.6)',
                         backdropFilter: 'blur(8px)',
-                        color: isDarkTheme ? 'var(--bs-sky-blue)' : '#4c1d95', // Darker purple for light theme
+                        color: isDarkTheme ? 'var(--bs-sky-blue)' : '#4c1d95',
                         border: `1px solid ${isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
                         opacity: 0.9
                     }}
@@ -247,4 +297,4 @@ const SpaceEarth: React.FC = () => {
     );
 };
 
-export default SpaceEarth;
+export default React.memo(SpaceEarth);

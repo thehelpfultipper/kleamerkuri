@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react';
 
 const WireframeOverlay: React.FC = () => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [isUnder1200, setIsUnder1200] = useState(false);
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
-    const [isHydrated, setIsHydrated] = useState(false);
+    const [dimensions, setDimensions] = useState({
+        isMobile: false,
+        isUnder1200: false,
+        isSmallScreen: false,
+        isHydrated: false
+    });
 
-    const prefersReducedMotion = typeof window !== 'undefined'
-        ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        : false;
+    const prefersReducedMotion = React.useMemo(() =>
+        typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
+        []);
 
     useEffect(() => {
-        setIsHydrated(true);
         const handleResize = () => {
             const width = window.innerWidth;
-            setIsMobile(width < 992);
-            setIsUnder1200(width <= 1200);
-            setIsSmallScreen(width <= 768);
+            setDimensions({
+                isMobile: width < 992,
+                isUnder1200: width <= 1200,
+                isSmallScreen: width <= 768,
+                isHydrated: true
+            });
         };
 
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    const { isMobile, isUnder1200, isSmallScreen, isHydrated } = dimensions;
 
     const centerX = 780;
     let centerY = 450;
@@ -180,4 +186,4 @@ const WireframeOverlay: React.FC = () => {
     );
 };
 
-export default WireframeOverlay;
+export default React.memo(WireframeOverlay);

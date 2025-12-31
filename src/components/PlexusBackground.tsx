@@ -5,7 +5,10 @@ import { Point } from '../helpers/interfaces';
 const PlexusBackground: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const pointsRef = useRef<Point[]>([]);
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const prefersReducedMotion = React.useMemo(() =>
+        typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
+        []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -109,4 +112,4 @@ const PlexusBackground: React.FC = () => {
     );
 };
 
-export default PlexusBackground;
+export default React.memo(PlexusBackground);
