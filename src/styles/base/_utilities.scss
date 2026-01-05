@@ -153,3 +153,8 @@
 .animate-scale-up {
   animation: scaleUp 0.2s ease-out forwards;
 }
+
+.pointer-events-none {
+  pointer-events: none !important;
+}
+
