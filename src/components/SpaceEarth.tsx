@@ -9,7 +9,11 @@ const SpaceEarth: React.FC = () => {
     const isDarkTheme = theme === 'dark' || theme === null; // Default to dark if not yet loaded
     const [isZoomedState, setIsZoomedState] = useState(false);
     const isZoomedRef = useRef(false);
-    const prefersReducedMotion = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+    useEffect(() => {
+        setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }, []);
 
     const handleInteraction = useCallback(() => {
         isZoomedRef.current = true;

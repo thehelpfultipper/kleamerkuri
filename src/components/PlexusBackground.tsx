@@ -6,9 +6,11 @@ const PlexusBackground: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const pointsRef = useRef<Point[]>([]);
 
-    const prefersReducedMotion = React.useMemo(() =>
-        typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
-        []);
+    const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+    React.useEffect(() => {
+        setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;

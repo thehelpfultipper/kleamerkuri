@@ -5,12 +5,9 @@ const WireframeOverlay: React.FC = () => {
         isMobile: false,
         isUnder1200: false,
         isSmallScreen: false,
-        isHydrated: false
+        isHydrated: false,
+        prefersReducedMotion: false
     });
-
-    const prefersReducedMotion = React.useMemo(() =>
-        typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false,
-        []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -19,7 +16,8 @@ const WireframeOverlay: React.FC = () => {
                 isMobile: width < 992,
                 isUnder1200: width <= 1200,
                 isSmallScreen: width <= 768,
-                isHydrated: true
+                isHydrated: true,
+                prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
             });
         };
 
@@ -28,7 +26,7 @@ const WireframeOverlay: React.FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const { isMobile, isUnder1200, isSmallScreen, isHydrated } = dimensions;
+    const { isMobile, isUnder1200, isSmallScreen, isHydrated, prefersReducedMotion } = dimensions;
 
     const centerX = 780;
     let centerY = 450;

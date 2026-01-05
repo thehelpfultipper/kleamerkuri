@@ -5,6 +5,12 @@ import BlogIcon from '../icons/BlogIcon';
 import { links } from '../helpers/variables';
 
 const Footer: React.FC = () => {
+  const [year, setYear] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="py-4 border-top border-slate-800">
       <div className="container container-px d-flex flex-column align-items-center text-center">
@@ -57,7 +63,7 @@ const Footer: React.FC = () => {
         </div>
 
         <p className="text-slate-dark footer-copy">
-          Copyright &copy; {new Date().getFullYear()} Klea Merkuri. All Rights Reserved.
+          Copyright &copy; {year || '2026'} Klea Merkuri. All Rights Reserved.
         </p>
       </div>
     </footer>
