@@ -1,12 +1,6 @@
-if (process.env.NODE_ENV === 'production') {
-  require('dotenv').config({
-    path: './environments/.env.production',
-  });
-} else {
-  require('dotenv').config({
-    path: './environments/.env.development',
-  });
-}
+import * as dotenv from 'dotenv';
+const envPath = process.env.NODE_ENV === 'production' ? './environments/.env.production' : './environments/.env.development';
+dotenv.config({ path: envPath });
 
 module.exports = {
   siteMetadata: {
@@ -14,7 +8,7 @@ module.exports = {
     description: 'Front-End Engineer specializing in high-performance web applications, accessible design systems, and modern React architectures.',
     author: 'Klea Merkuri',
     keywords:
-      'Front-End Engineer, React Developer, TypeScript, Web Performance, Design Systems, Finance of America, Gatsby, JavaScript, UI/UX, Software Engineer',
+      'Front-End Engineer, React Developer, TypeScript, Web Performance, Design Systems, Software Engineer, Gatsby, JavaScript, UI/UX Developer, AI Integration, Web Development',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri',
   },

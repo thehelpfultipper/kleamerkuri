@@ -4,6 +4,8 @@ import ChevronDownIcon from '../icons/ChevronDownIcon';
 import CloseIcon from '../icons/CloseIcon';
 import SubmitIcon from '../icons/SubmitIcon';
 import useChatbot from '../hooks/use-chatbot';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,13 +106,21 @@ const Chatbot: React.FC = () => {
           This is an AI-powered assistant. Responses may be experimental.
         </p>
         <div className="chat-messages">
-          {messages.map((msg, index) => (
-            <div
-              key={`${msg.role}-${index}`}
-              className={`chat-message ${msg.role === 'assistant' ? 'ai' : 'user'}-message animate-fade-in`}>
-              <div className="message-bubble">{msg.content || <>&nbsp;</>}</div>
-            </div>
-          ))}
+          {messages.map((msg, index) =>
+            msg.content && (
+              <div
+                key={`${msg.role}-${index}`}
+                className={`chat-message ${msg.role === 'assistant' ? 'ai' : 'user'}-message animate-fade-in`}>
+                <div className="message-bubble">
+                  {msg.role === 'assistant' ? (
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                  ) : (
+                    msg.content
+                  )}
+                </div>
+              </div>
+            )
+          )}
           {(isLoading || isTyping) && (
             <div className="chat-message ai-message">
               <div className="message-bubble loading-indicator">
@@ -120,8 +130,8 @@ const Chatbot: React.FC = () => {
               </div>
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
+        <div ref={messagesEndRef} aria-hidden="true" style={{ height: 0, overflow: 'hidden' }} />
       </div>
 
       <footer className="chatbot-footer">

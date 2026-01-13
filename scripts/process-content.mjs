@@ -1,221 +1,237 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as env from 'dotenv';
-env.config({
-    path: 'supabase/.env',
-});
-// Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Init Gemini
-const geminiKey = process.env.GEMINI_KEY;
-if (!geminiKey || geminiKey.length < 10) {
-    throw new Error('Missing or invalid GEMINI_KEY. Please check your environment variable.');
-}
-const genAI = new GoogleGenAI({ apiKey: geminiKey });
+const envPath = process.env.NODE_ENV === 'development' ? 'supabase/.env.local' : 'supabase/.env';
+env.config({ path: envPath });
 
-// Constants
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+
 const BATCH_LIMIT = 5;
-const MIN_LENGTH = 2;
-
-const seenTexts = new Set();
 const embeddingQueue = [];
 
-// Check if a given content + content_type combo already exists in the DB
-async function checkIfContentExists(content, content_type) {
-    const { data, error } = await supabase
-        .from('portfolio_content')
-        .select('id')
-        .eq('content', content)
-        .eq('content_type', content_type)
-        .maybeSingle();
+const generateHash = (text) => crypto.createHash('md5').update(text).digest('hex');
 
-    if (error) {
-        console.error('Supabase check error:', error);
-        return true;
-    }
+function createChunks(data, fileName) {
+    const chunks = [];
+    const source = fileName.replace('.json', '');
 
-    return Boolean(data);
-}
+    // 1. PROFILE (Exhaustive)
+    if (source === 'profile' && data.profile) {
+        const p = data.profile;
+        const name = p.name;
 
-// Initialize the embedding model to process a batch of text inputs and return embeddings
-async function initEmbeddingModel(batch) {
-    const texts = batch.map(item => item.content);
-    console.log(texts)
-    try {
-        const response = await genAI.models.embedContent({
-            model: 'models/text-embedding-004',
-            contents: texts
+        // Header Info (Fixed the previous blind spot)
+        chunks.push({
+            slug: 'profile-header',
+            text: `${name} is a ${p.title} currently employed at ${p.employer}. Her pronouns are ${p.pronouns}.`,
+            meta: { type: 'profile', section: 'header' }
         });
 
-        if (!response.embeddings || !Array.isArray(response.embeddings) || response.embeddings.length === 0) {
-            throw new Error(`Invalid embedding format from Gemini ${JSON.stringify(response)}`);
-        }
-        return response.embeddings;
+        // Contact Info
+        chunks.push({
+            slug: 'profile-contact',
+            text: `Contact information for ${name}: Email: ${p.contact.email}, Phone: ${p.contact.phone}. Blog: ${p.blog.name} (${p.blog.url}).`,
+            meta: { type: 'profile', section: 'contact' }
+        });
 
-    } catch (error) {
-        console.error('Error generating embedding:', error);
-        throw error;
-    }
-}
+        // Story & Lead
+        chunks.push({
+            slug: 'profile-bio',
+            text: `Professional bio for ${name}: ${p.story} Primary mission: ${p.lead}`,
+            meta: { type: 'profile', section: 'bio' }
+        });
 
-// Process all JSON files in data directory
-async function processPortfolioContent() {
-    const dataDir = path.join(process.cwd(), 'src/data');
-    // const generateEmbedding = await initEmbeddingModel();
+        // Facts
+        p.facts.forEach((fact, i) => {
+            chunks.push({
+                slug: `profile-fact-${i}`,
+                text: `Interesting fact about ${name}: ${fact}`,
+                meta: { type: 'profile', section: 'fact' }
+            });
+        });
 
-    // Recursively find all JSON files
-    function findJsonFiles(dir) {
-        const files = fs.readdirSync(dir);
-        return files.flatMap(file => {
-            const fullPath = path.join(dir, file);
-            return fs.statSync(fullPath).isDirectory() ? findJsonFiles(fullPath) : fullPath.endsWith('.json') ? [fullPath] : [];
+        // About Paragraphs
+        p.about.forEach((para, i) => {
+            chunks.push({
+                slug: `profile-about-${i}`,
+                text: `Background info on ${name}: ${para}`,
+                meta: { type: 'profile', section: 'about' }
+            });
         });
     }
 
-    // Get all JSON files in the data directory
-    const files = findJsonFiles(dataDir);
+    // 2. RESUME (Exhaustive)
+    else if (source === 'resume' && data.resume) {
+        const r = data.resume;
 
-    // const files = fs.readdirSync(dataDir).filter(file => file.endsWith('.json'));
+        // Summary
+        chunks.push({
+            slug: 'resume-summary',
+            text: `Klea Merkuri's Professional Summary: ${r.summary}`,
+            meta: { type: 'resume', section: 'summary' }
+        });
 
-    for (const file of files) {
-        const contentType = path.basename(file, '.json');
-        // const filePath = path.join(dataDir, file);
+        // Skills
+        r.skills.forEach(skillGroup => {
+            chunks.push({
+                slug: `resume-skill-${skillGroup.category}`,
+                text: `Klea Merkuri has expertise in ${skillGroup.category}: ${skillGroup.items.join(', ')}.`,
+                meta: { type: 'resume', section: 'skills', category: skillGroup.category }
+            });
+        });
 
-        // Read and parse JSON file
-        const rawData = fs.readFileSync(file, 'utf8');
-        const data = JSON.parse(rawData);
+        // Experience
+        r.experience.forEach((job, jobIdx) => {
+            // Job Header (Captures dates/location)
+            chunks.push({
+                slug: `resume-job-${jobIdx}`,
+                text: `Klea Merkuri served as ${job.title} at ${job.company} in ${job.location} from ${job.dates}.`,
+                meta: { type: 'resume', section: 'experience-header', company: job.company }
+            });
 
-        console.log(`Processing ${contentType} data...`);
-
-        // Process each section of the content
-        await processDataRecursively(data, contentType);
-    }
-
-    console.log('Content processing complete!');
-}
-
-async function upsertPortfolioContent({
-    content,
-    contentType,
-    contextKey,
-    embedding,
-    action = 'create', // or 'update' or 'delete'
-}) {
-    const content_type = `${contentType}:${contextKey}`;
-
-    if (action === 'delete') {
-        const { error } = await supabase
-            .from('portfolio_content')
-            .delete()
-            .eq('content_type', content_type);
-
-        if (error) console.error('Delete failed:', error);
-        else console.log(`Deleted ${content_type} content`);
-        return;
-    }
-
-    // Check if entry already exists
-    const { data: existing, error: fetchError } = await supabase
-        .from('portfolio_content')
-        .select('id')
-        .eq('content_type', content_type)
-        .maybeSingle();
-
-    if (fetchError) {
-        console.error('Check failed:', fetchError);
-        return;
-    }
-
-    if (existing && action === 'update') {
-        // update existing
-        const { error } = await supabase
-            .from('portfolio_content')
-            .update({ content, embedding })
-            .eq('content_type', content_type);
-
-        if (error) { console.error('Update failed:', error) } else {
-            console.log(`Updated ${content_type} content`);
-        }
-    } else if (!existing && ['create', 'update'].includes(action)) {
-        // insert new
-        const { error } = await supabase
-            .from('portfolio_content')
-            .insert({ content, content_type, embedding });
-
-        if (error) { console.error('Insert failed:', error) } else {
-            console.log(`Stored ${content_type} content`);
-        }
-    }
-}
-
-// Recursively process data objects/arrays and extract text content
-async function processDataRecursively(data, contentType, parentKey = '') {
-    if (Array.isArray(data)) {
-        // Process each item in array
-        for (let i = 0; i < data.length; i++) {
-            await processDataRecursively(
-                data[i],
-                contentType,
-                parentKey ? `${parentKey}[${i}]` : `[${i}]`
-            );
-        }
-    } else if (data !== null && typeof data === 'object') {
-        // Process each property in object
-        for (const [key, value] of Object.entries(data)) {
-            await processDataRecursively(
-                value,
-                contentType,
-                parentKey ? `${parentKey}.${key}` : key
-            );
-        }
-    } else if (typeof data === 'string' && data.trim().length > 3) {
-        // Create embedding for text content with reasonable length
-        const content = data.trim();
-        const contextKey = parentKey || 'general';
-
-        // Skip short text content within certain keywords
-        if (
-            content.length < MIN_LENGTH &&
-            !/^(ai|ml|ui|ux|js|go)$/i.test(content)
-        ) return;
-
-        // Skip if already seen
-        if (seenTexts.has(content)) return;
-        seenTexts.add(content);
-
-        // Skip if already in DB
-        const exists = await checkIfContentExists(content, `${contentType}:${contextKey}`);
-        if (exists) {
-            console.log(`${contentType}:${contextKey} content already exists`);
-            return;
-        };
-
-        // Push to queue
-        console.log(`Pushing ${contentType}:${contextKey} content to queue`);
-        embeddingQueue.push({ content, content_type: contextKey });
-
-        // Create embedding
-        if (embeddingQueue.length >= BATCH_LIMIT) {
-            const batch = embeddingQueue.splice(0, BATCH_LIMIT);
-            const embeddings = await initEmbeddingModel(batch);
-            for (let i = 0; i < batch.length; i++) {
-                const { content } = batch[i];
-                const embedding = embeddings[i].values;
-                await upsertPortfolioContent({
-                    content,
-                    contentType,
-                    contextKey,
-                    embedding,
+            // Job Bullets
+            job.desc.forEach((bullet, bulletIdx) => {
+                chunks.push({
+                    slug: `resume-exp-${job.company}-${bulletIdx}`,
+                    text: `During her time (${job.dates}) as ${job.title} at ${job.company}, Klea Merkuri: ${bullet}`,
+                    meta: { type: 'resume', section: 'experience-detail', company: job.company }
                 });
-            }
+            });
+        });
+    }
+
+    // 3. PRODUCTS (Exhaustive)
+    else if (source === 'products' && data.products) {
+        data.products.forEach(item => {
+            chunks.push({
+                slug: `product-${item.title}`,
+                text: `Product developed by Klea: ${item.title}. Description: ${item.description}. Demo Link: ${item.links.demo}. Blog Link: ${item.links.blog || 'N/A'}. Featured: ${item.featured}.`,
+                meta: { type: 'product', title: item.title }
+            });
+        });
+    }
+
+    // 4. POSTS (Exhaustive)
+    else if (source === 'posts' && data.posts) {
+        data.posts.forEach(item => {
+            chunks.push({
+                slug: `post-${item.title}`,
+                text: `Blog post by Klea Merkuri (The Helpful Tipper): "${item.title}". Published: ${item.date}. Link: ${item.link}. Featured: ${item.featured}.`,
+                meta: { type: 'post', title: item.title }
+            });
+        });
+    }
+
+    // 5. PROJECTS (Exhaustive)
+    else if (source === 'projects' || Array.isArray(data)) {
+        const items = Array.isArray(data) ? data : data.projects;
+        items.forEach(item => {
+            chunks.push({
+                slug: `project-${item.title}`,
+                text: `Portfolio Project: ${item.title}. Description: ${item.description}. Tech Stack: ${item.meta.stack.join(', ')}. Date: ${item.meta.date}. Category: ${item.meta.category.join(', ')}. Demo: ${item.links.demo}.`,
+                meta: { type: 'project', title: item.title }
+            });
+        });
+    }
+
+    return chunks.map(c => ({
+        ...c,
+        slug: c.slug.toLowerCase().replace(/[^a-z0-9]/g, '-')
+    }));
+}
+
+async function flushQueue() {
+    if (embeddingQueue.length === 0) return;
+
+    const batch = embeddingQueue.splice(0, BATCH_LIMIT);
+    const texts = batch.map(b => b.text);
+
+    try {
+        console.log(`Vectorizing ${batch.length} items with Gemini...`);
+        const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+        const result = await model.batchEmbedContents({
+            requests: texts.map(t => ({
+                content: { parts: [{ text: t }] }
+            }))
+        });
+
+        const embeddings = result.embeddings;
+
+        for (let i = 0; i < batch.length; i++) {
+            const item = batch[i];
+            const vectorValues = embeddings[i].values;
+
+            const { error } = await supabase
+                .from('portfolio_content')
+                .upsert({
+                    slug_id: item.slug,
+                    content: item.text,
+                    content_type: item.meta.type,
+                    embedding: vectorValues,
+                    hash: item.hash,
+                    metadata: item.meta
+                }, { onConflict: 'slug_id' });
+
+            if (error) console.error(`❌ Error upserting ${item.slug}:`, error.message);
+            else console.log(`✅ Synced: ${item.slug}`);
         }
+    } catch (err) {
+        console.error("Batch error processing Gemini embeddings:", err);
     }
 }
 
-// Run the processor
-processPortfolioContent().catch(console.error);
+async function runSync() {
+    const dataDir = path.join(process.cwd(), 'src/data');
+
+    function getAllFiles(dirPath, arrayOfFiles = []) {
+        const files = fs.readdirSync(dirPath);
+        files.forEach(file => {
+            const fullPath = path.join(dirPath, file);
+            if (fs.statSync(fullPath).isDirectory()) {
+                arrayOfFiles = getAllFiles(fullPath, arrayOfFiles);
+            } else if (file.endsWith('.json')) {
+                arrayOfFiles.push(fullPath);
+            }
+        });
+        return arrayOfFiles;
+    }
+
+    const allFiles = getAllFiles(dataDir);
+
+    for (const filePath of allFiles) {
+        const fileName = path.basename(filePath);
+        const rawData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+        console.log(`\n--- Processing ${fileName} ---`);
+        const chunks = createChunks(rawData, fileName);
+
+        for (const chunk of chunks) {
+            const hash = generateHash(chunk.text);
+
+            const { data: existing } = await supabase
+                .from('portfolio_content')
+                .select('hash')
+                .eq('slug_id', chunk.slug)
+                .maybeSingle();
+
+            if (existing?.hash === hash) {
+                console.log(`⏩ Skipping ${chunk.slug} (Match)`);
+                continue;
+            }
+
+            embeddingQueue.push({ ...chunk, hash });
+            if (embeddingQueue.length >= BATCH_LIMIT) await flushQueue();
+        }
+    }
+
+    await flushQueue();
+    console.log('\n✨ All systems go. Data sync complete.');
+}
+
+runSync().catch(console.error);

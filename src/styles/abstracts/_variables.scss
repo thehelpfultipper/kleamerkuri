@@ -6,6 +6,7 @@ $navy-dark: #1e1e1e;
 $slate-light-dark: #f5ebe0;
 $slate-dark-dark: #d5c6b7;
 $sky-blue-dark: #bd93f9;
+$sky-blue-hover-dark: #a777e8;
 $teal-accent-dark: #bd93f9; // Same as sky-blue, kept for consistency with original
 $orange-cta-dark: #ff79c6;
 $orange-cta-hover-dark: #f75ac0;
@@ -25,6 +26,7 @@ $slate-light-light: #1e1e1e;
 $slate-dark-light: #5c657a;
 /* Secondary text */
 $sky-blue-light: #6d28d9;
+$sky-blue-hover-light: #581c87;
 /* Purple accent */
 $teal-accent-light: #6d28d9;
 $orange-cta-light: #d9006c;
@@ -112,6 +114,7 @@ $dark-theme-vars: (
   --bs-chatbot-error-color: $orange-cta-dark,
   --bs-chatbot-error-border-color: $orange-cta-dark,
   --bs-chatbot-send-btn-bg: $sky-blue-dark,
+  --bs-chatbot-send-btn-hover-bg: $sky-blue-hover-dark,
   --bs-chatbot-send-btn-color: $navy-dark,
   --bs-chatbot-exit-dialog-bg: $slate-800-dark,
   --bs-chatbot-exit-dialog-border-color: $slate-700-dark,
@@ -185,6 +188,7 @@ $light-theme-vars: (
   --bs-chatbot-error-color: $orange-cta-light,
   --bs-chatbot-error-border-color: $orange-cta-light,
   --bs-chatbot-send-btn-bg: $sky-blue-light,
+  --bs-chatbot-send-btn-hover-bg: $sky-blue-hover-light,
   --bs-chatbot-send-btn-color: $navy-light,
   --bs-chatbot-exit-dialog-bg: $slate-800-light,
   --bs-chatbot-exit-dialog-border-color: $slate-700-light,
