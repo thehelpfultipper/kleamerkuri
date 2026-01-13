@@ -28,28 +28,36 @@ const supabaseClient = createClient(
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 );
 
-const systemInstruction = `
+// TEMPORAL AWARENESS: Inject current date into the instruction
+const getSystemInstruction = () => {
+  const today = new Date().toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  return `
     You are EVE, Klea Merkuri's AI Assistant.
     Klea is a Software Engineer.
+    Today is ${today}. Use this to reference "recent" or "current" work.
 
     RULES:
-    1. ONLY answer questions about Klea's portfolio, projects, or experience using the [CONTEXT] provided.
-    2. If a question is unrelated, respond: "I'm here to help with questions about Klea's portfolio. Please try asking something else."
-    3. Always refer to Klea in the third person (she/her).
-    4. NEVER share Klea's phone number. Suggest email (kleamdev@gmail.com) if they need to reach her.
-    5. Be professional, friendly, and concise.
-`;
+    1. ONLY answer questions about Klea's portfolio, projects, or experience using the [CONTEXT] and [HISTORY] provided.
+    2. Use the [HISTORY] to understand what "these", "it", or "those" refers to.
+    3. If a question is unrelated, respond: "I'm here to help with questions about Klea's portfolio. Please try asking something else."
+    4. Always refer to Klea in the third person (she/her).
+    5. NEVER share Klea's phone number. Suggest email (kleamdev@gmail.com) if they need to reach her.
+    6. Be professional, friendly, and concise.
+  `;
+};
 
 // 3. SMART SEARCH: Adjusts parameters based on user intent
-async function smartSearch(query, embedding) {
-  let threshold = 0.4;
-  let matchCount = 10;
-  const q = query.toLowerCase();
+async function smartSearch(query: string, embedding: number[], isFollowUp = false) {
+  let threshold = isFollowUp ? 0.2 : 0.4;
+  let matchCount = isFollowUp ? 40 : 15;
 
-  // If user is looking for a list or "work", expand the search net
-  if (q.includes('project') || q.includes('portfolio') || q.includes('work') || q.includes('built')) {
-    threshold = 0.25;
-    matchCount = 25;
+  const q = query.toLowerCase();
+  if (q.includes('project') || q.includes('work') || q.includes('built') || q.includes('link')) {
+    threshold = 0.15;
+    matchCount = 50;
   }
 
   const { data, error } = await supabaseClient.rpc('match_portfolio_content', {
@@ -93,24 +101,40 @@ Deno.serve(async (req) => {
       });
     }
 
+    // 7. CONTEXT DRIFT FIX: Retrieve History
+    let historyText = "";
+    let lastAiResponse = "";
+    if (sessionId) {
+      const { data: sessionData } = await supabaseClient.from('chat_sessions').select('data').eq('id', sessionId).maybeSingle();
+      const rawHistory = sessionData?.data?.history || [];
+      historyText = rawHistory.slice(-3).map(h => `User: ${h.query}\nAI: ${h.response}`).join('\n');
+      lastAiResponse = rawHistory.length > 0 ? rawHistory[rawHistory.length - 1].response : "";
+    }
+
+    // 8. QUERY AUGMENTATION to allow vector search to find context mentioned in the previous turn.
+    const isFollowUp = /these|those|it|link|demo|url/i.test(query);
+    const augmentedQuery = (isFollowUp && lastAiResponse)
+      ? `${query} ${lastAiResponse}`.trim()
+      : query;
+
     // 5. VECTOR GENERATION (768 Dimensions)
     const embedResponse = await genAI.models.embedContent({
       model: 'text-embedding-004',
-      contents: [query]
+      contents: [augmentedQuery]
     });
     const embedding = embedResponse.embeddings[0].values;
 
     // 6. CONTEXT RETRIEVAL
-    const relevantContent = await smartSearch(query, embedding);
+    const relevantContent = await smartSearch(query, embedding, isFollowUp);
 
-    // Simplified Context: We now just join the "Breadcrumb" strings
     const context = relevantContent
       ?.map(item => `[Source: ${item.metadata?.type || 'General'}] ${item.content}`)
       .join('\n\n') || "No background information found.";
 
-    // 7. AI GENERATION
-    const fullPrompt = `${systemInstruction}\n\n[CONTEXT]\n${context}\n\n[USER QUERY]\n${query}`;
+    // AI GENERATION: Updated Prompt with Date and History Injection
+    const fullPrompt = `${getSystemInstruction()}\n\n[HISTORY]\n${historyText || "No previous history."}\n\n[CONTEXT]\n${context}\n\n[USER QUERY]\n${query}`;
 
+    // Keep the exact structure of your working version to avoid 503 Overload
     const result = await genAI.models.generateContent({
         model: "gemini-2.5-flash",
         contents: [{ role: 'user', parts: [{ text: fullPrompt }]}]
@@ -125,21 +149,25 @@ Deno.serve(async (req) => {
     });
 
     if (sessionId) {
+        // Fetch existing history to append to it
+        const { data: currentSession } = await supabaseClient.from('chat_sessions').select('data').eq('id', sessionId).maybeSingle();
+        const history = currentSession?.data?.history || [];
+        history.push({ query, response: responseText, timestamp: new Date().toISOString() });
+
         await supabaseClient.from('chat_sessions').upsert({
             id: sessionId,
-            data: { last_query: query, last_response: responseText },
+            data: { history: history.slice(-10) }, // Keep last 10 turns for storage
         });
     }
 
-    // 9. STREAMING RESPONSE (Optional: Remove if you prefer static JSON)
+    // 9. STREAMING RESPONSE
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
-        // Splitting by sentences/phrases for a "natural" typing effect
         const tokens = responseText.match(/[^.!?]+[.!?]+|\S+/g) || [];
         for (const token of tokens) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: token })}\n\n`));
-          await new Promise(r => setTimeout(r, 40)); // Visual delay
+          await new Promise(r => setTimeout(r, 40));
         }
         controller.close();
       }

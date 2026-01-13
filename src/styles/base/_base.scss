@@ -48,7 +48,8 @@ body {
   }
 }
 
-::selection {
+::selection,
+::-moz-selection {
   background-color: var(--bs-teal-accent);
   color: var(--bs-navy);
 }
