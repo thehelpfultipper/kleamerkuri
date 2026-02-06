@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BlogPostCard from './BlogPostCard';
 import { IPost } from '../helpers/interfaces';
 import { links } from '../helpers/variables';
-import ExternalLinkIcon from '../icons/ExternalLinkIcon';
 import InlineNotice from './UI/InlineNotice';
 
 const Blog: React.FC = () => {
@@ -42,20 +41,29 @@ const Blog: React.FC = () => {
   return (
     <section
       id="blog"
-      className="py-5 my-5">
-      <h2 className="fs-2 fw-bold text-slate-light mb-5 text-center">
-        <span className="text-sky-blue font-monospace">02.</span> From My Blog
-      </h2>
+      className="py-5 mt-5">
+      <div className="d-flex justify-content-between align-items-end mb-5">
+        <div>
+          <h2 className="fs-2 fw-bold text-slate-light mb-2">
+            <span className="text-sky-blue font-monospace">02.</span> Technical Insights
+          </h2>
+          <p className="text-slate-dark mb-0">Writing on performance, accessibility, and AI integration.</p>
+        </div>
+        <a href={links.blog.url} target="_blank" rel="noreferrer" className="text-sky-blue font-monospace text-decoration-none d-none d-md-block">
+          View all posts &rarr;
+        </a>
+      </div>
       <div className="row g-4">
         {featuredPosts.map((post) => (
-          <div
-            className="col-12 col-md-6 col-lg-4"
-            key={post.title}>
+          <div className="col-12 col-md-6 col-lg-4" key={post.title}>
             <BlogPostCard post={post} />
           </div>
         ))}
       </div>
       <InlineNotice>
+        <h3 className="fs-6 fw-bold text-slate-light font-monospace text-uppercase tracking-widest mb-4">
+          Further Reading
+        </h3>
         <ul>
           {extraPosts.map((p, i) => (
             <li key={`ext_${i + 1}`}>
@@ -69,16 +77,6 @@ const Blog: React.FC = () => {
           ))}
         </ul>
       </InlineNotice>
-      <div className="text-center mt-5 pt-3">
-        <a
-          href={links.blog.url}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-cta d-inline-block">
-          Go to Blog
-          <ExternalLinkIcon className="ms-1 ext-link" />
-        </a>
-      </div>
     </section>
   );
 };

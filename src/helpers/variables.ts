@@ -9,7 +9,7 @@ export const portfolios = {
   },
 };
 
-export const categories: string[] = ['All', 'HTML', 'CSS', 'JavaScript', 'React', 'Python', 'SCSS'];
+export const categories: string[] = ['All', 'Enterprise', 'AI', 'Tools', 'Product'];
 
 export const links: IHelperLinks = {
   linkedin: {

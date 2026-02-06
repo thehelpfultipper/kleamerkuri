@@ -1,71 +1,42 @@
 {
   "resume": {
-    "summary": "Passionate web developer with expertise in designing and optimizing web applications and APIs, committed to delivering innovative solutions and driving business growth. Skilled in enhancing system performance, streamlining processes, and resolving technical challenges to exceed client expectations and elevate user experiences.",
-    "skills": [
-      {
-        "category": "Programming Languages",
-        "items": ["JavaScript (ES6+)", "Python", "PHP"]
-      },
-      {
-        "category": "Frontend Technologies",
-        "items": ["HTML5", "CSS3", "React", "Gatsby", "GraphQL", "jQuery", "Bootstrap", "Sass"]
-      },
-      {
-        "category": "Backend Technologies",
-        "items": ["Node.js", "Express", "Django", "Flask", "RESTful APIs"]
-      },
-      {
-        "category": "Database Systems",
-        "items": ["MongoDB", "MySQL", "PostgreSQL"]
-      },
-      {
-        "category": "Version Control",
-        "items": ["Git", "GitHub"]
-      },
-      {
-        "category": "Development Tools",
-        "items": ["VS Code", "Postman", "CI/CD Pipelines", "npm", "OpenAI", "Browser DevTools"]
-      },
-      {
-        "category": "Other",
-        "items": ["Agile Methodologies", "JIRA", "Confluence", "Slack", "WordPress"]
-      }
-    ],
+    "summary": "Systems Orchestrator and Full-Stack Engineer expert in React, TypeScript, and Node.js; specialized in automating data lifecycles—including a transition from quarterly to real-time sync—to scale enterprise properties for high-traffic environments.",
     "experience": [
       {
-        "title": "Front-End Engineer",
+        "title": "Software Developer",
         "company": "Finance of America",
         "location": "Remote",
-        "dates": "Sep 2025-Present",
+        "dates": "Sep 2025 – Present",
         "desc": [
-          "Design and ship consumer-facing features, including calculators and reusable UI components, across enterprise WordPress and PHP properties, enhancing page performance, UX consistency, and content discoverability across business units.",
-          "Collaborate across product, design, SEO, and backend engineering to define requirements and deliver iterative improvements in an Agile workflow, maintaining code standards and Git-based CI/CD deployment hygiene to ensure stable releases.",
-          "Implement SEO-focused, WCAG-compliant front-end patterns using HTML5, CSS/SCSS, and JavaScript while integrating REST APIs, optimizing load paths with browser DevTools, and resolving cross-browser/device edge-case issues.",
-          "Contribute to design system maturity by extending modular components and pattern libraries across marketing properties, accelerating delivery velocity while improving consistency and governance across CMS environments."
+          "Manage and optimize 5+ enterprise digital properties, streamlining database synchronization and updates to ensure data integrity across multi-tenant environments.",
+          "Architect and deploy high-conversion user flows and lead capture forms integrated with Salesforce, Prospect, and Genesys, facilitating seamless data ingestion and sales routing.",
+          "Design and ship consumer-facing features and reusable UI components, improving page performance and maintaining WCAG compliance and UX consistency across business units.",
+          "Iterate on deployment pipelines and Git-based workflows, reducing release friction and ensuring stable, high-velocity delivery in an Agile environment."
         ]
       },
       {
         "title": "Web Developer",
         "company": "Experian",
         "location": "Remote",
-        "dates": "Sep 2023-Sep 2025",
+        "dates": "Nov 2023 – Sep 2025",
         "desc": [
-          "Architect migration of a high-traffic blog from WordPress to a modern headless CMS leveraging React, Gatsby, and GraphQL, achieving a 20% reduction in load times and enhanced SEO performance.",
-          "Collaborate with backend teams to develop scalable APIs in Node.js, enabling seamless data flow and integrating third-party tools with frontends to enhance user functionality.",
-          "Mentor teammates by leading sessions on scalable code design, testing, and performance optimizations, ensuring adherence to high technical standards and improving team-wide code quality.",
-          "Partner with cross-functional teams to define technical requirements and deliver high-quality, user-focused features in an Agile development environment.",
-          "Debug complex frontend issues using DevTools, optimizing performance, and ensuring responsive design across distributed environments."
+          "Architected and deployed custom Node.js APIs to bridge BI platforms (Looker, Tableau) with a headless WordPress CMS, transitioning data updates from manual quarterly cycles to real-time synchronization and ensuring 100% data freshness.",
+          "Engineered an interactive WebGL data visualization for the chatbot product, utilizing a high-performance \"flying meteor\" animation to traverse 1,000+ global coordinates and programmatically display localized engagement metrics from real-time tracking data.",
+          "Architected the migration of a high-traffic blog to a headless CMS (React, Gatsby, GraphQL), achieving a 20% reduction in load times and significantly enhancing technical SEO performance and Core Web Vitals.",
+          "Collaborated with backend teams to develop and deploy scalable Node.js APIs for seamless data flow, integrating with third-party tools and monetization/user engagement widgets to enhance front-end functionality and web performance across distributed systems, aligning with SEO data exposure requirements.",
+          "Mentored a cross-functional team on scalable code design and performance optimizations while serving as the primary technical liaison to translate complex engineering blockers into actionable requirements for non-technical stakeholders (Product and SEO).",
+          "Partnered with cross-functional teams (Design, Product) in an Agile environment to translate SEO strategies into scalable engineering solutions."
         ]
       },
       {
         "title": "Content Marketing Coordinator",
         "company": "Experian",
         "location": "Remote",
-        "dates": "Nov 2021-Sep 2023",
+        "dates": "Nov 2021 – Nov 2023",
         "desc": [
-          "Automated workflows and optimized deployment pipelines by building a Node.js application integrated with Google APIs, reducing manual effort by 10x and accelerating delivery timelines.",
-          "Streamlined content quality assurance, reducing broken links by 30% and duplicate content by 25% by building custom Python and Node.js scripts to automate site-wide integrity checks.",
-          "Partnered with E-Commerce and SEO to support website functionality QA testing, and ensure pages are instrumented for proper tracking and performance analysis."
+          "Developed internal tools and automated workflows by building a Node.js application integrated with Google APIs, reducing manual effort by 10x and accelerating delivery timelines for content-related initiatives by more than 50%, thereby improving SEO processes and content optimization.",
+          "Streamlined content quality assurance, reducing broken links by 30% and duplicate content by 25%, by auditing pages using browser developer tools for frontend validation and developing custom Python and Node.js scripts to automate site-wide integrity checks and SEO audits, enhancing observability of content health.",
+          "Partnered with E-Commerce and Technical SEO teams to support website functionality QA testing, ensuring proper instrumentation for tracking, performance analysis, and SEO critical metrics monitoring using logging and dashboards."
         ]
       },
       {

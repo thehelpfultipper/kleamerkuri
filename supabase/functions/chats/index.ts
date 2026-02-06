@@ -1,5 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js';
-import { GoogleGenAI } from 'npm:@google/genai';
+import { GoogleGenerativeAI } from 'npm:@google/generative-ai';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -22,7 +22,7 @@ if (!GEMINI_KEY) {
   console.error("Missing GEMINI_KEY environment variable");
 }
 
-const genAI = new GoogleGenAI({ apiKey: GEMINI_KEY });
+const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 const supabaseClient = createClient(
   Deno.env.get('SUPABASE_URL') ?? '',
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
@@ -118,11 +118,12 @@ Deno.serve(async (req) => {
       : query;
 
     // 5. VECTOR GENERATION (768 Dimensions)
-    const embedResponse = await genAI.models.embedContent({
-      model: 'text-embedding-004',
-      contents: [augmentedQuery]
+    const embedModel = genAI.getGenerativeModel({ model: "gemini-embedding-001" });
+    const embedResponse = await embedModel.embedContent({
+      content: { parts: [{ text: augmentedQuery }] },
+      outputDimensionality: 768,
     });
-    const embedding = embedResponse.embeddings[0].values;
+    const embedding = embedResponse.embedding.values;
 
     // 6. CONTEXT RETRIEVAL
     const relevantContent = await smartSearch(query, embedding, isFollowUp);
@@ -135,11 +136,11 @@ Deno.serve(async (req) => {
     const fullPrompt = `${getSystemInstruction()}\n\n[HISTORY]\n${historyText || "No previous history."}\n\n[CONTEXT]\n${context}\n\n[USER QUERY]\n${query}`;
 
     // Keep the exact structure of your working version to avoid 503 Overload
-    const result = await genAI.models.generateContent({
-        model: "gemini-2.5-flash",
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent({
         contents: [{ role: 'user', parts: [{ text: fullPrompt }]}]
     });
-    const responseText = result.text || "";
+    const responseText = result.response.text();
 
     // 8. LOGGING & CACHING
     await supabaseClient.from('chat_cache').insert({

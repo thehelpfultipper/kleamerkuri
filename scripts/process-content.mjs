@@ -15,7 +15,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 const BATCH_LIMIT = 5;
 const embeddingQueue = [];
 
-const generateHash = (text) => crypto.createHash('md5').update(text).digest('hex');
+const generateHash = (text, model) => crypto.createHash('md5').update(text + model).digest('hex');
+const EMBED_MODEL = "gemini-embedding-001";
 
 function createChunks(data, fileName) {
     const chunks = [];
@@ -48,22 +49,26 @@ function createChunks(data, fileName) {
         });
 
         // Facts
-        p.facts.forEach((fact, i) => {
-            chunks.push({
-                slug: `profile-fact-${i}`,
-                text: `Interesting fact about ${name}: ${fact}`,
-                meta: { type: 'profile', section: 'fact' }
+        if (Array.isArray(p.facts)) {
+            p.facts.forEach((fact, i) => {
+                chunks.push({
+                    slug: `profile-fact-${i}`,
+                    text: `Interesting fact about ${name}: ${fact}`,
+                    meta: { type: 'profile', section: 'fact' }
+                });
             });
-        });
+        }
 
         // About Paragraphs
-        p.about.forEach((para, i) => {
-            chunks.push({
-                slug: `profile-about-${i}`,
-                text: `Background info on ${name}: ${para}`,
-                meta: { type: 'profile', section: 'about' }
+        if (Array.isArray(p.about)) {
+            p.about.forEach((para, i) => {
+                chunks.push({
+                    slug: `profile-about-${i}`,
+                    text: `Background info on ${name}: ${para}`,
+                    meta: { type: 'profile', section: 'about' }
+                });
             });
-        });
+        }
     }
 
     // 2. RESUME (Exhaustive)
@@ -78,66 +83,78 @@ function createChunks(data, fileName) {
         });
 
         // Skills
-        r.skills.forEach(skillGroup => {
-            chunks.push({
-                slug: `resume-skill-${skillGroup.category}`,
-                text: `Klea Merkuri has expertise in ${skillGroup.category}: ${skillGroup.items.join(', ')}.`,
-                meta: { type: 'resume', section: 'skills', category: skillGroup.category }
-            });
-        });
-
-        // Experience
-        r.experience.forEach((job, jobIdx) => {
-            // Job Header (Captures dates/location)
-            chunks.push({
-                slug: `resume-job-${jobIdx}`,
-                text: `Klea Merkuri served as ${job.title} at ${job.company} in ${job.location} from ${job.dates}.`,
-                meta: { type: 'resume', section: 'experience-header', company: job.company }
-            });
-
-            // Job Bullets
-            job.desc.forEach((bullet, bulletIdx) => {
+        if (r.skills && Array.isArray(r.skills)) {
+            r.skills.forEach(skillGroup => {
                 chunks.push({
-                    slug: `resume-exp-${job.company}-${bulletIdx}`,
-                    text: `During her time (${job.dates}) as ${job.title} at ${job.company}, Klea Merkuri: ${bullet}`,
-                    meta: { type: 'resume', section: 'experience-detail', company: job.company }
+                    slug: `resume-skill-${skillGroup.category}`,
+                    text: `Klea Merkuri has expertise in ${skillGroup.category}: ${skillGroup.items.join(', ')}.`,
+                    meta: { type: 'resume', section: 'skills', category: skillGroup.category }
                 });
             });
-        });
+        }
+
+        // Experience
+        if (Array.isArray(r.experience)) {
+            r.experience.forEach((job, jobIdx) => {
+                // Job Header (Captures dates/location)
+                chunks.push({
+                    slug: `resume-job-${jobIdx}`,
+                    text: `Klea Merkuri served as ${job.title} at ${job.company} in ${job.location} from ${job.dates}.`,
+                    meta: { type: 'resume', section: 'experience-header', company: job.company }
+                });
+
+                // Job Bullets
+                if (Array.isArray(job.desc)) {
+                    job.desc.forEach((bullet, bulletIdx) => {
+                        chunks.push({
+                            slug: `resume-exp-${job.company}-${bulletIdx}`,
+                            text: `During her time (${job.dates}) as ${job.title} at ${job.company}, Klea Merkuri: ${bullet}`,
+                            meta: { type: 'resume', section: 'experience-detail', company: job.company }
+                        });
+                    });
+                }
+            });
+        }
     }
 
     // 3. PRODUCTS (Exhaustive)
     else if (source === 'products' && data.products) {
-        data.products.forEach(item => {
-            chunks.push({
-                slug: `product-${item.title}`,
-                text: `Product developed by Klea: ${item.title}. Description: ${item.description}. Demo Link: ${item.links.demo}. Blog Link: ${item.links.blog || 'N/A'}. Featured: ${item.featured}.`,
-                meta: { type: 'product', title: item.title }
+        if (Array.isArray(data.products)) {
+            data.products.forEach(item => {
+                chunks.push({
+                    slug: `product-${item.title}`,
+                    text: `Product developed by Klea: ${item.title}. Description: ${item.description}. Demo Link: ${item.links.demo}. Blog Link: ${item.links.blog || 'N/A'}. Featured: ${item.featured}.`,
+                    meta: { type: 'product', title: item.title }
+                });
             });
-        });
+        }
     }
 
     // 4. POSTS (Exhaustive)
     else if (source === 'posts' && data.posts) {
-        data.posts.forEach(item => {
-            chunks.push({
-                slug: `post-${item.title}`,
-                text: `Blog post by Klea Merkuri (The Helpful Tipper): "${item.title}". Published: ${item.date}. Link: ${item.link}. Featured: ${item.featured}.`,
-                meta: { type: 'post', title: item.title }
+        if (Array.isArray(data.posts)) {
+            data.posts.forEach(item => {
+                chunks.push({
+                    slug: `post-${item.title}`,
+                    text: `Blog post by Klea Merkuri (The Helpful Tipper): "${item.title}". Published: ${item.date}. Link: ${item.link}. Featured: ${item.featured}.`,
+                    meta: { type: 'post', title: item.title }
+                });
             });
-        });
+        }
     }
 
     // 5. PROJECTS (Exhaustive)
     else if (source === 'projects' || Array.isArray(data)) {
         const items = Array.isArray(data) ? data : data.projects;
-        items.forEach(item => {
-            chunks.push({
-                slug: `project-${item.title}`,
-                text: `Portfolio Project: ${item.title}. Description: ${item.description}. Tech Stack: ${item.meta.stack.join(', ')}. Date: ${item.meta.date}. Category: ${item.meta.category.join(', ')}. Demo: ${item.links.demo}.`,
-                meta: { type: 'project', title: item.title }
+        if (Array.isArray(items)) {
+            items.forEach(item => {
+                chunks.push({
+                    slug: `project-${item.title}`,
+                    text: `Portfolio Project: ${item.title}. Description: ${item.description}. Tech Stack: ${item.meta.stack.join(', ')}. Date: ${item.meta.date}. Category: ${item.meta.category.join(', ')}. Demo: ${item.links.demo}.`,
+                    meta: { type: 'project', title: item.title }
+                });
             });
-        });
+        }
     }
 
     return chunks.map(c => ({
@@ -153,11 +170,13 @@ async function flushQueue() {
     const texts = batch.map(b => b.text);
 
     try {
-        console.log(`Vectorizing ${batch.length} items with Gemini...`);
-        const model = genAI.getGenerativeModel({ model: "text-embedding-004" });
+        console.log(`Vectorizing ${batch.length} items with Gemini (${EMBED_MODEL})...`);
+        const model = genAI.getGenerativeModel({ model: EMBED_MODEL });
+
         const result = await model.batchEmbedContents({
             requests: texts.map(t => ({
-                content: { parts: [{ text: t }] }
+                content: { parts: [{ text: t }] },
+                outputDimensionality: 768,
             }))
         });
 
@@ -175,7 +194,8 @@ async function flushQueue() {
                     content_type: item.meta.type,
                     embedding: vectorValues,
                     hash: item.hash,
-                    metadata: item.meta
+                    metadata: item.meta,
+                    updated_at: new Date().toISOString()
                 }, { onConflict: 'slug_id' });
 
             if (error) console.error(`❌ Error upserting ${item.slug}:`, error.message);
@@ -212,7 +232,7 @@ async function runSync() {
         const chunks = createChunks(rawData, fileName);
 
         for (const chunk of chunks) {
-            const hash = generateHash(chunk.text);
+            const hash = generateHash(chunk.text, EMBED_MODEL);
 
             const { data: existing } = await supabase
                 .from('portfolio_content')

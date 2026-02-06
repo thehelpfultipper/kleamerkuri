@@ -44,7 +44,7 @@ const WireframeOverlay: React.FC = () => {
 
     return (
         <div className="position-absolute top-0 start-0 w-100 h-100 pointer-events-none z-1 d-none d-md-block" style={{ opacity }}>
-            <svg className="w-100 h-100" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+            <svg className="w-100 h-100" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMid slice">
                 <defs>
                     <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur stdDeviation="4" result="blur" />
@@ -103,68 +103,87 @@ const WireframeOverlay: React.FC = () => {
                         <circle cx="0" cy="0" r="22" fill="#fff" filter="url(#hero-glow)">
                             {!prefersReducedMotion && (
                                 <>
-                                    <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite" />
-                                    <animate attributeName="r" values="20;24;20" dur="2.5s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1.5s" repeatCount="indefinite" />
+                                    <animate attributeName="r" values="20;23;20" dur="1.5s" repeatCount="indefinite" />
                                 </>
                             )}
                         </circle>
 
-                        {/* Modular Head Unit */}
+                        {/* Modular Head Unit / HUD Bubble */}
                         <g transform="translate(0, -65)">
-                            <rect x="-25" y="-12" width="50" height="30" rx="8" stroke="#BD93F9" strokeWidth="1.5" fill="rgba(30, 30, 30, 0.9)" filter="url(#hero-glow)" />
-                            {/* Sensors/Eyes */}
-                            <circle cx="-12" cy="3" r="4" fill="#FF79C6">
-                                {!prefersReducedMotion && <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite" />}
+                            {/* Physical Head Unit - Restored to fix "messed up head" */}
+                            <path d="M-30,0 L30,0 L35,18 L-35,18 Z" fill="rgba(30, 30, 30, 0.9)" stroke="#BD93F9" strokeWidth="1.5" filter="url(#hero-glow)" />
+                            <rect x="-20" y="5" width="40" height="4" rx="2" fill="rgba(189, 147, 249, 0.2)" stroke="#BD93F9" strokeWidth="0.5" />
+                            <circle cx="-8" cy="7" r="1.2" fill="#FF79C6">
+                                <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite" />
                             </circle>
-                            <circle cx="12" cy="3" r="4" fill="#FF79C6">
-                                {!prefersReducedMotion && <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite" />}
+                            <circle cx="8" cy="7" r="1.2" fill="#FF79C6">
+                                <animate attributeName="opacity" values="1;0.4;1" dur="3.5s" repeatCount="indefinite" />
                             </circle>
-                            {/* Scanning Light */}
-                            <rect x="-15" y="12" width="30" height="2" fill="#BD93F9" opacity="0.6">
-                                {!prefersReducedMotion && (
-                                    <>
-                                        <animate attributeName="width" values="0;30;0" dur="1.8s" repeatCount="indefinite" />
-                                        <animate attributeName="x" values="0;-15;0" dur="1.8s" repeatCount="indefinite" />
-                                    </>
-                                )}
-                            </rect>
 
-                            {/* Speech Bubble */}
-                            <g transform="translate(30, -65)">
+                            {/* HUD Bubble / Telemetry Readout */}
+                            <g transform="translate(45, -85)">
                                 {!prefersReducedMotion && (
-                                    <animate attributeName="opacity" values="0;1;1;0" dur="12s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity"
+                                        values="0;1;1;0"
+                                        keyTimes="0;0.05;0.95;1"
+                                        dur="15s"
+                                        repeatCount="indefinite" />
                                 )}
-                                {/* Cyber Bubble Path - Wider to fit long strings */}
-                                <path d="M0,0 L115,0 L120,5 L120,35 L115,40 L20,40 L5,55 L5,40 L-5,40 L-10,35 L-10,5 Z"
-                                    fill="rgba(20, 20, 20, 0.98)"
+                                {/* Refined, symmetrical "HUD" box with technical chamfers */}
+                                <path d="M-10,0 H160 L170,10 V60 L160,70 H40 L20,95 L20,70 H-10 L-20,60 V10 Z"
+                                    fill="rgba(10, 10, 10, 0.95)"
                                     stroke="#BD93F9"
                                     strokeWidth="1.5"
                                     filter="url(#hero-glow)" />
 
-                                {/* Cycling Text Messages - Synchronized with 12s loop */}
-                                <g transform="translate(55, 25)">
-                                    <text textAnchor="middle" fontSize="10" fill="#BD93F9" fontFamily="'Fira Code', monospace" fontWeight="bold">
-                                        <tspan x="0" y="0">
-                                            {!prefersReducedMotion && <animate attributeName="opacity" values="1;1;0;0;0;0;0;0;1" keyTimes="0;0.24;0.25;0.49;0.50;0.74;0.75;0.99;1" dur="12s" repeatCount="indefinite" />}
-                                            HELLO WORLD
+                                {/* HUD Header Separator Line */}
+                                <line x1="-5" y1="22" x2="155" y2="22" stroke="#BD93F9" strokeWidth="0.5" opacity="0.4" />
+
+                                {/* Internal Corner Brackets for tech aesthetic */}
+                                <g opacity="0.6" stroke="#FF79C6" strokeWidth="0.5" fill="none">
+                                    <path d="M-5,10 L-5,5 L0,5" />
+                                    <path d="M150,5 L155,5 L155,10" />
+                                    <path d="M155,55 L155,60 L150,60" />
+                                    <path d="M0,60 L-5,60 L-5,55" />
+                                </g>
+
+                                {/* HUD Text Readout */}
+                                <g transform="translate(75, 40)">
+                                    <text textAnchor="middle" fontSize="10" fill="#BD93F9" fontFamily="'Fira Code', monospace">
+                                        {/* Header ID */}
+                                        <tspan x="0" y="-25" fill="#FF79C6" fontWeight="bold" fontSize="9"> › EVE_SYSTEM_v2.1 </tspan>
+
+                                        {/* Status Lines (Cyclic) */}
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;1;1;0;0;0;0;0;0;0;0;0;0;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            STATUS: ENTRP_READY
                                         </tspan>
-                                        <tspan x="0" y="0">
-                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;1;1;0;0;0;0;0" keyTimes="0;0.24;0.25;0.49;0.50;0.74;0.75;0.99;1" dur="12s" repeatCount="indefinite" />}
-                                            SYSTEM: OK
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0;0;0;0;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            ECON_LOGIC: ACTIVE
                                         </tspan>
-                                        <tspan x="0" y="0">
-                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;1;1;0;0;0" keyTimes="0;0.24;0.25;0.49;0.50;0.74;0.75;0.99;1" dur="12s" repeatCount="indefinite" />}
-                                            Chat with Eve!
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;0;1;1;0;0;0;0;0;0;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            COFFEE: 12% (CRITICAL)
                                         </tspan>
-                                        <tspan x="0" y="0">
-                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0" keyTimes="0;0.24;0.25;0.49;0.50;0.74;0.75;0.99;1" dur="12s" repeatCount="indefinite" />}
-                                            HIRE ME? [Y/n]
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;0;0;0;1;1;0;0;0;0;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            TOKENS: OPTIMIZED
+                                        </tspan>
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;1;1;0;0;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            SARCASM: LOADED
+                                        </tspan>
+                                        <tspan x="0" y="8">
+                                            {!prefersReducedMotion && <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;0;0;1;1;0;0" keyTimes="0;0.02;0.15;0.17;0.31;0.33;0.47;0.49;0.63;0.65;0.79;0.81;0.95;0.97;1" dur="15s" repeatCount="indefinite" />}
+                                            RAG_SYNC: 100%
                                         </tspan>
                                     </text>
                                 </g>
-                                {/* Small blinking cursor in bubble */}
-                                <rect x="98" y="27" width="6" height="2" fill="#FF79C6">
-                                    {!prefersReducedMotion && <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />}
+                                {/* Blinking HUD Cursor - Pushed right to avoid text overlap */}
+                                <rect x="145" y="48" width="6" height="2" fill="#FF79C6">
+                                    {!prefersReducedMotion && <animate attributeName="opacity" values="1;0;1" dur="0.6s" repeatCount="indefinite" />}
                                 </rect>
                             </g>
                         </g>

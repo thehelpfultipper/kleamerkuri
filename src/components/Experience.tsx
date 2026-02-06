@@ -45,35 +45,33 @@ const Experience: React.FC = () => {
   );
 
   return (
-    <section
-      id="experience"
-      className="py-5 my-5 mx-auto">
+    <section id="experience" className="py-5 my-5 mx-auto max-w-900">
       <h2 className="fs-2 fw-bold text-slate-light mb-5 text-center">
-        <span className="text-sky-blue font-monospace">04.</span> Where I've Worked
+        <span className="text-sky-blue font-monospace">04.</span> Professional Trajectory
       </h2>
-      <div className="experience-container">
+      <div className="experience-container d-flex flex-column flex-md-row">
         <div
-          className="experience-tabs font-monospace"
+          className="experience-tabs border-start border-slate-800 font-monospace"
           role="tablist"
           aria-label="Job tabs">
           {exp
             ? exp.map((job, index) => (
-                <button
-                  key={`${job.title}_${index + 1}`}
-                  className={`experience-tab ${index === activeTab ? 'active' : ''}`}
-                  onClick={() => setActiveTab(index)}
-                  role="tab"
-                  aria-selected={index === activeTab}
-                  aria-controls={`panel-${index}`}
-                  id={`tab-${index}`}>
-                  {job.company}
-                </button>
-              ))
+              <button
+                key={`${job.title}_${index + 1}`}
+                className={`experience-tab text-start px-4 py-3 border-start ${index === activeTab ? 'active bg-slate-800 text-sky-blue' : 'text-slate-dark border-transparent'}`}
+                onClick={() => setActiveTab(index)}
+                role="tab"
+                aria-selected={index === activeTab}
+                aria-controls={`panel-${index}`}
+                id={`tab-${index}`}>
+                {job.company}
+              </button>
+            ))
             : renderExpError}
         </div>
         {activeExperience && (
           <div
-            className="experience-content animate-fade-in"
+            className="experience-content animate-fade-in ps-md-5 pt-4 pt-md-0 animate-fade-in"
             id={`panel-${activeTab}`}
             role="tabpanel"
             tabIndex={0}

@@ -1,56 +1,67 @@
 {
   "posts": [
     {
-      "title": "How To Make Auditing Your Website In Real-Time Easy",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png?w=800&ssl=1",
+      "title": "AEO vs SEO: Navigating the Answer-First Era",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/aeo-vs-seo-how-to-win-answer-first-era.png",
+      "date": "Feb 2026",
+      "link": "https://thehelpfultipper.com/aeo-vs-seo-how-to-win-the-answer-first-era/",
+      "featured": "true",
+      "category": "Architecture"
+    },
+    {
+      "title": "Token Economics: A Money-Saving AI Context Strategy",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/ai-workflow-files.png",
+      "date": "Jan 2026",
+      "link": "https://thehelpfultipper.com/practical-money-saving-ai-context-strategy-you-need-to-know/",
+      "featured": "true",
+      "category": "AI Engineering"
+    },
+    {
+      "title": "GEO vs SEO: The 2026 Guide to Winning in the Age of AI Search",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/geo-vs-seo-how-to-win-in-age-of-ai-search.png",
+      "date": "Jan 2026",
+      "link": "https://thehelpfultipper.com/geo-vs-seo-how-to-win-in-age-of-ai-search-2026-guide/",
+      "featured": "true",
+      "category": "AI Strategy"
+    },
+    {
+      "title": "Real-Time Website Auditing: Bridging SEO and Accessibility",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png",
       "date": "Dec 2025",
       "link": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/",
       "featured": "true"
     },
     {
-      "title": "10 Things People Get Wrong About My Developer Job",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/young-girl-coding-illustration.png?w=800&ssl=1",
+      "title": "Standardizing Excellence: An SEO & Accessibility Workflow",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png",
       "date": "Dec 2025",
-      "link": "https://thehelpfultipper.com/things-people-get-wrong-about-developer-job",
-      "featured": "false"
+      "link": "https://thehelpfultipper.com/this-is-a-super-easy-optimization-workflow-for-seo-accessibility/",
+      "featured": "false",
+      "category": "UX/DX"
     },
     {
-      "title": "A Smart Free Chrome Extension That Upgrades AI Prompts",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/feathered-pen-writing-on-tablet-digital-drawing.webp",
-      "date": "Oct 2025",
-      "link": "https://thehelpfultipper.com/smart-free-chrome-extension-that-upgrades-ai-prompts/",
-      "featured": "false"
-    },
-    {
-      "title": "How To Get Siri AI Mode In 15 Minutes On Any iPhone No Apple Intelligence",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/smart-ai-siri.webp",
-      "date": "Oct 2025",
-      "link": "https://thehelpfultipper.com/how-to-get-siri-ai-mode-15-minutes-any-iphone-no-apple-intelligence/",
-      "featured": "false"
-    },
-    {
-      "title": "I Tell People I Do “Fusion Engineering” Because Being a Developer in 2025 Feels Like Gluing the Future Together",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/people-on-plane-chasing-idea.webp",
-      "date": "Oct 2025",
-      "link": "https://thehelpfultipper.com/i-tell-people-i-do-fusion-engineering/",
-      "featured": "true"
-    },
-    {
-      "title": "This Is How To Build A Smart Custom AI Chatbot",
+      "title": "Architecting a Custom AI Chatbot with RAG and Supabase",
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/05/chatbot-ai-robot-ui.webp",
       "date": "May 2025",
       "link": "https://thehelpfultipper.com/how-to-build-a-smart-custom-ai-chatbot/",
       "featured": "true"
     },
     {
-      "title": "This Is The Simple Reason I Choose To Co-Code Instead Of Vibe Code",
+      "title": "Mental Models: Why I 'Co-Code' Instead of 'Vibe Code'",
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/girl-droid.webp",
       "date": "July 2025",
       "link": "https://thehelpfultipper.com/this-is-the-simple-reason-i-choose-to-co-code-instead-of-vibe-code/",
+      "featured": "true"
+    },
+    {
+      "title": "The 'Fusion Engineering' Mindset in Modern Frontend",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/people-on-plane-chasing-idea.webp",
+      "date": "Oct 2025",
+      "link": "https://thehelpfultipper.com/i-tell-people-i-do-fusion-engineering/",
       "featured": "false"
     },
     {
-      "title": "I Built A Free AI Chatbot For The First Time – Here’s Everything That Went Wrong (And Right)",
+      "title": "Case Study: Lessons from Building a Free AI Chatbot",
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/how-to-build-chatbot.webp",
       "date": "July 2025",
       "link": "https://thehelpfultipper.com/built-free-ai-chatbot-for-first-time-heres-everything-that-went-wrong-and-right/",

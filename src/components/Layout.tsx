@@ -6,7 +6,7 @@ import { ThemeProvider } from '../contexts/ThemeContext';
 
 interface LayoutProps {
   children: React.ReactNode;
-  location?: Location; // Gatsby passes location prop to page components
+  location?: Location;
 }
 
 const Chatbot = lazy(() => import('./Chatbot'));

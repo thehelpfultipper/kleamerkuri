@@ -1,24 +1,34 @@
 {
   "products": [
     {
-      "title": "DIRA – Design Research Insight Assistant",
-      "description": "DIRA (Design Research Insight Assistant) is the ultimate side-panel utility for UI/UX Designers, Product Managers, and Frontend Developers. Stop inspecting elements one by one—DIRA deconstructs the design DNA of any website in a single click. Turn the web into your pattern library.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png?resize=768%2C480&ssl=1",
+      "title": "DIRA – Design Research Assistant",
+      "description": "A technical side-panel utility that deconstructs the CSS DNA of any website. It allows frontend teams to extract design system tokens, typography scales, and color palettes directly from the DOM, streamlining the competitive research process.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png",
       "links": {
         "demo": "https://thehelpfultipper.com/dira/",
         "blog": ""
       },
-      "featured": false
+      "featured": true
     },
     {
+      "title": "gac – AI Git Copilot",
+      "description": "An open-source CLI tool distributed via NPM. It leverages LLMs to automate semantic commit messages and changelog generation, ensuring version control consistency across engineering teams and improving developer velocity.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png",
+      "links": {
+        "demo": "https://thehelpfultipper.com/gac/",
+        "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/"
+      },
+      "featured": true
+    },
+     {
       "title": "Tab Atlas",
-      "description": "Tab Atlas transforms your chaotic browser into an organized, “human-readable map” of your digital workspaces. This intelligent Chrome Extension automatically names your windows (e.g., “Project Alpha,” “Japan Trip,” “React Docs”) based on your active tabs and provides a powerful side panel to manage everything with ease.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png?w=640&ssl=1",
+      "description": "An intelligent workspace manager for Chrome. It uses tab-grouping APIs to map browser sessions into 'human-readable' workspaces, solving the problem of context-switching for developers and researchers.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png",
       "links": {
         "demo": "https://thehelpfultipper.com/tab-atlas/",
         "blog": ""
       },
-      "featured": false
+      "featured": true
     },
     {
       "title": "SEO & Accessibility Helper",
@@ -30,25 +40,15 @@
       },
       "featured": false
     },
-    {
+      {
       "title": "NoteApply AI",
-      "description": "NoteApply AI is a privacy-first research companion that turns passive reading into active knowledge gathering. Capture insights, dictate voice notes with AI refinement, and generate actionable summaries using Local Ollama, OpenAI, or Gemini.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/noteapply-ai-sidepanel.png?resize=768%2C480&ssl=1",
+      "description": "A privacy-first research companion using Local Ollama and Gemini. It features AI-refined voice dictation and automated knowledge extraction for high-volume technical documentation.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/noteapply-ai-sidepanel.png",
       "links": {
         "demo": "https://thehelpfultipper.com/noteapply/",
         "blog": ""
       },
       "featured": false
-    },
-    {
-      "title": "gac – Git Auto Commit",
-      "description": "An open source AI-powered Git co-pilot that writes high-quality commit messages, generates changelogs, and even automates full semantic releases.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png?resize=768%2C608&ssl=1",
-      "links": {
-        "demo": "https://thehelpfultipper.com/gac/",
-        "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/"
-      },
-      "featured": true
     },
     {
       "title": "Prompt Optimizer",
@@ -58,17 +58,7 @@
         "demo": "https://drive.google.com/file/d/1IdULZn4NYrpjzBOyJFku5vcRV7fpyltB/view?usp=sharing",
         "blog": ""
       },
-      "featured": true
-    },
-    {
-      "title": "Pink Panda Dark",
-      "description": "A cozy dark VS Code theme providing a blend of dark pastel colors contrasted with soft pinks.",
-      "image": "https://thehelpfultipper.gallerycdn.vsassets.io/extensions/thehelpfultipper/pinkpanda-dark-theme/0.2.1/1672698802401/Microsoft.VisualStudio.Services.Icons.Default",
-      "links": {
-        "demo": "https://marketplace.visualstudio.com/items?itemName=TheHelpfulTipper.pinkpanda-dark-theme",
-        "blog": "https://thehelpfultipper.com/create-a-custom-visual-studio-code-theme/"
-      },
-      "featured": true
+      "featured": false
     },
     {
       "title": "Duplicate Link Finder",

@@ -2,30 +2,30 @@
   "profile": {
     "name": "Klea Merkuri",
     "employer": "Finance of America",
-    "title": "Software Engineer",
+    "title": "Senior Frontend Engineer | Design Systems & AI Integrations",
     "blog": {
       "name": "The Helpful Tipper",
       "url": "https://www.thehelpfultipper.com"
     },
     "pronouns": "she/her",
-    "story": "I’m an LA-based web developer and digital content creator who developed a genuine passion for coding when trying to automate Excel billing spreadsheets. I’m eager to bring my unique blend of analytical skills and coding enthusiasm to innovative projects to create intuitive and accessible software.",
+    "story": "Senior Frontend Engineer with a focus on building scalable design systems and AI-integrated web applications. With a background in Economics from UCLA and experience in enterprise fintech, I bridge the gap between complex data requirements and performant, accessible user interfaces.",
     "facts": [
-      "Self-taught developer",
-      "Background in finance and accounting",
-      "Blogger and content creator",
-      "Codes when traveling",
-      "Pet-parent of Eve the Beagle",
-      "Enthusiast of Asian cuisine",
-      "Named after an Egyptian queen"
+      "Enterprise Design Systems Specialist",
+      "UCLA Economics Alumna",
+      "AI/LLM Implementation Lead",
+      "Headless CMS Architect",
+      "Blogger & Technical Writer",
+      "Pet-parent of Eve the Beagle"
     ],
     "contact": {
       "email": "kleamdev@gmail.com",
       "phone": "(818) 355-3683"
     },
-    "lead": "I bring ideas to life with robust, user-focused web solutions.",
+    "lead": "I architect high-performance, accessible design systems and AI-integrated web solutions for enterprise scale.",
     "about": [
-      "Hello! I'm Klea, a software engineer based in Los Angeles with a passion for creating dynamic, user-centric web applications. My journey into tech started from a background in Economics at UCLA, where I developed a keen eye for detail and a love for solving complex problems.",
-      "My experience at enterprise financial institutions has allowed me to hone my skills in migrating large-scale applications to modern headless architectures and building robust, scalable APIs. I thrive in collaborative environments, working alongside cross-functional teams to deliver high-quality features."
+      "I am a Senior Software Engineer based in Los Angeles with a specialized focus on bridging the gap between complex economic data and performant user interfaces. My path into engineering was driven by a background in Economics at UCLA, where I discovered that my passion for solving market-level problems translated perfectly into architecting scalable software systems.",
+      "Today, I specialize in building the frontend infrastructure for enterprise financial institutions. My work centers on creating modular design systems, migrating high-traffic legacy properties to headless architectures, and integrating AI/RAG solutions to solve real-world business friction.",
+      "I don't just write code; I build tools that improve developer velocity and user engagement. Whether it's architecting a global blog migration for Experian or distributing AI-powered CLI tools, I focus on delivering measurable technical impact."
     ]
   }
 }

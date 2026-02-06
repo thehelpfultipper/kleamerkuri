@@ -28,13 +28,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           alt={`${title} screenshot`}
           className="card-img-top img-cover"
         />
-        <div className="card-img-overlay project-overlay d-flex align-items-center justify-content-center">
-          <span className="text-white fw-bold fs-5">View Details</span>
+        <div className="card-img-overlay project-overlay d-flex flex-column align-items-center justify-content-center text-center p-3">
+          <span className="text-white fw-bold fs-5 mb-2">View Case Study</span>
+          <p className="text-white font-monospace small">{meta.category.join(' • ')}</p>
         </div>
       </div>
 
       <div className="card-body p-4 d-flex flex-column">
         <h3 className="fs-5 fw-bold card-title-link mb-2">{title}</h3>
+        <p className="text-sky-blue small">{meta.date.split('-')[0]} • {meta.category[0]}</p>
+
         <p className="card-text text-slate-dark small mb-4 flex-grow-1">
           {description.substring(0, 100)}...
         </p>
