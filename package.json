@@ -14,9 +14,11 @@
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,md}'",
     "local:sync-content": "NODE_ENV=development node scripts/process-content.mjs",
     "sync-content": "node scripts/process-content.mjs",
-    "local:stop-server": "npx supabase stop --no-backup",
+    "local:stop-server": "npx supabase stop",
     "local:start-server": "npx supabase start",
+    "local:restart-server": "npx supabase stop && npx supabase start",
     "local:reset-server": "npx supabase stop --no-backup && npx supabase start",
+    "local:status-server": "npx supabase status",
     "local:serve-function": "npx supabase functions serve chats --env-file ./supabase/functions/chats/.env --no-verify-jwt"
   },
   "dependencies": {
