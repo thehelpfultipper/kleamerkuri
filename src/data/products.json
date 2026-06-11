@@ -1,18 +1,38 @@
 {
   "products": [
     {
-      "title": "DIRA – Design Research Assistant",
-      "description": "A technical side-panel utility that deconstructs the CSS DNA of any website. It allows frontend teams to extract design system tokens, typography scales, and color palettes directly from the DOM, streamlining the competitive research process.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png",
+      "title": "VersoID",
+      "description": "A Flutter-based digital identity management app that lets users create and share multiple professional personas with QR codes. Switch between work, creator, and social identities with a single tap. Available on iOS; Android coming soon.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/global-links.png",
       "links": {
-        "demo": "https://thehelpfultipper.com/dira/",
+        "demo": "https://thehelpfultipper.com/versoid/",
         "blog": ""
       },
       "featured": true
     },
     {
+      "title": "Prompt Optimizer",
+      "description": "A Chrome extension that upgrades prompts into clearer, more detailed, and more effective versions for AI models like ChatGPT and Google Gemini. The May 2026 release adds snippets and Ollama support.",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/11/prompt-optimizer-promo-tile-ba6574.svg",
+      "links": {
+        "demo": "https://thehelpfultipper.com/prompt-optimizer/",
+        "blog": "https://thehelpfultipper.com/smart-free-chrome-extension-that-upgrades-ai-prompts/"
+      },
+      "featured": true
+    },
+    {
+      "title": "DIRA – Design Research Assistant",
+      "description": "Extracts design system tokens, typography scales, and color palettes from any live site — competitive research without leaving the DOM.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png",
+      "links": {
+        "demo": "https://thehelpfultipper.com/dira/",
+        "blog": ""
+      },
+      "featured": false
+    },
+    {
       "title": "gac – AI Git Copilot",
-      "description": "An open-source CLI tool distributed via NPM. It leverages LLMs to automate semantic commit messages and changelog generation, ensuring version control consistency across engineering teams and improving developer velocity.",
+      "description": "NPM-distributed CLI that generates semantic commit messages and changelogs via LLM — version control consistency without the manual overhead.",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png",
       "links": {
         "demo": "https://thehelpfultipper.com/gac/",
@@ -20,52 +40,32 @@
       },
       "featured": true
     },
-     {
+    {
       "title": "Tab Atlas",
-      "description": "An intelligent workspace manager for Chrome. It uses tab-grouping APIs to map browser sessions into 'human-readable' workspaces, solving the problem of context-switching for developers and researchers.",
+      "description": "Maps Chrome tab sessions into persistent, human-readable workspaces — context-switching solved for developers juggling multiple projects.",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png",
       "links": {
         "demo": "https://thehelpfultipper.com/tab-atlas/",
         "blog": ""
       },
-      "featured": true
+      "featured": false
     },
     {
       "title": "SEO & Accessibility Helper",
-      "description": "Boost your website’s ranking and user experience with the all-in-one SEO & Accessibility Helper. Get an instant on-page SEO analysis, accessibility checks, and Core Web Vitals performance tracking directly in your side panel.",
+      "description": "Real-time WCAG compliance checks, on-page SEO analysis, and Core Web Vitals tracking — all from a Chrome side panel while you browse.",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/sah-image.png?resize=768%2C723&ssl=1",
       "links": {
         "demo": "https://thehelpfultipper.com/seo-accessibility-helper/",
-        "blog": ""
+        "blog": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/"
       },
       "featured": false
     },
-      {
+    {
       "title": "NoteApply AI",
-      "description": "A privacy-first research companion using Local Ollama and Gemini. It features AI-refined voice dictation and automated knowledge extraction for high-volume technical documentation.",
+      "description": "Privacy-first research side panel using local Ollama and Gemini for voice dictation and automated knowledge extraction from technical docs.",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/noteapply-ai-sidepanel.png",
       "links": {
         "demo": "https://thehelpfultipper.com/noteapply/",
-        "blog": ""
-      },
-      "featured": false
-    },
-    {
-      "title": "Prompt Optimizer",
-      "description": "A Chrome extension that helps users write better prompts for AI models like ChatGPT and Google Gemini.",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/11/prompt-optimizer-promo-tile-ba6574.svg",
-      "links": {
-        "demo": "https://drive.google.com/file/d/1IdULZn4NYrpjzBOyJFku5vcRV7fpyltB/view?usp=sharing",
-        "blog": ""
-      },
-      "featured": false
-    },
-    {
-      "title": "Duplicate Link Finder",
-      "description": "A simple yet powerful tool designed to help you streamline your Google Docs™.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/duplicate_link_finder_docs.png?resize=768%2C608&ssl=1",
-      "links": {
-        "demo": "https://workspace.google.com/marketplace/app/duplicate_link_finder/622480540695",
         "blog": ""
       },
       "featured": false

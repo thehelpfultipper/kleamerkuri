@@ -1,16 +1,16 @@
 #experience {
-  min-height: 70vh;
+  min-height: auto;
   max-width: 48rem;
+
   .experience-container {
     .experience-tabs {
       display: flex;
       overflow-x: auto;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid var(--bs-slate-700);
-      -ms-overflow-style: none; /* Hide scrollbar IE and Edge */
-      scrollbar-width: none; /* Hide scrollbar Firefox */
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--bs-slate-700);
+      -ms-overflow-style: none;
+      scrollbar-width: none;
 
-      /* Hide scrollbar for Chrome, Safari and Opera */
       &::-webkit-scrollbar {
         display: none;
       }
@@ -18,28 +18,27 @@
       .experience-tab {
         background: none;
         border: none;
-        padding: 0.75rem 1.25rem;
-        color: var(--bs-slate-dark);
-        text-align: left;
         white-space: nowrap;
+        font-size: 0.875rem;
+        line-height: 1.5;
         border-bottom: 2px solid transparent;
-        transition: all 0.3s ease;
-        margin-bottom: -2px; /* Overlap container border */
-        // cursor: pointer;
-        // font-family: inherit;
+        cursor: pointer;
+        transition:
+          color 0.2s ease-in-out,
+          border-color 0.2s ease-in-out;
+        margin-bottom: -1px;
 
         &:hover {
-          background-color: rgba(189, 147, 249, 0.1);
-          color: var(--bs-sky-blue);
+          color: var(--bs-slate-light);
         }
 
         &.active {
           color: var(--bs-sky-blue);
           border-bottom-color: var(--bs-sky-blue);
-          background-color: rgba(189, 147, 249, 0.1);
         }
       }
     }
+
     .experience-content {
       ul {
         padding-left: 0;
@@ -48,40 +47,47 @@
 
       ul li {
         position: relative;
-        padding-left: 1.75rem;
-        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+        margin-bottom: 1.125rem;
+        line-height: 1.7;
+        font-size: 1rem;
+        color: var(--bs-text-secondary);
 
         &::before {
-          content: '▹';
+          content: '—';
           position: absolute;
           left: 0;
-          color: var(--bs-sky-blue);
+          color: var(--bs-text-secondary);
         }
       }
 
       .animate-fade-in {
-        animation: fadeInWithTransform 0.5s ease-in-out;
+        animation: fadeInWithTransform 0.3s ease-in-out;
       }
     }
   }
+
   @include media-breakpoint-up(md) {
     .experience-container {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
 
       .experience-tabs {
         flex-direction: column;
         overflow-x: visible;
         border-bottom: none;
         margin-bottom: 0;
-        border-left: 2px solid var(--bs-slate-700);
+        border-left: 1px solid var(--bs-slate-700);
+        min-width: 12rem;
 
         .experience-tab {
           border-bottom: none;
           border-left: 2px solid transparent;
           margin-bottom: 0;
-          margin-left: -2px;
+          margin-left: -1px;
           width: 100%;
+          padding-top: 0.875rem;
+          padding-bottom: 0.875rem;
 
           &.active {
             border-bottom-color: transparent;
@@ -91,7 +97,8 @@
       }
 
       .experience-content {
-        flex: 1; /* Allow content to take remaining space */
+        flex: 1;
+        padding-top: 0.25rem;
       }
     }
   }

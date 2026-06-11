@@ -12,57 +12,49 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="py-4 border-top border-slate-800">
-      <div className="container container-px d-flex flex-column align-items-center text-center">
+    <footer className="border-top border-slate-700">
+      <div className="container container-px d-flex flex-column align-items-center text-center py-4">
         <div className="d-flex align-items-center gap-4 mb-3">
           <a
             href={links.github.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
+            aria-label="GitHub (opens in new tab)"
             className="social-link">
-            <GitHubIcon className="icon-150" />
+            <GitHubIcon className="icon-150" aria-hidden="true" />
           </a>
           <a
             href={links.linkedin.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label="LinkedIn (opens in new tab)"
             className="social-link">
-            <LinkedInIcon className="icon-150" />
+            <LinkedInIcon className="icon-150" aria-hidden="true" />
           </a>
           <a
             href={links.blog.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Blog"
+            aria-label="Blog (opens in new tab)"
             className="social-link">
-            <BlogIcon className="icon-150" />
+            <BlogIcon className="icon-150" aria-hidden="true" />
           </a>
         </div>
-        <div className="text-slate-dark small mb-3">
-          <p>
-            <span>This portfolio is built with </span>
-            <span className="text-slate-light font-monospace">Gatsby</span>
-            <span> & </span>
-            <span className="text-slate-light font-monospace">Bootstrap.</span>
+        <div className="text-secondary small mb-4">
+          <p className="mb-1">
+            Built with <span className="text-slate-light font-monospace">Gatsby</span> and{' '}
+            <span className="text-slate-light font-monospace">Bootstrap</span>.
           </p>
-          <p>
-            <span>Eve the AI is powered by </span>
-            <a
-              href="https://gemini.google.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link text-slate-light font-monospace">
-              Google Gemini
-            </a>
-            <span> and served through </span>
-            <span className="text-slate-light font-monospace">Supabase</span>
-            <span>. She can sometimes be wrong.</span>
+          <p className="mb-0">
+            Eve uses{' '}
+            <span className="text-slate-light font-monospace">RAG</span> and{' '}
+            <span className="text-slate-light font-monospace">Gemini function calling</span> on{' '}
+            <span className="text-slate-light font-monospace">Supabase</span>. AI-assisted — verify
+            critical details.
           </p>
         </div>
 
-        <p className="text-slate-dark footer-copy">
+        <p className="text-secondary footer-copy small mb-0">
           Copyright &copy; {year || '2026'} Klea Merkuri. All Rights Reserved.
         </p>
       </div>

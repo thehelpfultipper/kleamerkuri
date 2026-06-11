@@ -9,22 +9,18 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
   const { title, date, link, image } = post;
 
   return (
-    <a href={link} className="text-decoration-none d-block h-100 group">
-      <article className="card card-custom bg-slate-800 h-100 border-0 shadow-sm overflow-hidden">
-        <div className="card-img-container" style={{ height: '200px' }}>
-          <img
-            src={image}
-            alt={title}
-            className="card-img-top img-cover transition-transform"
-          />
+    <a href={link} className="text-decoration-none d-block h-100">
+      <article className="card card-custom card-blog bg-slate-800 h-100 overflow-hidden">
+        <div className="card-img-container card-blog-img">
+          <img src={image} alt={title} className="card-img-top" />
         </div>
-        <div className="card-body p-4 d-flex flex-column">
-          <p className="text-sky-blue font-monospace small mb-2">{date}</p>
-          <h3 className="fs-5 fw-bold mb-3 text-slate-light group-hover-sky-blue">{title}</h3>
-          <footer className="mt-auto pt-3 border-top border-slate-700">
-            <span className="text-slate-dark small font-monospace">Read Insight &rarr;</span>
-          </footer>
+        <div className="card-body">
+          <p className="card-meta font-monospace mb-2">{date}</p>
+          <h3 className="fs-5 fw-semibold mb-0 text-slate-light">{title}</h3>
         </div>
+        <footer className="card-blog-footer">
+          <span className="text-secondary small font-monospace">Read →</span>
+        </footer>
       </article>
     </a>
   );

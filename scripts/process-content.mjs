@@ -18,7 +18,29 @@ const embeddingQueue = [];
 const generateHash = (text, model) => crypto.createHash('md5').update(text + model).digest('hex');
 const EMBED_MODEL = "gemini-embedding-001";
 
-function createChunks(data, fileName) {
+function normalizeTitle(title) {
+    return title.toLowerCase().split('–')[0].trim().replace(/[^a-z0-9]/g, '');
+}
+
+function buildProjectDateMap() {
+    const projectsPath = path.join(process.cwd(), 'src/data/projects/projects.json');
+    if (!fs.existsSync(projectsPath)) return new Map();
+
+    const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
+    const map = new Map();
+
+    if (Array.isArray(projects)) {
+        projects.forEach((project) => {
+            if (project.meta?.date) {
+                map.set(normalizeTitle(project.title), project.meta.date);
+            }
+        });
+    }
+
+    return map;
+}
+
+function createChunks(data, fileName, projectDateMap = new Map()) {
     const chunks = [];
     const source = fileName.replace('.json', '');
 
@@ -38,13 +60,13 @@ function createChunks(data, fileName) {
         chunks.push({
             slug: 'profile-contact',
             text: `Contact information for ${name}: Email: ${p.contact.email}, Phone: ${p.contact.phone}. Blog: ${p.blog.name} (${p.blog.url}).`,
-            meta: { type: 'profile', section: 'contact' }
+            meta: { type: 'profile', section: 'contact', title: 'Contact', external: p.blog.url }
         });
 
-        // Story & Lead
+        // Story, Subtitle & Lead
         chunks.push({
             slug: 'profile-bio',
-            text: `Professional bio for ${name}: ${p.story} Primary mission: ${p.lead}`,
+            text: `Professional bio for ${name}: ${p.story}${p.subtitle ? ` Tagline: ${p.subtitle}` : ''} Current focus: ${p.lead}`,
             meta: { type: 'profile', section: 'bio' }
         });
 
@@ -79,7 +101,12 @@ function createChunks(data, fileName) {
         chunks.push({
             slug: 'resume-summary',
             text: `Klea Merkuri's Professional Summary: ${r.summary}`,
-            meta: { type: 'resume', section: 'summary' }
+            meta: {
+                type: 'resume',
+                section: 'summary',
+                title: 'Resume',
+                external: 'https://thehelpfultipper.com/kleamerkuri/klea-merkuri-software-engineer-resume.pdf'
+            }
         });
 
         // Skills
@@ -90,6 +117,16 @@ function createChunks(data, fileName) {
                     text: `Klea Merkuri has expertise in ${skillGroup.category}: ${skillGroup.items.join(', ')}.`,
                     meta: { type: 'resume', section: 'skills', category: skillGroup.category }
                 });
+            });
+        }
+
+        // Education
+        if (r.education) {
+            const { school, degree, honors } = r.education;
+            chunks.push({
+                slug: 'resume-education',
+                text: `Klea Merkuri earned a ${degree} from ${school}${honors ? ` (${honors})` : ''}.`,
+                meta: { type: 'resume', section: 'education' }
             });
         }
 
@@ -121,10 +158,19 @@ function createChunks(data, fileName) {
     else if (source === 'products' && data.products) {
         if (Array.isArray(data.products)) {
             data.products.forEach(item => {
+                const date = projectDateMap.get(normalizeTitle(item.title));
+                const datePrefix = date ? `Completion date: ${date}. ` : '';
+
                 chunks.push({
                     slug: `product-${item.title}`,
-                    text: `Product developed by Klea: ${item.title}. Description: ${item.description}. Demo Link: ${item.links.demo}. Blog Link: ${item.links.blog || 'N/A'}. Featured: ${item.featured}.`,
-                    meta: { type: 'product', title: item.title }
+                    text: `${datePrefix}Product developed by Klea: ${item.title}. Description: ${item.description}. Demo Link: ${item.links.demo}. Blog Link: ${item.links.blog || 'N/A'}. Featured: ${item.featured}.`,
+                    meta: {
+                        type: 'product',
+                        title: item.title,
+                        ...(date && { date }),
+                        demo: item.links.demo || null,
+                        blog: item.links.blog || null
+                    }
                 });
             });
         }
@@ -137,7 +183,11 @@ function createChunks(data, fileName) {
                 chunks.push({
                     slug: `post-${item.title}`,
                     text: `Blog post by Klea Merkuri (The Helpful Tipper): "${item.title}". Published: ${item.date}. Link: ${item.link}. Featured: ${item.featured}.`,
-                    meta: { type: 'post', title: item.title }
+                    meta: {
+                        type: 'post',
+                        title: item.title,
+                        external: item.link
+                    }
                 });
             });
         }
@@ -150,8 +200,14 @@ function createChunks(data, fileName) {
             items.forEach(item => {
                 chunks.push({
                     slug: `project-${item.title}`,
-                    text: `Portfolio Project: ${item.title}. Description: ${item.description}. Tech Stack: ${item.meta.stack.join(', ')}. Date: ${item.meta.date}. Category: ${item.meta.category.join(', ')}. Demo: ${item.links.demo}.`,
-                    meta: { type: 'project', title: item.title }
+                    text: `Completion date: ${item.meta.date}. Portfolio Project: ${item.title}. Description: ${item.description}. Tech Stack: ${item.meta.stack.join(', ')}. Category: ${item.meta.category.join(', ')}. Demo: ${item.links.demo}. Blog: ${item.links.blog || 'N/A'}.`,
+                    meta: {
+                        type: 'project',
+                        title: item.title,
+                        date: item.meta.date,
+                        demo: item.links.demo || null,
+                        blog: item.links.blog || null
+                    }
                 });
             });
         }
@@ -223,13 +279,14 @@ async function runSync() {
     }
 
     const allFiles = getAllFiles(dataDir);
+    const projectDateMap = buildProjectDateMap();
 
     for (const filePath of allFiles) {
         const fileName = path.basename(filePath);
         const rawData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
         console.log(`\n--- Processing ${fileName} ---`);
-        const chunks = createChunks(rawData, fileName);
+        const chunks = createChunks(rawData, fileName, projectDateMap);
 
         for (const chunk of chunks) {
             const hash = generateHash(chunk.text, EMBED_MODEL);

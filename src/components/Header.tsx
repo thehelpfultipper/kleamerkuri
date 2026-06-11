@@ -19,9 +19,10 @@ const Header: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Projects', href: '/#projects' },
-    { name: 'Blog', href: '/#blog' },
-    { name: 'Products', href: '/#products' },
+    { name: 'Work', href: '/#projects' },
+    { name: 'Eve', href: '/#eve' },
+    { name: 'Writing', href: '/#blog' },
+    { name: 'Tools', href: '/#products' },
     { name: 'Experience', href: '/#experience' },
     { name: 'About', href: '/#about' },
   ];
@@ -42,12 +43,15 @@ const Header: React.FC = () => {
           as={Link}
           to="/"
           onClick={closeMenu}
-          className="fs-4 fw-bold font-monospace text-sky-blue text-decoration-none">
-          KM
+          className="fs-5 fw-semibold text-slate-light text-decoration-none">
+          <span className="d-none d-sm-inline">Klea Merkuri</span>
+          <span className="d-sm-none font-monospace text-sky-blue">KM</span>
         </Navbar.Brand>
 
         <Navbar.Toggle
           aria-controls="mobileMenu"
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           className="p-0 border-0">
           <span
             className={`navbar-toggler-icon ${isMenuOpen ? 'navbar-toggler-icon-close' : 'navbar-toggler-icon-open'}`}></span>
@@ -56,17 +60,14 @@ const Header: React.FC = () => {
         <Navbar.Collapse
           id="mobileMenu"
           className="justify-content-end">
-          <Nav className="align-items-xl-center text-center py-4 py-xl-0">
-            {navLinks.map((link, index) => (
+          <Nav aria-label="Primary navigation" className="align-items-xl-center text-center py-4 py-xl-0">
+            {navLinks.map((link) => (
               <Nav.Link
                 as="a"
                 key={link.name}
                 href={withPrefix(link.href)}
                 onClick={closeMenu}
                 className="header-link text-slate-light text-decoration-none my-2 my-xl-0 ms-xl-4">
-                <span className="text-sky-blue font-monospace d-none d-xl-inline">
-                  0{index + 1}.
-                </span>{' '}
                 {link.name}
               </Nav.Link>
             ))}
@@ -74,6 +75,7 @@ const Header: React.FC = () => {
               href={links.resume.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${links.resume.text} (opens in new tab)`}
               className="btn btn-outline-sky-blue ms-xl-4 mt-3 mt-xl-0">
               {links.resume.text}
             </a>

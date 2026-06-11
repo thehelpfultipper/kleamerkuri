@@ -4,11 +4,11 @@ dotenv.config({ path: envPath });
 
 module.exports = {
   siteMetadata: {
-    title: 'Klea Merkuri | Front-End Engineer',
-    description: 'Front-End Engineer specializing in high-performance web applications, accessible design systems, and modern React architectures.',
+    title: 'Klea Merkuri | Software Engineer',
+    description: 'Software Engineer specializing in design systems, cross-platform mobile applications, and applied AI integrations for enterprise environments.',
     author: 'Klea Merkuri',
     keywords:
-      'Front-End Engineer, React Developer, TypeScript, Web Performance, Design Systems, Software Engineer, Gatsby, JavaScript, UI/UX Developer, AI Integration, Web Development',
+      'Software Engineer, Design Systems, React Developer, TypeScript, Flutter, AI Integration, RAG, Web Performance, Gatsby, JavaScript, MCP, Mobile Development',
     siteImage: 'https://thehelpfultipper.com/kleamerkuri/site-image.png',
     siteUrl: 'https://thehelpfultipper.com/kleamerkuri',
   },
@@ -85,7 +85,7 @@ module.exports = {
   flags: {
     DEV_SSR: true,
   },
-  developMiddleware: (app: any) => {
+  developMiddleware: (app: { set: (name: string, value: string) => void }) => {
     app.set('etag', 'strong'); // Set ETag headers to strong for better caching
   },
 };

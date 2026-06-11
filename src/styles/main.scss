@@ -5,6 +5,8 @@
 // @import 'abstracts/mixins';
 // 2. BOOTSTRAP - The core engine.
 @import '~bootstrap/scss/variables';
+
+$font-family-base: $body-font-family;
 @import '~bootstrap/scss/maps';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/utilities';
@@ -37,6 +39,7 @@
 @import 'components/header';
 @import 'components/experience';
 @import 'components/chatbot';
+@import 'components/eve-section';
 @import 'components/inline-comment';
 @import 'components/about';
 @import 'components/archive';

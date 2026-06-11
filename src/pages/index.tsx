@@ -10,7 +10,7 @@ export function Head() {
   return (
     <SEO
       title="Home"
-      description="Hi I'm Klea, a full-stack engineer passionate about creating intuitive, scalable, and user-friendly web experiences."
+      description="Software Engineer building design systems, cross-platform mobile applications, and applied AI integrations for enterprise environments."
     />
   );
 }

@@ -40,8 +40,28 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
     />,
   ];
 
+  const fontComponents = [
+    <link
+      key="inter-font"
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />,
+    <link
+      key="inter-font-gstatic"
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="inter-font-stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />,
+  ];
+
   if (process.env.NODE_ENV === 'production') {
     setHeadComponents([
+      ...fontComponents,
       <script
         key="gtm-head"
         dangerouslySetInnerHTML={{
@@ -78,6 +98,8 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
         }}
       />,
     );
+  } else {
+    setHeadComponents(fontComponents);
   }
 
   setPreBodyComponents(preBodyComp);

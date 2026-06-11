@@ -2,30 +2,32 @@
   "profile": {
     "name": "Klea Merkuri",
     "employer": "Finance of America",
-    "title": "Senior Frontend Engineer | Design Systems & AI Integrations",
+    "title": "Software Engineer | Design Systems & Applied AI Solutions",
     "blog": {
       "name": "The Helpful Tipper",
       "url": "https://www.thehelpfultipper.com"
     },
     "pronouns": "she/her",
-    "story": "Senior Frontend Engineer with a focus on building scalable design systems and AI-integrated web applications. With a background in Economics from UCLA and experience in enterprise fintech, I bridge the gap between complex data requirements and performant, accessible user interfaces.",
+    "story": "Software engineer in Los Angeles focused on design systems, cross-platform mobile (Flutter), and applied AI. Economics degree from UCLA (Summa Cum Laude). Currently at Finance of America; previously Experian. Builds tools including VersoID and writes about AI workflows on The Helpful Tipper.",
     "facts": [
       "Enterprise Design Systems Specialist",
-      "UCLA Economics Alumna",
-      "AI/LLM Implementation Lead",
-      "Headless CMS Architect",
-      "Blogger & Technical Writer",
+      "UCLA Economics Alumna (Summa Cum Laude)",
+      "Cross-Platform Mobile Architect (Flutter & Dart)",
+      "RAG & Agentic Workflow Engineer",
+      "Technical Writer & Publisher",
       "Pet-parent of Eve the Beagle"
     ],
     "contact": {
       "email": "kleamdev@gmail.com",
       "phone": "(818) 355-3683"
     },
-    "lead": "I architect high-performance, accessible design systems and AI-integrated web solutions for enterprise scale.",
+    "subtitle": "I work on enterprise fintech platforms — and build the tools I wish already existed.",
+    "lead": "At Finance of America: design systems, property platforms, and Salesforce/Genesys integrations. Before that, a 5K-article Gatsby migration at Experian that cut load times ~20%.",
     "about": [
-      "I am a Senior Software Engineer based in Los Angeles with a specialized focus on bridging the gap between complex economic data and performant user interfaces. My path into engineering was driven by a background in Economics at UCLA, where I discovered that my passion for solving market-level problems translated perfectly into architecting scalable software systems.",
-      "Today, I specialize in building the frontend infrastructure for enterprise financial institutions. My work centers on creating modular design systems, migrating high-traffic legacy properties to headless architectures, and integrating AI/RAG solutions to solve real-world business friction.",
-      "I don't just write code; I build tools that improve developer velocity and user engagement. Whether it's architecting a global blog migration for Experian or distributing AI-powered CLI tools, I focus on delivering measurable technical impact."
+      "I'm a software engineer in Los Angeles, currently building multi-tenant property platforms, design systems, and AI integrations for enterprise fintech.",
+      "I didn't come up through a CS program. I studied Economics at UCLA (Summa Cum Laude) and got hooked on the part of the work that felt like engineering: tracing how data moves, where it breaks, and what has to change for systems to stay in sync.",
+      "At Finance of America, I own lead capture flows wired into Salesforce and Genesys and the design system keeping those properties WCAG-compliant. Before that, at Experian, I led a headless Gatsby migration across 5,000+ blog articles — cut load times ~20% — and built Node APIs that moved BI data from quarterly manual pulls to real-time sync.",
+      "Outside work, I ship tools I actually use: VersoID, a Flutter app for managing professional personas via QR codes (live on iOS), plus Chrome extensions and MCP experiments documented on The Helpful Tipper."
     ]
   }
 }

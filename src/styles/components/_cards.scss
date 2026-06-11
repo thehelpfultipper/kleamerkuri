@@ -1,16 +1,26 @@
 .card.card-custom {
-  transition: transform 0.3s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--bs-slate-700);
+  border-radius: 0.5rem;
+  box-shadow: none;
 
   &:hover {
-    transform: translateY(-0.5rem);
+    border-color: var(--bs-sky-blue);
+    background-color: var(--bs-slate-900);
+  }
+
+  .card-body {
+    padding: 1.5rem;
   }
 
   .card-title-link {
     text-decoration: none;
     color: var(--bs-slate-light);
-    transition: color 0.3s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    line-height: 1.35;
   }
 
   &:hover .card-title-link {
@@ -19,32 +29,119 @@
 
   .card-img-container {
     overflow: hidden;
-
-    .card-img-top {
-      transition: transform 0.3s ease-in-out;
-    }
+    border-bottom: 1px solid var(--bs-slate-700);
   }
 
-  &:hover .card-img-container .card-img-top {
-    transform: scale(1.05);
+  .card-impact {
+    color: var(--bs-sky-blue);
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 
-  .card-img-overlay.project-overlay {
-    background-color: rgba(#282828, 0.7);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
+  .card-text {
+    line-height: 1.65;
   }
 
-  &:hover .card-img-overlay.project-overlay {
-    opacity: 1;
+  .card-meta {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--bs-text-secondary);
   }
 
   .card-footer {
-    border-top-color: var(--bs-slate-900);
-    background-color: rgba(#282828, 0.5); // Add translucent background to footer
+    border-top-color: var(--bs-slate-700);
+    background-color: var(--bs-slate-900);
   }
+}
+
+// Product cards — only the footer CTA is clickable, not the whole card
+.card.card-static {
+  border: 1px solid var(--bs-slate-700);
+  border-radius: 0.5rem;
+  box-shadow: none;
+  cursor: default;
+
+  &:hover {
+    border-color: var(--bs-slate-700);
+    background-color: var(--bs-slate-800);
+  }
+
+  .card-footer {
+    border-top-color: var(--bs-slate-700);
+    background-color: var(--bs-slate-900);
+  }
+}
+
+.card.card-blog {
+  .card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  .card-blog-img {
+    height: 200px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card-blog-footer {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0.875rem 1.5rem 1.25rem;
+    border-top: 1px solid var(--bs-slate-700);
+  }
+}
+
+.card.card-featured {
+  .card-img-container img {
+    width: 100%;
+    object-fit: cover;
+    height: 12rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .card-featured-inner {
+      display: flex;
+      min-height: 280px;
+      align-items: stretch;
+    }
+
+    .card-img-container {
+      flex: 0 0 50%;
+      align-self: stretch;
+      display: flex;
+      border-bottom: none;
+      border-right: 1px solid var(--bs-slate-700);
+
+      img {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .card-featured-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+
+.badge-live {
+  background-color: var(--bs-sky-blue);
+  color: var(--bs-navy);
+  font-family: $font-family-monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
 }

@@ -9,12 +9,14 @@
     "serve": "gatsby serve --prefix-paths",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "predeploy": "gatsby clean",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' 'gatsby-*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{js,jsx,ts,tsx}' 'gatsby-*.{ts,tsx}' --fix",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,md}'",
     "local:sync-content": "NODE_ENV=development node scripts/process-content.mjs",
     "sync-content": "node scripts/process-content.mjs",
+    "local:stop-server": "npx supabase stop --no-backup",
     "local:start-server": "npx supabase start",
+    "local:reset-server": "npx supabase stop --no-backup && npx supabase start",
     "local:serve-function": "npx supabase functions serve chats --env-file ./supabase/functions/chats/.env --no-verify-jwt"
   },
   "dependencies": {

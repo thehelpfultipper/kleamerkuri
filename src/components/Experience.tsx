@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { links } from '../helpers/variables';
 import { IResume } from '../helpers/interfaces';
+import { highlightMetrics } from '../helpers/highlightMetrics';
+import SectionHeading from './UI/SectionHeading';
 
 const Experience: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -18,77 +20,93 @@ const Experience: React.FC = () => {
                 location
                 title
               }
+              education {
+                school
+                degree
+                honors
+              }
             }
           }
         }
       }
     }
   `);
-  if (!expData || !expData.allFile.nodes) {
-    console.error('Error getting experience data.');
-  }
+
   const res: IResume = expData.allFile.nodes[0]?.childDataJson?.resume || {};
-  const exp = res?.experience || null;
+  const exp = res?.experience || [];
+  const education = res?.education;
 
   const activeExperience = exp[activeTab];
 
   const renderExpError = (
-    <p>
-      Something's not showing up but here's more on me 👉{' '}
-      <a
-        href={links.linkedin.url}
-        target="_blank"
-        rel="noreferrer">
+    <p className="text-secondary">
+      Experience data unavailable. View my full background on{' '}
+      <a href={links.linkedin.url} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
+      .
     </p>
   );
 
   return (
-    <section id="experience" className="py-5 my-5 mx-auto max-w-900">
-      <h2 className="fs-2 fw-bold text-slate-light mb-5 text-center">
-        <span className="text-sky-blue font-monospace">04.</span> Professional Trajectory
-      </h2>
+    <section id="experience" className="section-block mx-auto max-w-content">
+      <SectionHeading label="Career" title="Experience" align="center" />
       <div className="experience-container d-flex flex-column flex-md-row">
         <div
-          className="experience-tabs border-start border-slate-800 font-monospace"
+          className="experience-tabs border-start border-slate-700"
           role="tablist"
           aria-label="Job tabs">
-          {exp
+          {exp.length > 0
             ? exp.map((job, index) => (
-              <button
-                key={`${job.title}_${index + 1}`}
-                className={`experience-tab text-start px-4 py-3 border-start ${index === activeTab ? 'active bg-slate-800 text-sky-blue' : 'text-slate-dark border-transparent'}`}
-                onClick={() => setActiveTab(index)}
-                role="tab"
-                aria-selected={index === activeTab}
-                aria-controls={`panel-${index}`}
-                id={`tab-${index}`}>
-                {job.company}
-              </button>
-            ))
+                <button
+                  key={`${job.title}_${index + 1}`}
+                  className={`experience-tab text-start px-4 py-3 border-start font-monospace ${
+                    index === activeTab
+                      ? 'active text-sky-blue'
+                      : 'text-secondary border-transparent'
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                  role="tab"
+                  aria-selected={index === activeTab}
+                  aria-controls={`panel-${index}`}
+                  id={`tab-${index}`}>
+                  {job.company}
+                </button>
+              ))
             : renderExpError}
         </div>
         {activeExperience && (
           <div
-            className="experience-content animate-fade-in ps-md-5 pt-4 pt-md-0 animate-fade-in"
+            className="experience-content animate-fade-in ps-md-5 pt-4 pt-md-0"
             id={`panel-${activeTab}`}
             role="tabpanel"
             tabIndex={0}
             aria-labelledby={`tab-${activeTab}`}>
-            <h3 className="fs-5 fw-bold text-slate-light mb-1">
+            <h3 className="fs-5 fw-semibold text-slate-light mb-2">
               {activeExperience.title}{' '}
-              <span className="text-sky-blue">@ {activeExperience.company}</span>
+              <span className="text-secondary fw-normal">@ {activeExperience.company}</span>
             </h3>
-            <p className="font-monospace text-slate-dark small mb-4">{activeExperience.dates}</p>
-            <ul className="text-slate-dark">
+            <p className="font-monospace text-secondary small mb-4">{activeExperience.dates}</p>
+            <ul>
               {activeExperience.desc.map((item, i) => (
-                <li key={i + 1}>{item}</li>
+                <li key={i + 1}>{highlightMetrics(item)}</li>
               ))}
             </ul>
           </div>
         )}
       </div>
+      {education && (
+        <div className="experience-education mt-5 pt-4 border-top border-slate-700">
+          <h3 className="fs-6 fw-semibold text-slate-light font-monospace text-uppercase section-label mb-3">
+            Education
+          </h3>
+          <p className="fw-semibold text-slate-light mb-1">{education.degree}</p>
+          <p className="font-monospace text-secondary small mb-0">
+            {education.school}
+            {education.honors ? ` · ${education.honors}` : ''}
+          </p>
+        </div>
+      )}
     </section>
   );
 };

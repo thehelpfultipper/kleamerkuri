@@ -1,10 +1,34 @@
 {
   "posts": [
     {
-      "title": "AEO vs SEO: Navigating the Answer-First Era",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/aeo-vs-seo-how-to-win-answer-first-era.png",
-      "date": "Feb 2026",
-      "link": "https://thehelpfultipper.com/aeo-vs-seo-how-to-win-the-answer-first-era/",
+      "title": "Is DeepSeek V4 Pro Actually Free? I Set It Up to Find Out",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/deepseek-v4-nvidia-nim-api.png",
+      "date": "May 2026",
+      "link": "https://thehelpfultipper.com/is-deepseek-v4-pro-actually-free-i-set-it-up-to-find-out/",
+      "featured": "true",
+      "category": "AI Strategy"
+    },
+    {
+      "title": "I Tried the 'Code for Free with Local AI' Setup. Here's What Actually Happened",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/free-local-ai-with-claude-code-and-ollama.png",
+      "date": "May 2026",
+      "link": "https://thehelpfultipper.com/i-tried-code-for-free-with-local-ai-setup-heres-what-happened/",
+      "featured": "true",
+      "category": "AI Engineering"
+    },
+    {
+      "title": "What Is OpenClaw? What You Need To Know Plus Risks Nobody Talks About",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/03/what-is-openclaw-all-you-need-to-know.png",
+      "date": "Mar 2026",
+      "link": "https://thehelpfultipper.com/what-is-openclaw-what-you-need-to-know-plus-risks-nobody-talks-about/",
+      "featured": "true",
+      "category": "AI Security"
+    },
+    {
+      "title": "How To Connect To Real Data And Secure Your Antigravity Workspace",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/03/connect-to-real-data-securely-antigravity.png",
+      "date": "Mar 2026",
+      "link": "https://thehelpfultipper.com/how-to-connect-to-real-data-and-secure-your-antigravity-workspace/",
       "featured": "true",
       "category": "Architecture"
     },
@@ -13,59 +37,40 @@
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/ai-workflow-files.png",
       "date": "Jan 2026",
       "link": "https://thehelpfultipper.com/practical-money-saving-ai-context-strategy-you-need-to-know/",
-      "featured": "true",
+      "featured": "false",
       "category": "AI Engineering"
     },
     {
-      "title": "GEO vs SEO: The 2026 Guide to Winning in the Age of AI Search",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/geo-vs-seo-how-to-win-in-age-of-ai-search.png",
-      "date": "Jan 2026",
-      "link": "https://thehelpfultipper.com/geo-vs-seo-how-to-win-in-age-of-ai-search-2026-guide/",
+      "title": "How To Get The Right Kind Of Glassy UI",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/glassmorphism-liquid-glass-aesthetic.png",
+      "date": "May 2026",
+      "link": "https://thehelpfultipper.com/how-to-get-the-right-kind-of-glassy-ui/",
       "featured": "true",
-      "category": "AI Strategy"
-    },
-    {
-      "title": "Real-Time Website Auditing: Bridging SEO and Accessibility",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png",
-      "date": "Dec 2025",
-      "link": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/",
-      "featured": "true"
-    },
-    {
-      "title": "Standardizing Excellence: An SEO & Accessibility Workflow",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/seo-accessibility-issues.png",
-      "date": "Dec 2025",
-      "link": "https://thehelpfultipper.com/this-is-a-super-easy-optimization-workflow-for-seo-accessibility/",
-      "featured": "false",
       "category": "UX/DX"
     },
     {
-      "title": "Architecting a Custom AI Chatbot with RAG and Supabase",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/05/chatbot-ai-robot-ui.webp",
-      "date": "May 2025",
-      "link": "https://thehelpfultipper.com/how-to-build-a-smart-custom-ai-chatbot/",
-      "featured": "true"
+      "title": "What Actually Happened When Using The OpenAI Codex App For Free",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/ai-workflow-files.png",
+      "date": "May 2026",
+      "link": "https://thehelpfultipper.com/what-actually-happened-when-using-the-openai-codex-app-for-free/",
+      "featured": "false",
+      "category": "Tools & DX"
     },
     {
       "title": "Mental Models: Why I 'Co-Code' Instead of 'Vibe Code'",
       "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/girl-droid.webp",
-      "date": "July 2025",
+      "date": "Jul 2025",
       "link": "https://thehelpfultipper.com/this-is-the-simple-reason-i-choose-to-co-code-instead-of-vibe-code/",
-      "featured": "true"
+      "featured": "false",
+      "category": "AI Engineering"
     },
     {
-      "title": "The 'Fusion Engineering' Mindset in Modern Frontend",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/people-on-plane-chasing-idea.webp",
-      "date": "Oct 2025",
-      "link": "https://thehelpfultipper.com/i-tell-people-i-do-fusion-engineering/",
-      "featured": "false"
-    },
-    {
-      "title": "Case Study: Lessons from Building a Free AI Chatbot",
-      "image": "https://thehelpfultipper.com/wp-content/uploads/2025/07/how-to-build-chatbot.webp",
-      "date": "July 2025",
-      "link": "https://thehelpfultipper.com/built-free-ai-chatbot-for-first-time-heres-everything-that-went-wrong-and-right/",
-      "featured": "false"
+      "title": "AEO vs SEO: Navigating the Answer-First Era",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/aeo-vs-seo-how-to-win-answer-first-era.png",
+      "date": "Feb 2026",
+      "link": "https://thehelpfultipper.com/aeo-vs-seo-how-to-win-the-answer-first-era/",
+      "featured": "true",
+      "category": "Architecture"
     }
   ]
 }

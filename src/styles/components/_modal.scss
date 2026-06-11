@@ -20,6 +20,7 @@
 .btn-close {
   background-color: transparent;
   opacity: 0.8;
+  cursor: pointer;
   transition: opacity 0.2s ease;
 
   &:hover {

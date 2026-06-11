@@ -4,10 +4,18 @@ import { IProject } from '../helpers/interfaces';
 interface ProjectCardProps {
   project: IProject;
   onClick: () => void;
+  featured?: boolean;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
-  const { title, description, meta, image } = project;
+const getPreview = (description: string, maxLength = 160): string => {
+  if (description.length <= maxLength) return description;
+  const truncated = description.substring(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return `${truncated.substring(0, lastSpace > 0 ? lastSpace : maxLength)}…`;
+};
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, featured = false }) => {
+  const { title, description, impact, meta, image } = project;
 
   return (
     <div
@@ -21,40 +29,41 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       role="button"
       tabIndex={0}
       aria-label={`View details for ${title}`}
-      className="card card-custom bg-slate-800 h-100 shadow-lg">
-      <div className="card-img-container rounded-top">
-        <img
-          src={image}
-          alt={`${title} screenshot`}
-          className="card-img-top img-cover"
-        />
-        <div className="card-img-overlay project-overlay d-flex flex-column align-items-center justify-content-center text-center p-3">
-          <span className="text-white fw-bold fs-5 mb-2">View Case Study</span>
-          <p className="text-white font-monospace small">{meta.category.join(' • ')}</p>
+      className={`card card-custom bg-slate-800 h-100 ${featured ? 'card-featured' : ''}`}>
+      <div className={featured ? 'card-featured-inner' : ''}>
+        <div className="card-img-container rounded-top">
+          <img
+            src={image}
+            alt={`${title} screenshot`}
+            className={`card-img-top ${featured ? '' : 'img-cover'}`}
+          />
         </div>
-      </div>
 
-      <div className="card-body p-4 d-flex flex-column">
-        <h3 className="fs-5 fw-bold card-title-link mb-2">{title}</h3>
-        <p className="text-sky-blue small">{meta.date.split('-')[0]} • {meta.category[0]}</p>
+        <div className={`card-body d-flex flex-column ${featured ? 'card-featured-body' : ''}`}>
+          <h3 className="fs-5 fw-semibold card-title-link mb-2">{title}</h3>
+          {impact && <p className="card-impact font-monospace mb-2">{impact}</p>}
+          <p className="card-meta font-monospace mb-3">
+            {meta.date.split('-')[0]} · {meta.category[0]}
+          </p>
 
-        <p className="card-text text-slate-dark small mb-4 flex-grow-1">
-          {description.substring(0, 100)}...
-        </p>
+          <p className="card-text text-secondary small mb-4 flex-grow-1">
+            {getPreview(description)}
+          </p>
 
-        <div className="d-flex flex-wrap gap-2">
-          {meta?.stack?.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="badge rounded-pill bg-slate-700 text-sky-blue font-monospace px-2 py-1">
-              {tech}
-            </span>
-          ))}
-          {meta?.stack?.length > 3 && (
-            <span className="badge rounded-pill bg-slate-700 text-sky-blue font-monospace px-2 py-1">
-              +{meta?.stack?.length - 3} more
-            </span>
-          )}
+          <div className="d-flex flex-wrap gap-2">
+            {meta?.stack?.slice(0, 3).map((tech) => (
+              <span
+                key={tech}
+                className="badge rounded-pill border border-slate-700 text-secondary font-monospace px-2 py-1">
+                {tech}
+              </span>
+            ))}
+            {meta?.stack?.length > 3 && (
+              <span className="badge rounded-pill border border-slate-700 text-secondary font-monospace px-2 py-1">
+                +{meta?.stack?.length - 3}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

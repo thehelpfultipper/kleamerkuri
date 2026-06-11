@@ -1,12 +1,13 @@
 [
-   {
+  {
     "title": "Eve – Portfolio RAG Assistant",
     "featured": "true",
-    "description": "A custom Retrieval-Augmented Generation (RAG) chatbot designed to act as a primary interface for recruiter inquiries. Built using a vector-store architecture with Supabase and Google Gemini, it processes unstructured resume data to provide context-aware responses regarding my professional background and technical expertise.",
+    "impact": "Primary recruiter interface — RAG over vector store",
+    "description": "A Portfolio Copilot powered by Retrieval-Augmented Generation (RAG) and Gemini function calling. Built on Supabase pgvector and Edge Functions, Eve retrieves portfolio embeddings, invokes tools to query structured professional data, and surfaces demo links and write-ups as actionable responses for recruiter inquiries.",
     "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/reengineering-chatbot-rag-context.png",
     "links": {
       "demo": "https://thehelpfultipper.com/kleamerkuri/",
-      "blog": "https://thehelpfultipper.com/ultimate-guide-to-re-engineering-portfolios-rag-chatbot/"
+      "blog": "https://thehelpfultipper.com/the-ultimate-guide-to-re-engineering-my-portfolios-rag-chatbot/"
     },
     "meta": {
       "stack": ["React", "Supabase", "Vector Embeddings", "Gemini API", "Edge Functions"],
@@ -16,7 +17,8 @@
   },
   {
     "title": "Tab Atlas – Workspace Manager",
-    "featured": "true",
+    "featured": "false",
+    "impact": "Maps browser sessions into persistent, human-readable workspaces",
     "description": "An intelligent Chrome Extension that de-clutters developer workflows by mapping active browser sessions into 'human-readable' workspaces. It utilizes the Chrome Tab Groups API and local storage to persist project-specific sessions, reducing cognitive load for multi-tasking engineers.",
     "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png",
     "links": {
@@ -32,6 +34,7 @@
   {
     "title": "Experian Global Blog Migration",
     "featured": "true",
+    "impact": "5K+ articles migrated — 20% faster load times",
     "description": "Architected the migration of a 5K+ article enterprise blog to a headless Gatsby/React architecture. Focused on high-scale content modeling and performance optimization.",
     "image": "https://thehelpfultipper.com/wp-content/uploads/2025/04/experian-blog.webp",
     "links": { "demo": "https://experian.com/blogs/ask-experian", "blog": null },
@@ -44,9 +47,13 @@
   {
     "title": "gac – AI Git Copilot",
     "featured": "true",
+    "impact": "NPM-distributed CLI for semantic commits and changelog automation",
     "description": "AI-powered CLI tool for semantic commit messages and changelog automation. Distributed via NPM.",
     "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png",
-    "links": { "demo": "https://thehelpfultipper.com/gac/", "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/" },
+    "links": {
+      "demo": "https://thehelpfultipper.com/gac/",
+      "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/"
+    },
     "meta": {
       "stack": ["Node.js", "OpenAI", "NPM", "TypeScript"],
       "date": "2025-11-01",
@@ -55,10 +62,14 @@
   },
   {
     "title": "SEO & Accessibility Helper",
-    "featured": "true",
+    "featured": "false",
+    "impact": "Real-time WCAG and Core Web Vitals auditing in the browser",
     "description": "A Chrome extension for real-time website auditing. Performs on-page SEO analysis, WCAG compliance checks, and Core Web Vitals tracking.",
     "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/sah-image.png",
-    "links": { "demo": "https://thehelpfultipper.com/seo-accessibility-helper/", "blog": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/" },
+    "links": {
+      "demo": "https://thehelpfultipper.com/seo-accessibility-helper/",
+      "blog": "https://thehelpfultipper.com/how-to-make-auditing-website-in-real-time-easy/"
+    },
     "meta": {
       "stack": ["JavaScript", "Chrome API", "SEO Engine", "WCAG"],
       "date": "2025-12-10",
@@ -68,13 +79,30 @@
   {
     "title": "SplitFlow – AI Expense Capture",
     "featured": "true",
-    "description": "AI-integrated MVP for shared expense tracking using Google Gemini’s multimodal vision capabilities.",
+    "impact": "Multimodal receipt parsing via Gemini vision API",
+    "description": "AI-integrated MVP for shared expense tracking using Google Gemini's multimodal vision capabilities.",
     "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/splitflow-ai-expense-splitting-app.webp",
-    "links": { "demo": "https://thehelpfultipper.com/splitflow/", "blog": "https://thehelpfultipper.com/this-simple-ai-tool-makes-money-talks-easy-again/" },
+    "links": {
+      "demo": "https://thehelpfultipper.com/splitflow/",
+      "blog": "https://thehelpfultipper.com/this-simple-ai-tool-makes-money-talks-easy-again/"
+    },
     "meta": {
       "stack": ["React", "Google Gemini", "Supabase", "TypeScript"],
       "date": "2025-10-26",
       "category": ["AI & RAG"]
+    }
+  },
+  {
+    "title": "VersoID",
+    "featured": "false",
+    "impact": "Multiple professional personas — shareable via QR, one tap to switch",
+    "description": "A Flutter-based digital identity management app that lets users create and share multiple professional personas with QR codes. Switch between work, creator, and social identities with a single tap. Available on iOS; Android coming soon.",
+    "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/global-links.png",
+    "links": { "demo": "https://thehelpfultipper.com/versoid/", "blog": "" },
+    "meta": {
+      "stack": ["Flutter", "Dart", "QR Codes", "iOS"],
+      "date": "2026-06-04",
+      "category": ["Mobile"]
     }
   },
   {
@@ -92,12 +120,16 @@
   {
     "title": "Prompt Optimizer",
     "featured": "false",
-    "description": "Chrome extension focused on improving LLM response quality through advanced prompt engineering patterns.",
-    "image": "https://thehelpfultipper.com/wp-content/uploads/2025/11/prompt-optimizer-promo-tile-ba6574.svg",
-    "links": { "demo": "https://thehelpfultipper.com/smart-free-chrome-extension-that-upgrades-ai-prompts/", "blog": "" },
+    "impact": "Upgrades prompts for ChatGPT and Gemini — snippets and Ollama in latest release",
+    "description": "A Chrome extension that upgrades prompts into clearer, more detailed, and more effective versions for AI models like ChatGPT and Google Gemini. The May 2026 release adds snippets and Ollama support.",
+    "image": "https://thehelpfultipper.com/prompt-optimizer/screenshots/providers-security.png",
+    "links": {
+      "demo": "https://thehelpfultipper.com/prompt-optimizer/",
+      "blog": "https://thehelpfultipper.com/smart-free-chrome-extension-that-upgrades-ai-prompts/"
+    },
     "meta": {
-      "stack": ["JavaScript", "OpenAI", "Gemini API"],
-      "date": "2025-11-15",
+      "stack": ["JavaScript", "Chrome Extensions API", "Ollama", "Gemini API"],
+      "date": "2026-05-26",
       "category": ["AI & RAG", "Tools & DX"]
     }
   },

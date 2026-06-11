@@ -16,6 +16,7 @@ const Archive: React.FC<PageProps> = ({ location, path }) => {
         nodes {
           title
           featured
+          impact
           image
           description
           meta {
@@ -31,10 +32,14 @@ const Archive: React.FC<PageProps> = ({ location, path }) => {
       }
     }
   `);
-  if (!data || !data.allProjectsJson.nodes) {
+  if (!data?.allProjectsJson?.nodes) {
     console.error('There was an error getting projects data.');
   }
-  const projects = data.allProjectsJson.nodes || [];
+
+  const projects = useMemo<IProject[]>(
+    () => data?.allProjectsJson?.nodes ?? [],
+    [data?.allProjectsJson?.nodes],
+  );
 
   const filteredProjects = useMemo(() => {
     const killList = ['Pokémon Search App', 'Tic Tac Toe Game', 'Shopping Cart App', 'Inspirational Quote App'];
@@ -63,11 +68,16 @@ const Archive: React.FC<PageProps> = ({ location, path }) => {
 
   return (
     <>
-      <section id="projects-archive" className="py-5">
-        <div className="text-center my-5 archive-hero mx-auto max-w-700">
-          <h1 className="display-4 fw-bold text-slate-light tracking-tight">Technical Case Studies</h1>
-          <p className="mt-4 fs-5 text-slate-dark">
-            A deep dive into the systems I've architected, the products I've shipped, and the tools I've built for the developer community.
+      <section id="projects-archive" className="section-block">
+        <div className="text-center archive-hero mx-auto max-w-prose mb-5">
+          <p className="section-label font-monospace text-uppercase text-secondary mb-2">
+            Case Studies
+          </p>
+          <h1 className="fs-1 fw-semibold text-slate-light tracking-tight">Technical Work</h1>
+          <hr className="section-divider mx-auto" />
+          <p className="mt-4 text-secondary section-heading__description mx-auto">
+            Systems architected, products shipped, and tools built for enterprise scale and developer
+            productivity.
           </p>
         </div>
 
@@ -100,7 +110,7 @@ const Archive: React.FC<PageProps> = ({ location, path }) => {
           </div>
         ) : (
           <div className="text-center py-5">
-            <p className="text-slate-dark fs-5">No specialized projects found in this category.</p>
+            <p className="text-secondary fs-5">No specialized projects found in this category.</p>
           </div>
         )}
       </section>

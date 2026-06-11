@@ -1,6 +1,7 @@
 export interface IProject {
   title: string;
   description: string;
+  impact?: string;
   image: string;
   links: {
     demo: string;
@@ -17,12 +18,19 @@ export interface IProfile {
   name: string;
   employer: string;
   title: string;
+  subtitle?: string;
   blog: {
     name: string;
     url: string;
   };
   lead: string;
   about: string[];
+}
+
+export interface IResumeEducation {
+  school: string;
+  degree: string;
+  honors?: string;
 }
 
 export interface IResumeExperience {
@@ -36,6 +44,7 @@ export interface IResumeExperience {
 export interface IResume {
   summary: string;
   experience: IResumeExperience[];
+  education?: IResumeEducation;
 }
 
 export interface IProduct {
@@ -62,6 +71,12 @@ export interface IHelperLinks {
     url: string;
     text: string;
   };
+}
+
+export interface IEveAction {
+  label: string;
+  url: string;
+  type: 'demo' | 'blog' | 'resume' | 'contact' | 'external';
 }
 
 export type IMouseEvents = (event: React.MouseEvent<HTMLDivElement>) => void;

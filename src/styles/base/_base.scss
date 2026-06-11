@@ -9,6 +9,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  font-size: 100%;
   /* Account for fixed header */
 
   &[data-bs-theme='light'] {
@@ -29,7 +30,9 @@ body,
 
 // General body styles and resets
 body {
-  line-height: 1.6;
+  font-family: $body-font-family;
+  font-size: 1rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bs-body-bg);
@@ -37,15 +40,22 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-  background-image: var(--bs-starry-bg-image);
-  background-size: var(--bs-starry-bg-size);
-  background-attachment: var(--bs-starry-bg-attachment);
-  background-repeat: var(--bs-starry-bg-repeat);
-  animation: var(--bs-starry-animation) 100s linear infinite;
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    animation: none !important;
-  }
+// Explicit pointer on interactive controls (custom btn classes, nav, cards, etc.)
+a[href]:not([aria-disabled='true']),
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']) {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bs-focus-ring);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 ::selection,
@@ -64,16 +74,21 @@ body {
 }
 
 .container-px {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 
   @include media-breakpoint-up(md) {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   @include media-breakpoint-up(lg) {
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }

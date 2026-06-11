@@ -1,11 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import profilePic from '../assets/profile-pic.webp';
-import { useTheme } from '../contexts/ThemeContext';
+import SectionHeading from './UI/SectionHeading';
+
+const BLOG_MENTION = 'The Helpful Tipper';
 
 const About: React.FC = () => {
-  const { theme } = useTheme();
-  const isDarkTheme = theme === 'dark' || theme === null;
   const data = useStaticQuery(graphql`
     query ProfileData {
       allFile(
@@ -15,6 +15,11 @@ const About: React.FC = () => {
           childDataJson {
             profile {
               about
+              facts
+              blog {
+                name
+                url
+              }
             }
           }
         }
@@ -22,66 +27,95 @@ const About: React.FC = () => {
     }
   `);
 
-  if (!data || !data.allFile.nodes) {
-    console.error('There was an error getting profile data.');
-  }
-
   const { profile } = data.allFile.nodes[0].childDataJson || {};
 
-  const about = profile?.about || [];
+  const about: string[] = profile?.about || [];
+  const facts: string[] = profile?.facts || [];
+  const blog = profile?.blog;
 
-  const skillCategories = [
-    { label: 'Architecture', skills: ['React', 'Gatsby', 'Next.js', 'Headless CMS'] },
-    { label: 'Specialized', skills: ['Design Systems', 'AI/RAG Integration', 'WCAG 2.1 Accessibility'] },
-    { label: 'Tools/Languages', skills: ['TypeScript', 'Node.js', 'GraphQL', 'Python'] }
+  const capabilityAreas = [
+    {
+      label: 'Architecture',
+      statement: 'Headless CMS migrations and real-time data pipelines',
+      skills: ['React', 'Gatsby', 'Next.js', 'GraphQL'],
+    },
+    {
+      label: 'Mobile & AI',
+      statement: 'Cross-platform apps and context-aware AI workflows',
+      skills: ['Flutter', 'Python', 'RAG', 'Model Context Protocol (MCP)'],
+    },
+    {
+      label: 'Quality',
+      statement: 'Accessible design systems and developer tooling',
+      skills: ['Design Systems', 'WCAG 2.1 AA', 'TypeScript', 'Node.js'],
+    },
   ];
 
+  const renderAboutParagraph = (text: string, index: number) => {
+    const isLast = index === about.length - 1;
+    const hasBlogLink =
+      isLast && blog?.url && text.includes(BLOG_MENTION);
+
+    if (hasBlogLink) {
+      const [before, after] = text.split(BLOG_MENTION);
+      return (
+        <p key={index} className="mb-0">
+          {before}
+          <a
+            href={blog.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-blue text-decoration-none">
+            {blog.name || BLOG_MENTION}
+          </a>
+          {after}
+        </p>
+      );
+    }
+
+    return (
+      <p key={index} className="mb-0">
+        {text}
+      </p>
+    );
+  };
+
   return (
-    <section
-      id="about"
-      className="py-5 my-5">
-      <h2 className="fs-2 fw-bold text-slate-light mb-5 text-center">
-        <span className="text-sky-blue font-monospace">05.</span> Engineering Philosophy
-      </h2>
-      <div className="col-lg-4 order-1 order-lg-2 mx-auto">
-        <div className="mb-4 d-flex justify-content-center">
+    <section id="about" className="section-block">
+      <SectionHeading label="Background" title="About" align="center" />
+      <div className="row align-items-start g-4 g-lg-5 max-w-wide mx-auto">
+        <div className="col-lg-3 text-center text-lg-start">
           <img
             src={profilePic}
             alt="Klea Merkuri"
-            className="rounded-circle border border-3 border-sky-blue shadow-lg"
-            style={{ width: '130px', height: '130px', objectFit: 'cover' }}
+            className="rounded-circle border border-2 border-slate-700 mb-3"
+            style={{ width: '96px', height: '96px', objectFit: 'cover' }}
           />
         </div>
-        <div
-          className="mb-4 text-center px-4 py-2 rounded-3"
-          style={{
-            background: isDarkTheme ? 'rgba(30, 30, 30, 0.7)' : 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(10px)',
-            border: `1px solid ${isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)'
-          }}
-        >
-          <p className="font-monospace mb-0 fw-bold small" style={{ color: isDarkTheme ? 'var(--bs-sky-blue)' : '#4c1d95' }}>
-            <span className="text-orange-cta me-2">📍</span>
-            ENGINEERING FROM: LOS ANGELES, CA
-          </p>
-        </div>
-      </div>
-      <div className="row align-items-center g-5">
-        <div className="col-lg-8 order-2 order-lg-1 mx-auto">
-          <div className="text-slate-dark d-flex flex-column gap-3 fs-5 text-start text-lg-center">
-            {about.map((item: string, i: number) => (
-              <p key={i}>{item}</p>
-            ))}
+        <div className="col-lg-9">
+          <div className="about-body d-flex flex-column gap-3 mb-5">
+            {about.map((item, i) => renderAboutParagraph(item, i))}
           </div>
-          <div className="row mt-4 text-start text-lg-center">
-            {skillCategories.map((cat) => (
-              <div key={cat.label} className="col-md-4 mb-4">
-                <h4 className="fs-6 fw-bold text-slate-light font-monospace text-uppercase mb-3">{cat.label}</h4>
-                <ul className="list-unstyled font-monospace small">
-                  {cat.skills.map((skill) => (
-                    <li key={skill} className="mb-2 text-slate-dark">
-                      <span className="text-sky-blue me-2">▹</span>{skill}
+          {facts.length > 0 && (
+            <div className="d-flex flex-wrap gap-2 mb-5 pb-2">
+              {facts.map((fact) => (
+                <span
+                  key={fact}
+                  className="badge rounded-pill border border-slate-700 text-secondary font-monospace px-3 py-2 fw-normal">
+                  {fact}
+                </span>
+              ))}
+            </div>
+          )}
+          <div className="row text-start g-4">
+            {capabilityAreas.map((area) => (
+              <div key={area.label} className="col-md-4 about-capability">
+                <h4 className="fw-semibold text-slate-light">{area.label}</h4>
+                <p className="mb-3">{area.statement}</p>
+                <ul className="list-unstyled font-monospace mb-0">
+                  {area.skills.map((skill) => (
+                    <li key={skill} className="mb-2">
+                      {skill}
                     </li>
                   ))}
                 </ul>

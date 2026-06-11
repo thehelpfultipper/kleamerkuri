@@ -46,7 +46,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, show, onHide }) =>
               {project.title}
             </h2>
 
-            <p className="text-slate-dark mb-4">{project.description}</p>
+            <p className="text-secondary mb-4">{project.description}</p>
 
             <h3 className="fs-5 fw-bold text-slate-light mb-3">Tech Stack</h3>
             <div className="d-flex flex-wrap gap-2 mb-4">

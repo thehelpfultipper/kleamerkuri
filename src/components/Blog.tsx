@@ -4,6 +4,7 @@ import BlogPostCard from './BlogPostCard';
 import { IPost } from '../helpers/interfaces';
 import { links } from '../helpers/variables';
 import InlineNotice from './UI/InlineNotice';
+import SectionHeading from './UI/SectionHeading';
 
 const Blog: React.FC = () => {
   const data = useStaticQuery(graphql`
@@ -24,36 +25,28 @@ const Blog: React.FC = () => {
     }
   `);
 
-  if (!data || !data.allFile.nodes) {
-    console.error('There was an error getting posts data.');
-  }
-
   const { posts }: { posts: IPost[] } = data.allFile.nodes[0].childDataJson || {};
 
-  const featuredPosts = useMemo(() => {
-    return posts.filter((p: IPost) => p.featured === 'true');
-  }, [posts]);
-
-  const extraPosts = useMemo(() => {
-    return posts.filter((p: IPost) => p.featured === 'false');
-  }, [posts]);
+  const featuredPosts = useMemo(() => posts.filter((p: IPost) => p.featured === 'true'), [posts]);
+  const extraPosts = useMemo(() => posts.filter((p: IPost) => p.featured === 'false'), [posts]);
 
   return (
-    <section
-      id="blog"
-      className="py-5 mt-5">
-      <div className="d-flex justify-content-between align-items-end mb-5">
-        <div>
-          <h2 className="fs-2 fw-bold text-slate-light mb-2">
-            <span className="text-sky-blue font-monospace">02.</span> Technical Insights
-          </h2>
-          <p className="text-slate-dark mb-0">Writing on performance, accessibility, and AI integration.</p>
-        </div>
-        <a href={links.blog.url} target="_blank" rel="noreferrer" className="text-sky-blue font-monospace text-decoration-none d-none d-md-block">
-          View all posts &rarr;
+    <section id="blog" className="section-block">
+      <div className="section-heading-row d-flex justify-content-between align-items-end gap-4 flex-wrap">
+        <SectionHeading
+          label="Writing"
+          title="Technical Insights"
+          description="Performance, accessibility, and AI integration."
+        />
+        <a
+          href={links.blog.url}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sky-blue font-monospace small text-decoration-none d-none d-md-block flex-shrink-0">
+          View all posts →
         </a>
       </div>
-      <div className="row g-4">
+      <div className="row g-3 g-lg-4">
         {featuredPosts.map((post) => (
           <div className="col-12 col-md-6 col-lg-4" key={post.title}>
             <BlogPostCard post={post} />
@@ -61,16 +54,13 @@ const Blog: React.FC = () => {
         ))}
       </div>
       <InlineNotice>
-        <h3 className="fs-6 fw-bold text-slate-light font-monospace text-uppercase tracking-widest mb-4">
+        <h3 className="fs-6 fw-semibold text-slate-light font-monospace text-uppercase section-label mb-4">
           Further Reading
         </h3>
         <ul>
           {extraPosts.map((p, i) => (
             <li key={`ext_${i + 1}`}>
-              <a
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer">
+              <a href={p.link} target="_blank" rel="noopener noreferrer">
                 {p.title}
               </a>
             </li>

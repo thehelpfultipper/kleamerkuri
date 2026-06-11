@@ -1,5 +1,5 @@
 #about {
-  min-height: 70vh;
+  min-height: auto;
   margin-left: auto;
   margin-right: auto;
 
@@ -21,5 +21,39 @@
 
   .profile-tech-wrapper {
     max-width: 42rem;
+  }
+
+  .about-body {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--bs-text-secondary);
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--bs-slate-light);
+      }
+    }
+  }
+
+  .about-education {
+    line-height: 1.5;
+  }
+
+  .about-capability {
+    h4 {
+      font-size: 0.9375rem;
+      margin-bottom: 0.625rem;
+    }
+
+    p,
+    li {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--bs-text-secondary);
+    }
   }
 }

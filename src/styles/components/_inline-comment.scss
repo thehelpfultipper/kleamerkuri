@@ -1,9 +1,11 @@
 .inline-comment {
   max-width: 48rem;
+  margin-top: var(--space-content-gap);
+  margin-bottom: var(--space-content-gap);
   margin-left: auto;
   margin-right: auto;
   border-left: 3px solid var(--bs-slate-700);
-  padding-left: 1.5rem;
+  padding: 1.5rem 0 1.5rem 1.75rem;
   transition: border-color 0.3s ease-in-out;
 
   &:hover {
@@ -16,16 +18,21 @@
   }
 
   .inline-comment-content {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--bs-text-secondary);
+
     ul {
       list-style: none;
       padding-left: 0;
-      margin-top: 1rem;
+      margin-top: 1.25rem;
       margin-bottom: 0;
 
       li {
         position: relative;
         padding-left: 1.75rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
 
         &::before {
           content: '▹';
@@ -38,6 +45,7 @@
           color: var(--bs-sky-blue);
           text-decoration: none;
           font-weight: 500;
+          cursor: pointer;
           position: relative;
           transition: color 0.3s ease-in-out;
 
@@ -55,7 +63,7 @@
           }
 
           &:hover {
-            color: var(--bs-orange-cta);
+            color: var(--bs-slate-light);
 
             &::after {
               transform: scaleX(1);
