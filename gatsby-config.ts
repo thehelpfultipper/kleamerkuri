@@ -19,6 +19,18 @@ module.exports = {
     'gatsby-transformer-json',
     'gatsby-plugin-sass',
     {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: ['G-8JSXM2V0J4'],
+        gtagConfig: {
+          anonymize_ip: true,
+        },
+        pluginConfig: {
+          head: true,
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-sitemap',
       options: {
         query: `

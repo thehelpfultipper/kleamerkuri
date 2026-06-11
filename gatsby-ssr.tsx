@@ -10,7 +10,26 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHeadComponents,
   setPreBodyComponents,
 }) => {
-  const preBodyComp = [
+  setHeadComponents([
+    <link
+      key="inter-font"
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />,
+    <link
+      key="inter-font-gstatic"
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="inter-font-stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />,
+  ]);
+
+  setPreBodyComponents([
     <script
       key="theme-select"
       dangerouslySetInnerHTML={{
@@ -38,69 +57,5 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
           `.trim(),
       }}
     />,
-  ];
-
-  const fontComponents = [
-    <link
-      key="inter-font"
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />,
-    <link
-      key="inter-font-gstatic"
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossOrigin="anonymous"
-    />,
-    <link
-      key="inter-font-stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />,
-  ];
-
-  if (process.env.NODE_ENV === 'production') {
-    setHeadComponents([
-      ...fontComponents,
-      <script
-        key="gtm-head"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-NV7XJ655');
-          `,
-        }}
-      />,
-    ]);
-
-    //   setPreBodyComponents([
-    //     <noscript
-    //       key="gtm-body"
-    //       dangerouslySetInnerHTML={{
-    //         __html: `
-    //           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV7XJ655"
-    // height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    //         `,
-    //       }}
-    //     />,
-    //   ]);
-    preBodyComp.push(
-      <noscript
-        key="gtm-body"
-        dangerouslySetInnerHTML={{
-          __html: `
-            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV7XJ655"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe>
-          `,
-        }}
-      />,
-    );
-  } else {
-    setHeadComponents(fontComponents);
-  }
-
-  setPreBodyComponents(preBodyComp);
+  ]);
 };

@@ -28,6 +28,7 @@
     "@xenova/transformers": "^2.17.2",
     "bootstrap": "^5.3.8",
     "gatsby": "^5.14.1",
+    "gatsby-plugin-google-gtag": "^5.16.0",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
