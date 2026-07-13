@@ -1,0 +1,39 @@
+name: Keep Supabase Alive
+
+# External pings count as user API traffic. In-DB pg_cron + pg_net does not
+# reliably prevent free-tier pausing (and often never completes the HTTP call).
+on:
+  schedule:
+    # Daily at 12:00 UTC — matches Supabase guidance of a few requests/day.
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST (chat_cache)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "Missing SUPABASE_URL or SUPABASE_ANON_KEY repository secrets."
+            exit 1
+          fi
+
+          BASE_URL="${SUPABASE_URL%/}"
+          URL="${BASE_URL}/rest/v1/chat_cache?select=id&limit=1"
+
+          echo "GET ${URL}"
+          curl -fsS --max-time 30 "$URL" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Accept: application/json" \
+            -o /tmp/supabase-ping.json \
+            -w "HTTP %{http_code}\n"
+
+          echo "Response body:"
+          cat /tmp/supabase-ping.json
+          echo
