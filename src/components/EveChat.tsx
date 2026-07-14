@@ -400,7 +400,8 @@ const EveChatCore: React.FC<EveChatCoreProps> = ({
             aria-busy={isBusy || undefined}
             aria-label="Chat messages">
             {renderMessages()}
-            {(isLoading || isTyping) && renderLoading()}
+            {/* Thinking indicator only until the first streamed token arrives */}
+            {isLoading && renderLoading()}
           </div>
         </div>
 

@@ -27,11 +27,16 @@ interface IChatHistoryEntry {
 }
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const CLIENT_CACHE_VERSION = 'rag-inline-links-v4';
 
 const WELCOME = [
   "Hi! I'm Eve, Klea's Portfolio Copilot.",
   "I use RAG and function calling to search her portfolio and surface relevant links.",
 ];
+
+function cacheKeyFor(query: string) {
+  return `${CLIENT_CACHE_VERSION}:${query.toLowerCase()}`;
+}
 
 export function useChatbot() {
   const [messages, setMessages] = useState<IChatMessage[]>([]);
@@ -175,6 +180,24 @@ export function useChatbot() {
     });
   }, []);
 
+  const upsertStreamingAssistant = useCallback((content: string, replace = false) => {
+    if (replace) {
+      currentResponseRef.current = content;
+    } else {
+      currentResponseRef.current += content;
+    }
+
+    const nextContent = currentResponseRef.current;
+
+    setMessages((prev) => {
+      const last = prev[prev.length - 1];
+      if (last?.role === 'assistant') {
+        return [...prev.slice(0, -1), { ...last, content: nextContent }];
+      }
+      return [...prev, buildMessage(nextContent, 'assistant')];
+    });
+  }, []);
+
   const processQuery = useCallback(
     async (userInput: string) => {
       if (!userInput.trim() || isLoading || isTypingRef.current) return;
@@ -187,7 +210,7 @@ export function useChatbot() {
       currentActionsRef.current = [];
 
       try {
-        const cacheKey = userInput.toLowerCase();
+        const cacheKey = cacheKeyFor(userInput);
         const cached = localCache[cacheKey];
         if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
           setTimeout(() => {
@@ -225,96 +248,89 @@ export function useChatbot() {
         const reader = response.body.getReader();
         const decoder = new TextDecoder('utf-8');
         let buffer = '';
-        let isFirstAssistantMessage = true;
+        let receivedText = false;
 
-        setIsLoading(false);
+        // Headers arrived — keep "thinking" until the first text token, then stream
         setIsTyping(true);
+
+        const flushSseLine = (rawLine: string) => {
+          const line = rawLine.trim();
+          if (!line || !line.startsWith('data:')) return;
+
+          try {
+            const payload = JSON.parse(line.replace(/^data:\s*/, ''));
+
+            if (payload.isCached && payload.text) {
+              currentResponseRef.current = payload.text;
+              if (payload.actions) currentActionsRef.current = payload.actions;
+
+              setMessages((prev) => [
+                ...prev,
+                buildMessage(payload.text, 'assistant', new Date(), payload.actions),
+              ]);
+              receivedText = true;
+              setIsLoading(false);
+              setIsTyping(false);
+
+              setLocalCache((prev) => {
+                const updated = {
+                  ...prev,
+                  [cacheKey]: {
+                    text: payload.text,
+                    timestamp: Date.now(),
+                    actions: payload.actions,
+                  },
+                };
+                localStorage.setItem('chatCache', JSON.stringify(updated));
+                return updated;
+              });
+              return;
+            }
+
+            if (payload.actions && !payload.text) {
+              currentActionsRef.current = payload.actions;
+              attachActionsToLastAssistant(payload.actions);
+              return;
+            }
+
+            if (payload.text) {
+              if (!receivedText) {
+                receivedText = true;
+                setIsLoading(false);
+              }
+
+              upsertStreamingAssistant(payload.text, Boolean(payload.replace));
+            }
+          } catch {
+            /* skip malformed SSE frames */
+          }
+        };
 
         // eslint-disable-next-line no-constant-condition
         while (true) {
           const { value, done } = await reader.read();
-          if (done) {
-            setIsTyping(false);
-            if (currentActionsRef.current.length) {
-              attachActionsToLastAssistant(currentActionsRef.current);
-            }
-            break;
-          }
+          if (done) break;
 
-          const chunk = decoder.decode(value, { stream: true });
-          const lines = (buffer + chunk).split('\n');
-          if (!chunk.endsWith('\n')) {
-            buffer = lines.pop() || '';
-          } else {
-            buffer = '';
-          }
+          buffer += decoder.decode(value, { stream: true });
 
-          for (let line of lines) {
-            line = line.trim();
-            if (!line || !line.startsWith('data: ')) continue;
+          // SSE frames are separated by blank lines; also split on single newlines for our flat frames
+          const parts = buffer.split('\n');
+          buffer = parts.pop() || '';
 
-            try {
-              const payload = JSON.parse(line.substring(6).trim());
-
-              if (payload.isCached && payload.text) {
-                currentResponseRef.current = payload.text;
-                if (payload.actions) currentActionsRef.current = payload.actions;
-
-                setMessages((prev) => [
-                  ...prev,
-                  buildMessage(payload.text, 'assistant', new Date(), payload.actions),
-                ]);
-                setIsTyping(false);
-
-                setLocalCache((prev) => {
-                  const updated = {
-                    ...prev,
-                    [cacheKey]: {
-                      text: payload.text,
-                      timestamp: Date.now(),
-                      actions: payload.actions,
-                    },
-                  };
-                  localStorage.setItem('chatCache', JSON.stringify(updated));
-                  return updated;
-                });
-
-                await reader.cancel();
-                break;
-              }
-
-              if (payload.actions && !payload.text) {
-                currentActionsRef.current = payload.actions;
-                attachActionsToLastAssistant(payload.actions);
-                continue;
-              }
-
-              if (payload.text) {
-                currentResponseRef.current += payload.text;
-
-                setMessages((prev) => {
-                  if (isFirstAssistantMessage) {
-                    isFirstAssistantMessage = false;
-                    return [...prev, buildMessage(payload.text, 'assistant')];
-                  }
-                  const allButLast = prev.slice(0, -1);
-                  const lastMessage = prev[prev.length - 1];
-                  if (lastMessage?.role === 'assistant') {
-                    return [
-                      ...allButLast,
-                      { ...lastMessage, content: currentResponseRef.current },
-                    ];
-                  }
-                  return [...prev, buildMessage(payload.text, 'assistant')];
-                });
-              }
-            } catch {
-              /* continue */
-            }
+          for (const part of parts) {
+            flushSseLine(part);
           }
         }
 
-        if (currentResponseRef.current && !localCache[cacheKey]) {
+        if (buffer.trim()) {
+          flushSseLine(buffer);
+        }
+
+        if (currentActionsRef.current.length) {
+          attachActionsToLastAssistant(currentActionsRef.current);
+        }
+
+        if (currentResponseRef.current) {
           setLocalCache((prev) => {
             const updated = {
               ...prev,
@@ -333,14 +349,12 @@ export function useChatbot() {
           ...prev,
           buildMessage('Something went wrong. Please try again later.', 'assistant'),
         ]);
-        setIsTyping(false);
-        setIsLoading(false);
       } finally {
         setIsTyping(false);
         setIsLoading(false);
       }
     },
-    [isLoading, localCache, sessionId, attachActionsToLastAssistant],
+    [isLoading, localCache, sessionId, attachActionsToLastAssistant, upsertStreamingAssistant],
   );
 
   const handleSubmit = useCallback(
