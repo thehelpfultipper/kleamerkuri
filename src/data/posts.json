@@ -1,44 +1,28 @@
 {
   "posts": [
     {
-      "title": "Is DeepSeek V4 Pro Actually Free? I Set It Up to Find Out",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/deepseek-v4-nvidia-nim-api.png",
-      "date": "May 2026",
-      "link": "https://thehelpfultipper.com/is-deepseek-v4-pro-actually-free-i-set-it-up-to-find-out/",
+      "title": "This Is How To Stop Guessing What Docker Actually Does",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/what-docker-actually-is.png",
+      "date": "Jul 2026",
+      "link": "https://thehelpfultipper.com/how-to-stop-guessing-what-docker-actually-does/",
       "featured": "true",
-      "category": "AI Strategy"
+      "category": "DevOps & Containerization"
     },
     {
-      "title": "I Tried the 'Code for Free with Local AI' Setup. Here's What Actually Happened",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/free-local-ai-with-claude-code-and-ollama.png",
-      "date": "May 2026",
-      "link": "https://thehelpfultipper.com/i-tried-code-for-free-with-local-ai-setup-heres-what-happened/",
+      "title": "The Privacy Tools You Trust Aren't Doing What You Think",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/online-privacy-2026-isnt-what-you-think.png",
+      "date": "Jun 2026",
+      "link": "https://thehelpfultipper.com/the-privacy-tools-you-trust-arent-doing-what-you-think/",
       "featured": "true",
-      "category": "AI Engineering"
+      "category": "Security & Privacy"
     },
     {
-      "title": "What Is OpenClaw? What You Need To Know Plus Risks Nobody Talks About",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/03/what-is-openclaw-all-you-need-to-know.png",
-      "date": "Mar 2026",
-      "link": "https://thehelpfultipper.com/what-is-openclaw-what-you-need-to-know-plus-risks-nobody-talks-about/",
+      "title": "It Looks Like AI Is Actually Now Your Most Expensive Hire",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/ai-is-becoming-your-most-expensive-hire.png",
+      "date": "Jul 2026",
+      "link": "https://thehelpfultipper.com/ai-is-actually-now-your-most-expensive-hire/",
       "featured": "true",
-      "category": "AI Security"
-    },
-    {
-      "title": "How To Connect To Real Data And Secure Your Antigravity Workspace",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/03/connect-to-real-data-securely-antigravity.png",
-      "date": "Mar 2026",
-      "link": "https://thehelpfultipper.com/how-to-connect-to-real-data-and-secure-your-antigravity-workspace/",
-      "featured": "true",
-      "category": "Architecture"
-    },
-    {
-      "title": "Token Economics: A Money-Saving AI Context Strategy",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/ai-workflow-files.png",
-      "date": "Jan 2026",
-      "link": "https://thehelpfultipper.com/practical-money-saving-ai-context-strategy-you-need-to-know/",
-      "featured": "false",
-      "category": "AI Engineering"
+      "category": "AI Impact, Cost Analysis"
     },
     {
       "title": "How To Get The Right Kind Of Glassy UI",
@@ -46,15 +30,39 @@
       "date": "May 2026",
       "link": "https://thehelpfultipper.com/how-to-get-the-right-kind-of-glassy-ui/",
       "featured": "true",
-      "category": "UX/DX"
+      "category": "Modern UI, Design Systems, Glassmorphism"
     },
     {
-      "title": "What Actually Happened When Using The OpenAI Codex App For Free",
+      "title": "Stop Paying for SEO Tools When DevTools Does This for Free",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/04/chrome-devtools-free-features-seo-and-performance.png",
+      "date": "Apr 2026",
+      "link": "https://thehelpfultipper.com/stop-paying-for-seo-tools-when-devtools-does-this-for-free/",
+      "featured": "true",
+      "category": "SEO & Accessibility"
+    },
+    {
+      "title": "Stop Sleeping On These Super Helpful Chrome DevTools Debugging Tools",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/04/how-to-use-chrome-devtools-for-web-development.png",
+      "date": "Apr 2026",
+      "link": "https://thehelpfultipper.com/stop-sleeping-on-these-super-helpful-chrome-devtools-debugging-tools/",
+      "featured": "true",
+      "category": "Chrome DevTools"
+    },
+    {
+      "title": "Token Economics: A Money-Saving AI Context Strategy",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/ai-workflow-files.png",
-      "date": "May 2026",
-      "link": "https://thehelpfultipper.com/what-actually-happened-when-using-the-openai-codex-app-for-free/",
+      "date": "Jan 2026",
+      "link": "https://thehelpfultipper.com/practical-money-saving-ai-context-strategy-you-need-to-know/",
       "featured": "false",
-      "category": "Tools & DX"
+      "category": "AI Cost Optimization"
+    },
+    {
+      "title": "Why Your Engineering Role No Longer Makes Sense",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/engineer-role-breakdown-2026.png",
+      "date": "Jun 2026",
+      "link": "https://thehelpfultipper.com/why-your-engineering-role-no-longer-makes-sense/",
+      "featured": "false",
+      "category": "AI & The Future of Work"
     },
     {
       "title": "Mental Models: Why I 'Co-Code' Instead of 'Vibe Code'",
@@ -62,15 +70,15 @@
       "date": "Jul 2025",
       "link": "https://thehelpfultipper.com/this-is-the-simple-reason-i-choose-to-co-code-instead-of-vibe-code/",
       "featured": "false",
-      "category": "AI Engineering"
+      "category": "Developer Mindset & Collaboration"
     },
     {
-      "title": "AEO vs SEO: Navigating the Answer-First Era",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/01/aeo-vs-seo-how-to-win-answer-first-era.png",
-      "date": "Feb 2026",
-      "link": "https://thehelpfultipper.com/aeo-vs-seo-how-to-win-the-answer-first-era/",
-      "featured": "true",
-      "category": "Architecture"
+      "title": "Why AI-Generated Code Actually Fails",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/how-to-fix-failing-ai-generated-code-in-production.png",
+      "date": "Jul 2026",
+      "link": "https://thehelpfultipper.com/why-ai-generated-code-actually-fails-and-how-to-fix-it/",
+      "featured": "false",
+      "category": "AI Strategy"
     }
   ]
 }

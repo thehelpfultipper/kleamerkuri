@@ -21,14 +21,14 @@
       "featured": true
     },
     {
-      "title": "DIRA – Design Research Assistant",
-      "description": "Extracts design system tokens, typography scales, and color palettes from any live site — competitive research without leaving the DOM.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png",
+      "title": "Job Atlas",
+      "description": "Notion-inspired Chrome extension designed to revolutionize how you search for roles. Instantly save and organize job postings from any career site into a private, searchable pipeline. Capture, track, and manage your entire job search journey locally.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/job-atlas-promo-tile.png",
       "links": {
-        "demo": "https://thehelpfultipper.com/dira/",
-        "blog": ""
+        "demo": "https://thehelpfultipper.com/job-atlas/",
+        "blog": "https://thehelpfultipper.com/free-browser-extension-your-job-search-needs/"
       },
-      "featured": false
+      "featured": true
     },
     {
       "title": "gac – AI Git Copilot",
@@ -38,14 +38,14 @@
         "demo": "https://thehelpfultipper.com/gac/",
         "blog": "https://thehelpfultipper.com/how-to-love-writing-git-commits-meet-gac/"
       },
-      "featured": true
+      "featured": false
     },
     {
-      "title": "Tab Atlas",
-      "description": "Maps Chrome tab sessions into persistent, human-readable workspaces — context-switching solved for developers juggling multiple projects.",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png",
+      "title": "DIRA – Design Research Assistant",
+      "description": "Extracts design system tokens, typography scales, and color palettes from any live site — competitive research without leaving the DOM.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/dira-chrome.png",
       "links": {
-        "demo": "https://thehelpfultipper.com/tab-atlas/",
+        "demo": "https://thehelpfultipper.com/dira/",
         "blog": ""
       },
       "featured": false
@@ -66,6 +66,17 @@
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/noteapply-ai-sidepanel.png",
       "links": {
         "demo": "https://thehelpfultipper.com/noteapply/",
+        "blog": ""
+      },
+      "featured": false
+    },
+
+    {
+      "title": "Tab Atlas",
+      "description": "Maps Chrome tab sessions into persistent, human-readable workspaces — context-switching solved for developers juggling multiple projects.",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/12/tab-atlas.png",
+      "links": {
+        "demo": "https://thehelpfultipper.com/tab-atlas/",
         "blog": ""
       },
       "featured": false

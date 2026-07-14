@@ -16,6 +16,22 @@
     }
   },
   {
+    "title": "Local AI Agent Ecosystem",
+    "featured": "true",
+    "impact": "Full-stack orchestration project involving Docker, Redis, and Python scripts for local vector database.",
+    "description": "Building a local AI agent with Docker Compose that indexes PDFs and answers questions using Ollama, covering container setup, networking, security, and a simple frontend for interaction. It uses Redis for vector database and Python scripts for indexing and querying. Available on GitHub.",
+    "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/build-mino-local-ai-agent-with-docker.png",
+    "links": {
+      "demo": "",
+      "blog": "https://thehelpfultipper.com/lets-build-an-insanely-useful-local-ai-agent-with-docker/"
+    },
+    "meta": {
+      "stack": ["Docker", "Redis", "Python"],
+      "date": "2026-07-10",
+      "category": ["AI & RAG", "Tools & DX"]
+    }
+  },
+  {
     "title": "Tab Atlas – Workspace Manager",
     "featured": "false",
     "impact": "Maps browser sessions into persistent, human-readable workspaces",
@@ -46,7 +62,7 @@
   },
   {
     "title": "gac – AI Git Copilot",
-    "featured": "true",
+    "featured": "false",
     "impact": "NPM-distributed CLI for semantic commits and changelog automation",
     "description": "AI-powered CLI tool for semantic commit messages and changelog automation. Distributed via NPM.",
     "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2025/11/gac-npm-package-copilot.png",
@@ -78,7 +94,7 @@
   },
   {
     "title": "SplitFlow – AI Expense Capture",
-    "featured": "true",
+    "featured": "false",
     "impact": "Multimodal receipt parsing via Gemini vision API",
     "description": "AI-integrated MVP for shared expense tracking using Google Gemini's multimodal vision capabilities.",
     "image": "https://thehelpfultipper.com/wp-content/uploads/2025/10/splitflow-ai-expense-splitting-app.webp",
@@ -93,15 +109,18 @@
     }
   },
   {
-    "title": "VersoID",
-    "featured": "false",
+    "title": "VersoID – Digital Identity Platform",
+    "featured": "true",
     "impact": "Multiple professional personas — shareable via QR, one tap to switch",
     "description": "A Flutter-based digital identity management app that lets users create and share multiple professional personas with QR codes. Switch between work, creator, and social identities with a single tap. Available on iOS; Android coming soon.",
-    "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/global-links.png",
-    "links": { "demo": "https://thehelpfultipper.com/versoid/", "blog": "" },
+    "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/how-I-built-versoid-mobile-app-using-ai.png",
+    "links": {
+      "demo": "https://thehelpfultipper.com/versoid/",
+      "blog": "https://thehelpfultipper.com/solo-no-team-this-is-how-versoid-actually-got-built/"
+    },
     "meta": {
       "stack": ["Flutter", "Dart", "QR Codes", "iOS"],
-      "date": "2026-06-04",
+      "date": "2026-07-03",
       "category": ["Mobile"]
     }
   },

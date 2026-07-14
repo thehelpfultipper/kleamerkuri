@@ -28,7 +28,7 @@ const Products: React.FC = () => {
 
   const { products }: { products: IProduct[] } = data.allFile.nodes[0].childDataJson || {};
   const featuredProducts = products.filter((product) => product.featured);
-  const otherProducts = products.filter((product) => !product.featured);
+  const otherProducts = products.filter((product) => !product.featured).slice(0, -1);
 
   return (
     <section id="products" className="section-block">
