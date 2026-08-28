@@ -1,20 +1,36 @@
 {
   "posts": [
     {
+      "title": "The Hidden AI Skill Gap Nobody's Talking About",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/08/hidden-ai-skill-gap-nobodys-talking-about.jpeg",
+      "date": "Aug 2026",
+      "link": "https://thehelpfultipper.com/the-hidden-ai-skill-gap-nobodys-talking-about/",
+      "featured": "true",
+      "category": "AI & The Future of Work"
+    },
+    {
+      "title": "Lessons Learned From Shipping An App For The First Time",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2026/08/lessons-learned-from-shipping-app-for-first-time.png",
+      "date": "Aug 2026",
+      "link": "https://thehelpfultipper.com/lessons-learned-from-shipping-an-app-for-the-first-time/",
+      "featured": "true",
+      "category": "Mobile & Product Shipping"
+    },
+    {
+      "title": "Why \"AI Said So\" Ends Every Argument Now",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2026/08/ai-as-authority-for-decision-making.jpeg",
+      "date": "Aug 2026",
+      "link": "https://thehelpfultipper.com/why-ai-said-so-ends-every-argument-now/",
+      "featured": "true",
+      "category": "AI Strategy"
+    },
+    {
       "title": "This Is How To Stop Guessing What Docker Actually Does",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/07/what-docker-actually-is.png",
       "date": "Jul 2026",
       "link": "https://thehelpfultipper.com/how-to-stop-guessing-what-docker-actually-does/",
       "featured": "true",
       "category": "DevOps & Containerization"
-    },
-    {
-      "title": "The Privacy Tools You Trust Aren't Doing What You Think",
-      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/online-privacy-2026-isnt-what-you-think.png",
-      "date": "Jun 2026",
-      "link": "https://thehelpfultipper.com/the-privacy-tools-you-trust-arent-doing-what-you-think/",
-      "featured": "true",
-      "category": "Security & Privacy"
     },
     {
       "title": "It Looks Like AI Is Actually Now Your Most Expensive Hire",
@@ -25,11 +41,19 @@
       "category": "AI Impact, Cost Analysis"
     },
     {
+      "title": "The Privacy Tools You Trust Aren't Doing What You Think",
+      "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/online-privacy-2026-isnt-what-you-think.png",
+      "date": "Jun 2026",
+      "link": "https://thehelpfultipper.com/the-privacy-tools-you-trust-arent-doing-what-you-think/",
+      "featured": "true",
+      "category": "Security & Privacy"
+    },
+    {
       "title": "How To Get The Right Kind Of Glassy UI",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/05/glassmorphism-liquid-glass-aesthetic.png",
       "date": "May 2026",
       "link": "https://thehelpfultipper.com/how-to-get-the-right-kind-of-glassy-ui/",
-      "featured": "true",
+      "featured": "false",
       "category": "Modern UI, Design Systems, Glassmorphism"
     },
     {
@@ -37,7 +61,7 @@
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/04/chrome-devtools-free-features-seo-and-performance.png",
       "date": "Apr 2026",
       "link": "https://thehelpfultipper.com/stop-paying-for-seo-tools-when-devtools-does-this-for-free/",
-      "featured": "true",
+      "featured": "false",
       "category": "SEO & Accessibility"
     },
     {
@@ -45,8 +69,24 @@
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/04/how-to-use-chrome-devtools-for-web-development.png",
       "date": "Apr 2026",
       "link": "https://thehelpfultipper.com/stop-sleeping-on-these-super-helpful-chrome-devtools-debugging-tools/",
-      "featured": "true",
+      "featured": "false",
       "category": "Chrome DevTools"
+    },
+    {
+      "title": "Why OpenClaw And Hermes AI Agents Aren't Actually Free",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2026/08/openclaw-hermes-local-ai-agent-setups-not-free.png",
+      "date": "Aug 2026",
+      "link": "https://thehelpfultipper.com/why-openclaw-and-hermes-ai-agents-arent-actually-free/",
+      "featured": "false",
+      "category": "Local AI & Cost Analysis"
+    },
+    {
+      "title": "I Easily Find Bugs In AI Code Every Single Time",
+      "image": "https://thehelpfultipper.com/wp-content/uploads/2026/08/gist-debt-in-ai-code-how-to-spot.png",
+      "date": "Aug 2026",
+      "link": "https://thehelpfultipper.com/i-easily-find-bugs-in-ai-code-every-single-time/",
+      "featured": "false",
+      "category": "AI Strategy"
     },
     {
       "title": "Token Economics: A Money-Saving AI Context Strategy",

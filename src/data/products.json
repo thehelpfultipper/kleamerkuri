@@ -2,7 +2,7 @@
   "products": [
     {
       "title": "VersoID",
-      "description": "A Flutter-based digital identity management app that lets users create and share multiple professional personas with QR codes. Switch between work, creator, and social identities with a single tap. Available on iOS; Android coming soon.",
+      "description": "A Flutter-based digital identity management app that lets users create and share multiple professional personas with QR codes. Switch between work, creator, and social identities with a single tap. Available on iOS and Android.",
       "image": "https://i0.wp.com/thehelpfultipper.com/wp-content/uploads/2026/06/global-links.png",
       "links": {
         "demo": "https://thehelpfultipper.com/versoid/",

@@ -4,7 +4,7 @@ const proofMetrics = [
   { value: '5K+', label: 'articles migrated' },
   { value: '20%', label: 'faster loads' },
   { value: 'WCAG 2.1', label: 'compliance' },
-  { value: 'Real-time', label: 'BI sync' },
+  { value: '5%', label: 'monthly lead growth' },
 ];
 
 const HeroProofStrip: React.FC = () => (

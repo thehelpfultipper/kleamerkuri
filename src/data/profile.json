@@ -2,7 +2,7 @@
   "profile": {
     "name": "Klea Merkuri",
     "employer": "Finance of America",
-    "title": "Software Engineer | Design Systems & Applied AI Solutions",
+    "title": "Product Engineer | Design Systems & Applied AI Solutions",
     "blog": {
       "name": "The Helpful Tipper",
       "url": "https://www.thehelpfultipper.com"
@@ -21,13 +21,13 @@
       "email": "kleamdev@gmail.com",
       "phone": "(818) 355-3683"
     },
-    "subtitle": "I work on enterprise fintech platforms — and build the tools I wish already existed.",
-    "lead": "At Finance of America: design systems, property platforms, and Salesforce/Genesys integrations. Before that, a 5K-article Gatsby migration at Experian that cut load times ~20%.",
+    "subtitle": "I design and ship user-facing products — from design systems to full-stack tools I actually use.",
+    "lead": "Design systems, high-conversion flows, and shipped products — currently at Finance of America. Before that, a 5K-article Gatsby migration at Experian that cut load times ~20%.",
     "about": [
-      "I'm a software engineer in Los Angeles, currently building multi-tenant property platforms, design systems, and AI integrations for enterprise fintech.",
+      "I'm a product engineer in Los Angeles, currently building user-facing products, design systems, and AI integrations at scale.",
       "I didn't come up through a CS program. I studied Economics at UCLA (Summa Cum Laude) and got hooked on the part of the work that felt like engineering: tracing how data moves, where it breaks, and what has to change for systems to stay in sync.",
       "At Finance of America, I own lead capture flows wired into Salesforce and Genesys and the design system keeping those properties WCAG-compliant. Before that, at Experian, I led a headless Gatsby migration across 5,000+ blog articles — cut load times ~20% — and built Node APIs that moved BI data from quarterly manual pulls to real-time sync.",
-      "Outside work, I ship tools I actually use: VersoID, a Flutter app for managing professional personas via QR codes (live on iOS), plus Chrome extensions and MCP experiments documented on The Helpful Tipper."
+      "Outside work, I ship tools I actually use: VersoID, a Flutter app for managing professional personas via QR codes (live on iOS and Android), plus Chrome extensions and MCP experiments documented on The Helpful Tipper."
     ]
   }
 }
