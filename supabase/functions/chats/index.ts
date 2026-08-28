@@ -46,7 +46,7 @@ const supabaseClient = createClient(
   Deno.env.get('SUPABASE_URL') ?? '',
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
 );
-const CACHE_VERSION = 'rag-with-actions-v4';
+const CACHE_VERSION = 'rag-with-actions-v5';
 
 const getSystemInstruction = () => {
   const today = new Date().toLocaleDateString('en-US', {
@@ -183,6 +183,69 @@ interface AvailableLink {
   label: string;
   url: string;
   markdown: string;
+  shortTitle?: string;
+  kind?: 'demo' | 'blog' | 'external';
+}
+
+function linksFromMetadata(m: ContentMetadata): AvailableLink[] {
+  if (!m?.title) return [];
+
+  const shortTitle = m.title.split('–')[0].trim();
+  const links: AvailableLink[] = [];
+
+  if (isValidUrl(m.demo)) {
+    const label = `${shortTitle} Demo`;
+    links.push({
+      label,
+      url: m.demo,
+      markdown: `[${label}](${m.demo})`,
+      shortTitle,
+      kind: 'demo',
+    });
+  }
+  if (isValidUrl(m.blog)) {
+    const label = `${shortTitle} Write-up`;
+    links.push({
+      label,
+      url: m.blog,
+      markdown: `[${label}](${m.blog})`,
+      shortTitle,
+      kind: 'blog',
+    });
+  }
+  if (isValidUrl(m.external)) {
+    links.push({
+      label: shortTitle,
+      url: m.external,
+      markdown: `[${shortTitle}](${m.external})`,
+      shortTitle,
+      kind: 'external',
+    });
+  }
+
+  return links;
+}
+
+/** Pull Demo/Blog/Link URLs out of chunk body when metadata is incomplete. */
+function linksFromContent(chunk: RetrievedChunk): AvailableLink[] {
+  const title = chunk.metadata?.title?.split('–')[0]?.trim();
+  if (!title) return [];
+
+  const text = chunk.content || '';
+  const demoMatch = text.match(/(?:Demo(?:\s+Link)?|demo):\s*(https?:\/\/\S+)/i);
+  const blogMatch = text.match(/(?:Blog(?:\s+Link)?|blog|Write-?up):\s*(https?:\/\/\S+)/i);
+  const linkMatch = text.match(/(?:^|\s)Link:\s*(https?:\/\/\S+)/i);
+
+  const demo = demoMatch?.[1]?.replace(/[.,);]+$/, '');
+  const blog = blogMatch?.[1]?.replace(/[.,);]+$/, '');
+  const external = linkMatch?.[1]?.replace(/[.,);]+$/, '');
+
+  return linksFromMetadata({
+    title,
+    demo: isValidUrl(demo) ? demo : chunk.metadata?.demo,
+    blog: isValidUrl(blog) ? blog : chunk.metadata?.blog,
+    external: isValidUrl(external) ? external : chunk.metadata?.external,
+  });
 }
 
 function collectAvailableLinks(chunks: RetrievedChunk[]): AvailableLink[] {
@@ -190,24 +253,15 @@ function collectAvailableLinks(chunks: RetrievedChunk[]): AvailableLink[] {
   const seen = new Set<string>();
 
   for (const chunk of chunks) {
-    const m = chunk.metadata;
-    if (!m?.title) continue;
+    const candidates = [
+      ...linksFromMetadata(chunk.metadata || {}),
+      ...linksFromContent(chunk),
+    ];
 
-    const shortTitle = m.title.split('–')[0].trim();
-
-    if (isValidUrl(m.demo) && !seen.has(m.demo)) {
-      seen.add(m.demo);
-      const label = `${shortTitle} Demo`;
-      links.push({ label, url: m.demo, markdown: `[${label}](${m.demo})` });
-    }
-    if (isValidUrl(m.blog) && !seen.has(m.blog)) {
-      seen.add(m.blog);
-      const label = `${shortTitle} Write-up`;
-      links.push({ label, url: m.blog, markdown: `[${label}](${m.blog})` });
-    }
-    if (isValidUrl(m.external) && !seen.has(m.external)) {
-      seen.add(m.external);
-      links.push({ label: shortTitle, url: m.external, markdown: `[${shortTitle}](${m.external})` });
+    for (const link of candidates) {
+      if (seen.has(link.url)) continue;
+      seen.add(link.url);
+      links.push(link);
     }
   }
 
@@ -215,13 +269,39 @@ function collectAvailableLinks(chunks: RetrievedChunk[]): AvailableLink[] {
   return links.sort((a, b) => b.label.length - a.label.length);
 }
 
+/** Full catalog so normalize can fix write-up mentions even when that chunk wasn't retrieved. */
+async function fetchPortfolioLinkCatalog(): Promise<AvailableLink[]> {
+  const { data, error } = await supabaseClient
+    .from('portfolio_content')
+    .select('content, metadata, content_type')
+    .in('content_type', ['product', 'project', 'post', 'resume']);
+
+  if (error) {
+    console.error('Failed to load portfolio link catalog:', error.message);
+    return [];
+  }
+
+  return collectAvailableLinks(
+    ((data || []) as RetrievedChunk[]).map((row) => ({
+      content: row.content,
+      metadata: row.metadata as ContentMetadata,
+    })),
+  );
+}
+
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/** Fix vague [here](url) labels and plain-text title mentions that should be markdown links. */
-function normalizeInlineLinks(responseText: string, chunks: RetrievedChunk[]): string {
-  const links = collectAvailableLinks(chunks);
+const WRITE_UP_VARIANT = String.raw`Write[\s-]?up`;
+const DEMO_VARIANT = String.raw`Demo`;
+
+/**
+ * Fix vague [here](url) labels and plain-text write-up/demo mentions.
+ * Also rewrites "in her {Title} Write-up" → "in the [{Title} Write-up](url)" so "her"
+ * isn't left looking like a truncated "here" with the link missing.
+ */
+function normalizeInlineLinks(responseText: string, links: AvailableLink[]): string {
   if (!links.length) return responseText;
 
   let result = responseText;
@@ -232,14 +312,53 @@ function normalizeInlineLinks(responseText: string, chunks: RetrievedChunk[]): s
     (match, _label: string, url: string) => byUrl.get(url)?.markdown ?? match,
   );
 
-  for (const link of links) {
-    if (result.includes(link.markdown)) continue;
+  // Prefer blog/write-up links, then demos, then externals — longest titles first
+  const ordered = [...links].sort((a, b) => {
+    const kindScore = (k?: AvailableLink['kind']) =>
+      k === 'blog' ? 0 : k === 'demo' ? 1 : 2;
+    const kindDiff = kindScore(a.kind) - kindScore(b.kind);
+    if (kindDiff !== 0) return kindDiff;
+    return (b.shortTitle?.length || b.label.length) - (a.shortTitle?.length || a.label.length);
+  });
 
-    // Already linked with this URL under another label — leave it
+  for (const link of ordered) {
+    if (result.includes(link.markdown)) continue;
     if (isUrlInResponse(link.url, result)) continue;
 
-    const pattern = new RegExp(`(?<!\\[)\\b${escapeRegExp(link.label)}\\b(?!\\]\\()`, 'gi');
-    result = result.replace(pattern, link.markdown);
+    const title = link.shortTitle || link.label;
+    const titleRe = escapeRegExp(title);
+
+    if (link.kind === 'blog') {
+      // "in her Prompt Optimizer Write-up" → "in the [Prompt Optimizer Write-up](url)"
+      result = result.replace(
+        new RegExp(
+          `\\bin\\s+her\\s+(${titleRe})\\s+${WRITE_UP_VARIANT}\\b(?!\\]\\()`,
+          'gi',
+        ),
+        `in the ${link.markdown}`,
+      );
+
+      // Bare "Prompt Optimizer Write-up" / "Writeup" / "Write up"
+      result = result.replace(
+        new RegExp(`(?<!\\[)\\b(${titleRe})\\s+${WRITE_UP_VARIANT}\\b(?!\\]\\()`, 'gi'),
+        link.markdown,
+      );
+    }
+
+    if (link.kind === 'demo') {
+      result = result.replace(
+        new RegExp(`\\bin\\s+her\\s+(${titleRe})\\s+${DEMO_VARIANT}\\b(?!\\]\\()`, 'gi'),
+        `in the ${link.markdown}`,
+      );
+      result = result.replace(
+        new RegExp(`(?<!\\[)\\b(${titleRe})\\s+${DEMO_VARIANT}\\b(?!\\]\\()`, 'gi'),
+        link.markdown,
+      );
+    }
+
+    // Exact label match as a final pass
+    const exact = new RegExp(`(?<!\\[)\\b${escapeRegExp(link.label)}\\b(?!\\]\\()`, 'gi');
+    result = result.replace(exact, link.markdown);
   }
 
   return result;
