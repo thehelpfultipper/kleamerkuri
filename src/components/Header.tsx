@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withPrefix } from 'gatsby';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { links } from '../helpers/variables';
 import ThemeToggle from './UI/ThemeToggle';
 
 const Header: React.FC = () => {
@@ -71,15 +70,7 @@ const Header: React.FC = () => {
                 {link.name}
               </Nav.Link>
             ))}
-            <a
-              href={links.resume.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${links.resume.text} (opens in new tab)`}
-              className="btn btn-outline-sky-blue ms-xl-4 mt-3 mt-xl-0">
-              {links.resume.text}
-            </a>
-            <div className="ms-xl-3 mt-3 mt-xl-0">
+            <div className="ms-xl-4 mt-3 mt-xl-0">
               <ThemeToggle />
             </div>
           </Nav>

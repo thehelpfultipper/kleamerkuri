@@ -30,45 +30,20 @@
         "location": "Remote",
         "dates": "Sep 2025 – Present",
         "desc": [
-          "Streamline database synchronization for 5+ enterprise properties, maintaining 100% data integrity across multi-tenant environments through optimized update cycles.",
-          "Architect high-conversion user flows and lead capture systems integrated with Salesforce and Genesys, driving 5% monthly combined lead-submit growth while facilitating data ingestion and sales routing.",
-          "Engineer reusable UI components and scalable design systems to improve page performance and maintain strict WCAG 2.1 AA compliance and accessibility standards.",
-          "Accelerate feature delivery velocity in an Agile environment by configuring ESLint/Prettier infrastructure and iterating on Git-based workflows and CI/CD deployment pipelines to reduce release friction."
+          "Own frontend experiences across 5+ enterprise web properties, building reusable UI patterns and design-system infrastructure with accessibility and performance in mind.",
+          "Translate Figma designs into responsive, conversion-focused experiences and lead-capture flows, contributing to an average 5% monthly combined lead-submit growth.",
+          "Build internal tooling, MCP workflows, and automated Playwright/CI pipelines that reduce friction between design, development, and release validation."
         ]
       },
       {
-        "title": "Web Developer",
+        "title": "Web Developer / Technical Marketing Engineer",
         "company": "Experian",
         "location": "Remote",
-        "dates": "Nov 2023 – Sep 2025",
+        "dates": "Nov 2021 – Sep 2025",
         "desc": [
-          "Modernized data architecture by deploying custom Node.js APIs to bridge BI platforms with headless CMS, transitioning data from manual quarterly cycles to real-time synchronization with 100% data freshness.",
-          "Built high-performance WebGL data visualizations for AI products, programmatically rendering localized engagement metrics for 1,000+ global coordinates.",
-          "Led the migration of high-traffic blog properties to a headless CMS stack (React, Gatsby, GraphQL), resulting in a 20% reduction in load times and highly optimized Core Web Vitals.",
-          "Served as primary technical liaison for Product and SEO teams, translating complex engineering blockers into actionable technical specifications, documentation, and scalable code design.",
-          "Integrated scalable Node.js APIs with third-party engagement widgets to enhance frontend functionality and SEO data exposure across distributed systems."
-        ]
-      },
-      {
-        "title": "Technical Marketing Coordinator",
-        "company": "Experian",
-        "location": "Remote",
-        "dates": "Nov 2021 – Nov 2023",
-        "desc": [
-          "Automated content workflows by building a custom Node.js application integrated with Google APIs, reducing manual effort by 10x and accelerating delivery by 50%.",
-          "Engineered internal SEO audit tools using Python and Node.js to automate site-wide integrity checks, reducing broken links by 30% and duplicate content by 25%.",
-          "Collaborated with E-Commerce and Technical SEO teams to ensure proper instrumentation for tracking and performance monitoring using custom logging and dashboards."
-        ]
-      },
-      {
-        "title": "Resident Analyst",
-        "company": "obo. Agency",
-        "location": "Remote",
-        "dates": "Sep 2021 – Nov 2021",
-        "desc": [
-          "Extracted key data elements from B2B client databases to enable data-driven personalization and engagement insights.",
-          "Built responsive landing pages and automation workflows using HTML, CSS, and JavaScript.",
-          "Translated user requirements into CRM integrations and data migration initiatives."
+          "Led the migration of a 5,000+ article public web property to headless React/Gatsby/GraphQL architecture, reducing load times ~20%.",
+          "Built interactive WebGL/Canvas experiences and production React components while partnering across Design, Product, Marketing, and SEO.",
+          "Automated content and data workflows with Node.js and Google APIs, reducing manual operational effort 10x and accelerating delivery velocity by 50%."
         ]
       }
     ],
