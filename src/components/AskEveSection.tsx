@@ -49,11 +49,13 @@ const getPrimaryAction = (actions: IEveAction[]) =>
   actions.find((action) => action.type === 'blog') ??
   actions[0];
 
-const previewText = (text: string, maxLength = 140) => {
-  if (text.length <= maxLength) return text;
-  const truncated = text.slice(0, maxLength);
-  const lastSpace = truncated.lastIndexOf(' ');
-  return `${truncated.slice(0, lastSpace > 0 ? lastSpace : maxLength)}…`;
+const scrollAnswerIntoView = (target: HTMLElement | null) => {
+  if (!target) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.scrollIntoView({
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    block: 'start',
+  });
 };
 
 const AskEveSection: React.FC = () => {
@@ -105,6 +107,7 @@ const AskEveSection: React.FC = () => {
   const gapPromptBtnRef = useRef<HTMLButtonElement>(null);
   const askInputRef = useRef<HTMLTextAreaElement>(null);
   const answerHeadingRef = useRef<HTMLHeadingElement>(null);
+  const responseRef = useRef<HTMLDivElement>(null);
   const confirmDialogRef = useRef<HTMLDivElement>(null);
   const confirmCancelRef = useRef<HTMLButtonElement>(null);
   const startOverBtnRef = useRef<HTMLButtonElement>(null);
@@ -128,6 +131,7 @@ const AskEveSection: React.FC = () => {
     const text = input.trim();
     if (!text || isBusy) return;
     setInput('');
+    setViewedIndex(exchanges.length);
     await sendMessage(text);
   };
 
@@ -157,9 +161,14 @@ const AskEveSection: React.FC = () => {
   useEffect(() => {
     if (exchanges.length > previousExchangeCount.current) {
       setViewedIndex(exchanges.length - 1);
-      if (previousExchangeCount.current === 0) {
-        answerHeadingRef.current?.focus();
-      }
+      const isFirstExchange = previousExchangeCount.current === 0;
+      window.requestAnimationFrame(() => {
+        const target = answerHeadingRef.current ?? responseRef.current;
+        scrollAnswerIntoView(target);
+        if (isFirstExchange) {
+          answerHeadingRef.current?.focus();
+        }
+      });
     } else if (exchanges.length === 0) {
       setViewedIndex(-1);
     }
@@ -206,6 +215,7 @@ const AskEveSection: React.FC = () => {
 
     if (prompt.query) {
       setShowGapInput(false);
+      setViewedIndex(exchanges.length);
       await sendMessage(prompt.query);
     }
   };
@@ -215,6 +225,7 @@ const AskEveSection: React.FC = () => {
     if (!jd || isBusy) return;
     setShowGapInput(false);
     setJobDescription('');
+    setViewedIndex(exchanges.length);
     await sendMessage(`${GAP_ANALYSIS_PREFIX}\n\n${jd}`);
   };
 
@@ -241,6 +252,15 @@ const AskEveSection: React.FC = () => {
 
   const renderAskForm = () => (
     <form className={`eve-ask${isAnswerState ? ' eve-ask--followup' : ''}`} onSubmit={handleAskSubmit}>
+      {isAnswerState ? (
+        <div className="eve-ask-glass" aria-hidden="true">
+          <span className="eve-ask-glass__blur eve-ask-glass__blur--1" />
+          <span className="eve-ask-glass__blur eve-ask-glass__blur--2" />
+          <span className="eve-ask-glass__blur eve-ask-glass__blur--3" />
+          <span className="eve-ask-glass__blur eve-ask-glass__blur--4" />
+          <span className="eve-ask-glass__wash" />
+        </div>
+      ) : null}
       <label htmlFor="eve-ask-input" className="eve-ask-label">
         {isAnswerState ? 'Ask another question' : 'What do you want to know about Klea?'}
       </label>
@@ -300,73 +320,47 @@ const AskEveSection: React.FC = () => {
       </div>
     ) : null;
 
-  const renderWorkItem = (item: IEveWorkItem, featured: boolean, index: number) => {
+  const renderWorkItem = (item: IEveWorkItem, index: number) => {
     const meta = [item.date, item.category].filter(Boolean).join(' · ');
     const primary = getPrimaryAction(item.actions);
-    const stack = item.stack?.slice(0, 3) ?? [];
 
     return (
       <li
         key={item.key}
-        className={`eve-work-card card card-custom bg-slate-800${featured ? ' card-featured' : ''}`}
-        style={{ '--eve-work-delay': `${index * 80}ms` } as React.CSSProperties}>
-        <div className={featured ? 'card-featured-inner' : ''}>
-          {item.image && (
-            <div className={`card-img-container${featured ? '' : ' rounded-top'}`}>
-              <img
-                src={item.image}
-                alt={`${item.title} screenshot`}
-                className={featured ? '' : 'card-img-top img-cover'}
-              />
-            </div>
-          )}
-          <div className={`card-body${featured ? ' card-featured-body' : ''}`}>
-            {meta && <p className="card-meta font-monospace mb-2">{meta}</p>}
-            <h5 className="eve-work-title mb-2">
-              {primary ? (
-                <a
-                  href={primary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-title-link"
-                  aria-label={`${item.title} (opens in new tab)`}>
-                  {item.title}
-                </a>
-              ) : (
-                item.title
-              )}
-            </h5>
-            {item.impact && <p className="card-impact font-monospace mb-2">{item.impact}</p>}
-            {featured && item.description && (
-              <p className="card-text text-secondary small mb-3">{previewText(item.description)}</p>
+        className="eve-work-item"
+        style={{ '--eve-work-delay': `${index * 60}ms` } as React.CSSProperties}>
+        <div className="eve-work-copy">
+          {meta && <p className="eve-work-meta font-monospace">{meta}</p>}
+          <h5 className="eve-work-title">
+            {primary ? (
+              <a
+                href={primary.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="eve-work-title-link"
+                aria-label={`${item.title} (opens in new tab)`}>
+                {item.title}
+              </a>
+            ) : (
+              item.title
             )}
-            {featured && stack.length > 0 && (
-              <div className="d-flex flex-wrap gap-2 mb-3">
-                {stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="badge rounded-pill border border-slate-700 text-secondary font-monospace px-2 py-1">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-            <ul className="eve-work-actions">
-              {item.actions.map((action) => (
-                <li key={`${action.type}-${action.url}`}>
-                  <a
-                    href={action.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="eve-work-link"
-                    aria-label={`${action.label} (opens in new tab)`}>
-                    {action.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </h5>
+          {item.impact && <p className="eve-work-impact">{item.impact}</p>}
         </div>
+        <ul className="eve-work-actions">
+          {item.actions.map((action) => (
+            <li key={`${action.type}-${action.url}`}>
+              <a
+                href={action.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="eve-work-link"
+                aria-label={`${action.label} (opens in new tab)`}>
+                {action.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </li>
     );
   };
@@ -409,7 +403,7 @@ const AskEveSection: React.FC = () => {
         {!isAnswerState && renderAskForm()}
 
         {isAnswerState && activeExchange ? (
-          <div className="eve-response" aria-busy={isBusy || undefined}>
+          <div ref={responseRef} className="eve-response" aria-busy={isBusy || undefined}>
             {exchanges.length > 1 && (
               <nav className="eve-trail" aria-label="Questions already asked">
                 <ol className="eve-trail-list">
@@ -454,55 +448,53 @@ const AskEveSection: React.FC = () => {
               </button>
             </header>
 
-            {presentedWork.projects.length > 0 && (
-              <section className="eve-work" aria-labelledby="eve-work-heading">
-                <h4 id="eve-work-heading" className="visually-hidden">
-                  Matching work
-                </h4>
-                <ul className="eve-work-stage">
-                  {renderWorkItem(presentedWork.projects[0], true, 0)}
-                </ul>
-                {presentedWork.projects.length > 1 && (
-                  <ul className="eve-work-list">
-                    {presentedWork.projects.slice(1).map((item, index) => renderWorkItem(item, false, index + 1))}
-                  </ul>
-                )}
-              </section>
-            )}
-
-            {presentedWork.links.length > 0 && (
-              <ul className="eve-action-links" aria-label="Suggested actions">
-                {presentedWork.links.map((action) => (
-                  <li key={`${action.type}-${action.url}`}>
-                    <a
-                      href={action.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="eve-work-link"
-                      aria-label={`${action.label} (opens in new tab)`}>
-                      {action.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-
             <div className="eve-answer" aria-labelledby="eve-answer-title">
               <p className="eve-kicker font-monospace mb-3">Eve&apos;s note</p>
               {activeExchange.answer ? (
-                <div className="eve-answer-body">
+                <div className={`eve-answer-body${isBusy ? ' is-streaming' : ''}`}>
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{activeExchange.answer}</ReactMarkdown>
                 </div>
               ) : (
                 <p className="eve-answer-status font-monospace" role="status">
-                  Looking through the portfolio…
+                  {presentedWork.projects.length > 0 || presentedWork.links.length > 0
+                    ? 'Writing a note…'
+                    : 'Looking through the portfolio…'}
                 </p>
               )}
             </div>
+
+            {renderAskForm()}
+
+            {(presentedWork.projects.length > 0 || presentedWork.links.length > 0) && (
+              <section className="eve-work" aria-labelledby="eve-work-heading">
+                <h4 id="eve-work-heading" className="eve-kicker font-monospace">
+                  {presentedWork.projects.length > 0 ? 'Related work' : 'Links'}
+                </h4>
+                {presentedWork.projects.length > 0 && (
+                  <ul className="eve-work-list">
+                    {presentedWork.projects.map((item, index) => renderWorkItem(item, index))}
+                  </ul>
+                )}
+                {presentedWork.links.length > 0 && (
+                  <ul className="eve-action-links" aria-label="More links">
+                    {presentedWork.links.map((action) => (
+                      <li key={`${action.type}-${action.url}`}>
+                        <a
+                          href={action.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="eve-work-link"
+                          aria-label={`${action.label} (opens in new tab)`}>
+                          {action.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
           </div>
         ) : null}
-
-        {isAnswerState && renderAskForm()}
 
         <nav
           className={`eve-paths${isAnswerState ? ' eve-paths--compact' : ''}`}

@@ -289,7 +289,13 @@ export function useChatbot() {
 
             if (payload.actions && !payload.text) {
               currentActionsRef.current = payload.actions;
-              attachActionsToLastAssistant(payload.actions);
+              setMessages((prev) => {
+                const last = prev[prev.length - 1];
+                if (last?.role === 'assistant') {
+                  return [...prev.slice(0, -1), { ...last, actions: payload.actions }];
+                }
+                return [...prev, buildMessage('', 'assistant', new Date(), payload.actions)];
+              });
               return;
             }
 

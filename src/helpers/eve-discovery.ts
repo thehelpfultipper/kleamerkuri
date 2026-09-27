@@ -172,20 +172,33 @@ export const buildWorkItems = (
   return order.map((key) => items.get(key)!);
 };
 
+export const MAX_WORK_SAMPLES = 2;
+
 export const presentWork = (
   answer: string,
   actions: IEveAction[],
   projects: IEveProjectMatch[],
+  limit = MAX_WORK_SAMPLES,
 ) => {
   const items = buildWorkItems(mergeActions(extractMarkdownLinks(answer), actions), projects);
-  const cardUrls = new Set(
-    items
-      .filter((item) => item.matched)
-      .flatMap((item) => item.actions.map((action) => normalizeUrl(action.url))),
+  const matched = items.filter((item) => item.matched);
+  const samples = matched.slice(0, limit);
+  const overflowActions = matched.slice(limit).flatMap((item) => item.actions);
+  const sampleUrls = new Set(
+    samples.flatMap((item) => item.actions.map((action) => normalizeUrl(action.url))),
   );
+  const seenLinks = new Set(sampleUrls);
+  const links: IEveAction[] = [];
+
+  [...actions, ...overflowActions].forEach((action) => {
+    const key = normalizeUrl(action.url);
+    if (seenLinks.has(key)) return;
+    seenLinks.add(key);
+    links.push(action);
+  });
 
   return {
-    projects: items.filter((item) => item.matched),
-    links: actions.filter((action) => !cardUrls.has(normalizeUrl(action.url))),
+    projects: samples,
+    links,
   };
 };

@@ -364,6 +364,35 @@ function normalizeInlineLinks(responseText: string, links: AvailableLink[]): str
   return result;
 }
 
+function buildPreviewActions(chunks: RetrievedChunk[], limit = 4): EveAction[] {
+  const actions: EveAction[] = [];
+  const seen = new Set<string>();
+
+  for (const chunk of chunks) {
+    const m = chunk.metadata;
+    if (!m?.title) continue;
+
+    const shortTitle = m.title.split('–')[0].trim();
+
+    if (isValidUrl(m.demo) && !seen.has(m.demo)) {
+      seen.add(m.demo);
+      actions.push({ label: `View ${shortTitle} demo`, url: m.demo, type: 'demo' });
+    }
+    if (isValidUrl(m.blog) && !seen.has(m.blog)) {
+      seen.add(m.blog);
+      actions.push({ label: `Read ${shortTitle} write-up`, url: m.blog, type: 'blog' });
+    }
+    if (isValidUrl(m.external) && !seen.has(m.external)) {
+      seen.add(m.external);
+      actions.push({ label: shortTitle, url: m.external, type: 'external' });
+    }
+
+    if (actions.length >= limit) break;
+  }
+
+  return actions;
+}
+
 function buildActions(responseText: string, chunks: RetrievedChunk[]): EveAction[] {
   const actions: EveAction[] = [];
   const seen = new Set<string>();
@@ -396,34 +425,97 @@ const GENERATION_MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash'];
 
 type StreamChunkHandler = (text: string) => void;
 
+function textFromGeminiEvent(payload: unknown): string {
+  const candidates = (payload as {
+    candidates?: Array<{ content?: { parts?: Array<{ text?: string; thought?: boolean }> } }>;
+  }).candidates;
+  const parts = candidates?.[0]?.content?.parts ?? [];
+  return parts
+    .filter((part) => part.text && !part.thought)
+    .map((part) => part.text as string)
+    .join('');
+}
+
+async function streamGeminiSse(
+  modelName: string,
+  fullPrompt: string,
+  onChunk: StreamChunkHandler,
+): Promise<string> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': GEMINI_KEY ?? '',
+    },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: fullPrompt }] }],
+      ...(modelName.includes('2.5')
+        ? { generationConfig: { thinkingConfig: { thinkingBudget: 0 } } }
+        : {}),
+    }),
+  });
+
+  if (!response.ok || !response.body) {
+    const detail = await response.text().catch(() => '');
+    const error = new Error(`Gemini ${modelName} ${response.status}: ${detail}`) as Error & {
+      status?: number;
+    };
+    error.status = response.status;
+    throw error;
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let fullText = '';
+
+  const consumeLine = (rawLine: string) => {
+    const line = rawLine.trim();
+    if (!line.startsWith('data:')) return;
+    const data = line.slice(5).trim();
+    if (!data || data === '[DONE]') return;
+
+    try {
+      const text = textFromGeminiEvent(JSON.parse(data));
+      if (!text) return;
+      fullText += text;
+      onChunk(text);
+    } catch {
+      /* skip malformed SSE frames */
+    }
+  };
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() || '';
+    for (const line of lines) consumeLine(line);
+  }
+
+  if (buffer.trim()) consumeLine(buffer);
+  return fullText;
+}
+
 async function streamGenerateWithRetry(fullPrompt: string, onChunk: StreamChunkHandler): Promise<string> {
   let lastError: unknown = null;
 
   for (const modelName of GENERATION_MODELS) {
-    const model = genAI.getGenerativeModel({ model: modelName });
-
     for (let attempt = 0; attempt < 3; attempt++) {
       let emittedChunks = false;
 
       try {
-        const result = await model.generateContentStream({
-          contents: [{ role: 'user', parts: [{ text: fullPrompt }] }],
-        });
-
         if (modelName !== GENERATION_MODELS[0]) {
           console.log(`Streaming with fallback model: ${modelName}`);
         }
 
-        let fullText = '';
-        for await (const chunk of result.stream) {
-          const text = chunk.text();
-          if (!text) continue;
+        return await streamGeminiSse(modelName, fullPrompt, (text) => {
           emittedChunks = true;
-          fullText += text;
           onChunk(text);
-        }
-
-        return fullText;
+        });
       } catch (error) {
         lastError = error;
         const status = (error as { status?: number }).status;
@@ -519,14 +611,21 @@ Deno.serve(async (req) => {
           const augmentedQuery =
             isFollowUp && lastAiResponse ? `${query} ${lastAiResponse}`.trim() : query;
 
+          const wantsDates = isTemporalQuery(query);
+          const datedPromise = wantsDates ? fetchProjectsByDate() : Promise.resolve<RetrievedChunk[]>([]);
+
           const embedding = await embedText(augmentedQuery);
           const semanticResults = await smartSearch(query, embedding, isFollowUp);
-
-          const relevantContent = isTemporalQuery(query)
-            ? mergeChunks(await fetchProjectsByDate(), semanticResults)
+          const relevantContent = wantsDates
+            ? mergeChunks(await datedPromise, semanticResults)
             : semanticResults;
 
           const availableLinks = buildAvailableLinks(relevantContent);
+          const previewActions = buildPreviewActions(relevantContent);
+          if (previewActions.length) {
+            send({ actions: previewActions });
+          }
+
           const context =
             relevantContent
               ?.map((item) => `[Source: ${item.metadata?.type || 'General'}] ${item.content}`)
@@ -539,7 +638,10 @@ Deno.serve(async (req) => {
             send({ text });
           });
 
-          const responseText = normalizeInlineLinks(rawText, relevantContent);
+          const responseText = normalizeInlineLinks(
+            rawText,
+            collectAvailableLinks(relevantContent),
+          );
           if (responseText !== rawText) {
             send({ text: responseText, replace: true });
           }

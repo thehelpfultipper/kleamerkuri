@@ -223,7 +223,7 @@ const EveChatCore: React.FC<EveChatCoreProps> = ({
 
   const renderMessages = () =>
     messages.map((msg, index) =>
-      msg.content ? (
+      msg.content || (msg.role === 'assistant' && msg.actions?.length) ? (
         isFloating ? (
           <div
             key={`${msg.role}-${index}`}
@@ -231,7 +231,9 @@ const EveChatCore: React.FC<EveChatCoreProps> = ({
             aria-label={msg.role === 'assistant' ? 'Eve' : 'You'}>
             <div className="message-bubble">
               {msg.role === 'assistant' ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                msg.content ? (
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                ) : null
               ) : (
                 msg.content
               )}
@@ -249,7 +251,9 @@ const EveChatCore: React.FC<EveChatCoreProps> = ({
             </p>
             <div className="eve-turn-body">
               {msg.role === 'assistant' ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                msg.content ? (
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                ) : null
               ) : (
                 msg.content
               )}

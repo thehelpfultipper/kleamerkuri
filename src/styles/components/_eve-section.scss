@@ -24,8 +24,22 @@
 }
 
 .eve-ask--followup {
-  margin-top: clamp(2rem, 4vw, 2.75rem);
+  --eve-ask-fade-top: 1.75rem;
+  --eve-ask-fade-bottom: 5.5rem;
+  position: sticky;
+  top: 80px;
+  z-index: 2;
+  isolation: isolate;
+  margin-top: 1.5rem;
   margin-bottom: 0;
+  padding: 0.85rem 0 0.95rem;
+  background: none;
+  overflow: visible;
+
+  > :not(.eve-ask-glass) {
+    position: relative;
+    z-index: 1;
+  }
 
   .eve-ask-label {
     font-size: 0.8125rem;
@@ -34,7 +48,147 @@
     font-weight: 400;
     font-family: $font-family-monospace;
     color: var(--bs-text-secondary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@mixin eve-ask-mask($stops...) {
+  mask-image: linear-gradient(to bottom, $stops);
+  -webkit-mask-image: linear-gradient(to bottom, $stops);
+}
+
+.eve-ask-glass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--eve-ask-fade-top) * -1);
+  height: calc(100% + var(--eve-ask-fade-top) + var(--eve-ask-fade-bottom));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eve-ask-glass__blur,
+.eve-ask-glass__wash {
+  position: absolute;
+  inset: 0;
+}
+
+.eve-ask-glass__blur {
+  &--1 {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    @include eve-ask-mask(
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 10%,
+      rgba(0, 0, 0, 0.7) 18%,
+      #000 28%,
+      #000 60%,
+      rgba(0, 0, 0, 0.45) 72%,
+      transparent 86%,
+      transparent 100%
+    );
+  }
+
+  &--2 {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    @include eve-ask-mask(
+      transparent 0%,
+      transparent 12%,
+      rgba(0, 0, 0, 0.35) 20%,
+      #000 30%,
+      #000 58%,
+      rgba(0, 0, 0, 0.3) 68%,
+      transparent 80%,
+      transparent 100%
+    );
+  }
+
+  &--3 {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    @include eve-ask-mask(
+      transparent 0%,
+      transparent 18%,
+      rgba(0, 0, 0, 0.4) 26%,
+      #000 36%,
+      #000 54%,
+      rgba(0, 0, 0, 0.2) 64%,
+      transparent 74%,
+      transparent 100%
+    );
+  }
+
+  &--4 {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    @include eve-ask-mask(
+      transparent 0%,
+      transparent 24%,
+      rgba(0, 0, 0, 0.45) 34%,
+      #000 42%,
+      #000 52%,
+      transparent 64%,
+      transparent 100%
+    );
+  }
+}
+
+.eve-ask-glass__wash {
+  background: linear-gradient(
+    in oklab to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--bs-body-bg) 16%, transparent) 5%,
+    color-mix(in oklab, var(--bs-body-bg) 42%, transparent) 9%,
+    color-mix(in oklab, var(--bs-body-bg) 74%, transparent) 13%,
+    color-mix(in oklab, var(--bs-body-bg) 90%, transparent) 17%,
+    color-mix(in oklab, var(--bs-body-bg) 96%, transparent) 22%,
+    color-mix(in oklab, var(--bs-body-bg) 96%, transparent) 52%,
+    color-mix(in oklab, var(--bs-body-bg) 92%, transparent) 58%,
+    color-mix(in oklab, var(--bs-body-bg) 78%, transparent) 64%,
+    color-mix(in oklab, var(--bs-body-bg) 58%, transparent) 70%,
+    color-mix(in oklab, var(--bs-body-bg) 38%, transparent) 76%,
+    color-mix(in oklab, var(--bs-body-bg) 22%, transparent) 82%,
+    color-mix(in oklab, var(--bs-body-bg) 12%, transparent) 88%,
+    color-mix(in oklab, var(--bs-body-bg) 5%, transparent) 94%,
+    transparent 100%
+  );
+}
+
+html[data-bs-theme='light'] .eve-ask-glass__wash {
+  background: linear-gradient(
+    in oklab to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--bs-body-bg) 20%, transparent) 5%,
+    color-mix(in oklab, var(--bs-body-bg) 48%, transparent) 9%,
+    color-mix(in oklab, var(--bs-body-bg) 78%, transparent) 13%,
+    color-mix(in oklab, var(--bs-body-bg) 92%, transparent) 17%,
+    color-mix(in oklab, var(--bs-body-bg) 97%, transparent) 22%,
+    color-mix(in oklab, var(--bs-body-bg) 97%, transparent) 52%,
+    color-mix(in oklab, var(--bs-body-bg) 90%, transparent) 58%,
+    color-mix(in oklab, var(--bs-body-bg) 72%, transparent) 64%,
+    color-mix(in oklab, var(--bs-body-bg) 52%, transparent) 70%,
+    color-mix(in oklab, var(--bs-body-bg) 32%, transparent) 76%,
+    color-mix(in oklab, var(--bs-body-bg) 18%, transparent) 82%,
+    color-mix(in oklab, var(--bs-body-bg) 9%, transparent) 88%,
+    color-mix(in oklab, var(--bs-body-bg) 3%, transparent) 94%,
+    transparent 100%
+  );
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .eve-ask-glass__blur {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .eve-ask--followup {
+    background: var(--bs-body-bg);
+  }
+
+  .eve-ask-glass {
+    display: none;
   }
 }
 
@@ -182,6 +336,11 @@
   color: var(--bs-text-secondary);
 }
 
+.eve-ask--followup + .eve-work,
+.eve-response:not(:has(.eve-work)) + .eve-paths--compact {
+  margin-top: clamp(3.25rem, 6vw, 4.75rem);
+}
+
 .eve-paths--compact {
   margin-top: clamp(1.75rem, 3vw, 2.25rem);
 
@@ -316,50 +475,79 @@
 }
 
 .eve-work {
-  margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+
+  > .eve-kicker {
+    margin: 0;
+  }
 }
 
-.eve-work-stage,
 .eve-work-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0.65rem 0 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--bs-slate-700);
 }
 
-.eve-work-stage {
-  margin-bottom: 0.85rem;
-}
-
-.eve-work-list {
-  display: grid;
-  gap: 0.85rem;
-
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.eve-work-card {
-  animation: eve-work-in 0.45s ease both;
+.eve-work-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--bs-slate-700);
+  animation: eve-work-in 0.35s ease both;
   animation-delay: var(--eve-work-delay, 0ms);
-  cursor: default;
-  overflow: hidden;
 
-  .card-body {
-    padding: 1.25rem 1.375rem;
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
   }
+}
 
-  .card-img-container img {
-    width: 100%;
-    display: block;
-  }
+.eve-work-copy {
+  min-width: 0;
+}
+
+.eve-work-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--bs-text-secondary);
+  margin: 0 0 0.2rem;
 }
 
 .eve-work-title {
-  font-size: 1.1875rem;
+  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.35;
   color: var(--bs-slate-light);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.eve-work-title-link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--bs-sky-blue);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--bs-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.eve-work-impact {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--bs-text-secondary);
+  margin: 0.2rem 0 0;
 }
 
 .eve-work-actions {
@@ -367,15 +555,23 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  flex-wrap: wrap;
+  gap: 0.15rem 1rem;
 }
 
 .eve-work-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--bs-sky-blue);
   text-decoration: none;
+
+  @include media-breakpoint-up(sm) {
+    min-height: 0;
+    padding: 0.15rem 0;
+  }
 
   &:hover {
     color: var(--bs-slate-light);
@@ -393,21 +589,30 @@
 
 .eve-action-links {
   list-style: none;
-  padding: 0;
-  margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  padding: 0.35rem 0 0;
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  flex-wrap: wrap;
+  gap: 0.15rem 1.25rem;
 }
 
 .eve-answer {
   max-width: 42rem;
+  min-height: 4.5rem;
 }
 
 .eve-answer-body {
   color: var(--bs-text-secondary);
   font-size: 1.0625rem;
   line-height: 1.7;
+
+  &.is-streaming::after {
+    content: '▍';
+    display: inline;
+    margin-left: 0.1em;
+    color: var(--bs-sky-blue);
+    animation: eve-caret 1s steps(1) infinite;
+  }
 
   > *:first-child {
     font-size: 1.1875rem;
@@ -607,6 +812,12 @@ html[data-bs-theme='light'] .eve-confirm-backdrop {
   }
 }
 
+@keyframes eve-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
 @keyframes eve-work-in {
   from {
     opacity: 0;
@@ -621,7 +832,11 @@ html[data-bs-theme='light'] .eve-confirm-backdrop {
 
 @media (prefers-reduced-motion: reduce) {
   .eve-response,
-  .eve-work-card {
+  .eve-work-item {
+    animation: none;
+  }
+
+  .eve-answer-body.is-streaming::after {
     animation: none;
   }
 
@@ -634,5 +849,22 @@ html[data-bs-theme='light'] .eve-confirm-backdrop {
   .eve-response-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .eve-ask--followup {
+    top: 72px;
+  }
+
+  .eve-ask-row {
+    align-items: stretch;
+  }
+
+  .eve-ask-submit {
+    min-height: 2.75rem;
+  }
+
+  .eve-paths--compact .eve-path-btn {
+    min-height: 2.75rem;
+    padding: 0.45rem 0;
   }
 }
