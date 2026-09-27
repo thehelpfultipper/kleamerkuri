@@ -10,12 +10,10 @@
     "pronouns": "she/her",
     "story": "Software engineer in Los Angeles focused on design systems, cross-platform mobile (Flutter), and applied AI. Economics degree from UCLA (Summa Cum Laude). Currently at Finance of America; previously Experian. Builds tools including VersoID and writes about AI workflows on The Helpful Tipper.",
     "facts": [
-      "Enterprise Design Systems Specialist",
-      "UCLA Economics Alumna (Summa Cum Laude)",
-      "Cross-Platform Mobile Architect (Flutter & Dart)",
-      "RAG & Agentic Workflow Engineer",
-      "Technical Writer & Publisher",
-      "Pet-parent of Eve the Beagle"
+      "Frontend & Product Engineer",
+      "Design Systems & Accessibility",
+      "Interactive Web & WebGL",
+      "AI & Developer Tooling"
     ],
     "contact": {
       "email": "kleamdev@gmail.com",
@@ -25,8 +23,8 @@
     "lead": "Design systems, polished web experiences, high-conversion flows, and shipped products — currently at Finance of America. Before that, I led a 5K-article Gatsby migration at Experian that cut load times ~20%.",
     "about": [
       "I'm a software engineer who likes working where product, design, and systems meet to build polished interfaces, design systems, and the tooling behind them.",
-      "I didn't come up through a CS program. I studied Economics at UCLA (Summa Cum Laude) and got hooked on the part of the work that felt like engineering: tracing how data moves, where it breaks, and what has to change for systems to stay in sync.",
-      "At Finance of America, I own lead capture flows wired into Salesforce and Genesys and the design system keeping those properties WCAG-compliant. Before that, at Experian, I led a headless Gatsby migration across 5,000+ blog articles — cut load times ~20% — and built Node APIs that moved BI data from quarterly manual pulls to real-time sync.",
+      "I studied Economics at UCLA, then found myself increasingly drawn to the engineering side of product work. Especially in understanding how systems behave, where they break, and how to make the experience on top of them better.",
+      "At Finance of America, I own frontend experiences and design-system infrastructure across enterprise properties. Before that, at Experian, I led a headless Gatsby migration across 5,000+ blog articles — cut load times ~20% — and built interactive WebGL/Canvas experiences.",
       "Outside work, I ship tools I actually use: VersoID, a Flutter app for managing professional personas via QR codes (live on iOS and Android), plus Chrome extensions and MCP experiments documented on The Helpful Tipper."
     ]
   }
