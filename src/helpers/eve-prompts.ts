@@ -12,14 +12,19 @@ export const EVE_QUICK_PROMPTS: IEveQuickPrompt[] = [
     query: "What's Klea's most recent project? Include demo links.",
   },
   {
-    id: 'rag',
-    label: 'AI & RAG work',
-    query: "Show me Klea's AI and RAG projects and how they work.",
+    id: 'frontend',
+    label: 'Frontend & Web',
+    query: 'What frontend and web experience does Klea have? Include React and shipped web work.',
   },
   {
-    id: 'gatsby',
-    label: 'Gatsby experience',
-    query: 'What enterprise Gatsby and React experience does Klea have?',
+    id: 'design-systems',
+    label: 'Design systems',
+    query: "Tell me about Klea's design systems work.",
+  },
+  {
+    id: 'rag',
+    label: 'AI & tooling',
+    query: "Show me Klea's AI and developer tooling work and how they work.",
   },
   {
     id: 'gap',
