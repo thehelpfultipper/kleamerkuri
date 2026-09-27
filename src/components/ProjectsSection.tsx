@@ -7,7 +7,12 @@ import { IProject } from '../helpers/interfaces';
 import InlineNotice from './UI/InlineNotice';
 import { portfolios } from '../helpers/variables';
 
-const EVE_PROJECT_TITLE = 'Eve – Portfolio RAG Assistant';
+const HOMEPAGE_FEATURED_ORDER = [
+  'Stripe First 300 | Interactive Visual Storytelling',
+  'VersoID – Digital Identity Platform',
+  'Eve – Portfolio RAG Assistant',
+  'HOA Connect | Full-Stack Dashboard & Local AI',
+];
 
 const prtList = [
   { link: portfolios.km.v1, text: 'Version 1.0 — Gatsby and Material UI' },
@@ -43,9 +48,12 @@ const ProjectsSection: React.FC = () => {
     console.error('There was an error getting featured projects data.');
   }
 
-  const featuredProjects: IProject[] = data.allProjectsJson.nodes || [];
-  const signatureProject = featuredProjects.find((p) => p.title === EVE_PROJECT_TITLE);
-  const otherProjects = featuredProjects.filter((p) => p.title !== EVE_PROJECT_TITLE);
+  const featuredProjects: IProject[] = [...(data.allProjectsJson.nodes || [])].sort((a, b) => {
+    const aIndex = HOMEPAGE_FEATURED_ORDER.indexOf(a.title);
+    const bIndex = HOMEPAGE_FEATURED_ORDER.indexOf(b.title);
+    return (aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex) - (bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex);
+  });
+  const [signatureProject, ...otherProjects] = featuredProjects;
 
   const handleCardClick = (project: IProject) => {
     setSelectedProject(project);
