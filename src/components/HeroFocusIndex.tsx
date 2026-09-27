@@ -11,28 +11,28 @@ interface FocusThread {
 const focusThreads: FocusThread[] = [
   {
     id: '01',
-    label: 'Enterprise migration',
-    impact: '5K+ articles · 20% faster loads',
+    label: 'Public Web',
+    impact: 'High-traffic experiences · React · performance',
     href: '#projects',
   },
   {
     id: '02',
-    label: 'Design systems',
-    impact: 'WCAG · Salesforce / Genesys integrations',
+    label: 'Design Systems',
+    impact: 'Reusable UI · accessibility · Figma → code',
     href: '#experience',
   },
   {
     id: '03',
-    label: 'Applied AI',
-    impact: 'RAG, CLI tools, shipped experiments',
-    href: '#eve',
+    label: 'Interactive Experiences',
+    impact: 'WebGL · animation · visual storytelling',
+    href: 'https://thehelpfultipper.github.io/stripe-first-300/',
+    isExternal: true,
   },
   {
     id: '04',
-    label: 'Writing',
-    impact: 'AI workflows · The Helpful Tipper',
-    href: 'https://www.thehelpfultipper.com',
-    isExternal: true,
+    label: 'Applied AI',
+    impact: 'RAG · local AI · developer tooling',
+    href: '#eve',
   },
 ];
 
